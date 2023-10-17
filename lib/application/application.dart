@@ -9,6 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       routerConfig: appRouterSinglton.router,
       title: 'WhatsApp Status Saver',
       theme: AppTheme.appTheme,

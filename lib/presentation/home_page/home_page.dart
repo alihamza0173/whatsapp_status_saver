@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,7 +13,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   void initState() {
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
     super.initState();
   }
 
@@ -29,25 +28,12 @@ class _HomePageState extends State<HomePage>
     return Scaffold(
       appBar: AppBar(
           title: const Text('Status Saver'),
-          leading: Builder(
-            builder: (BuildContext context) {
-              return IconButton(
-                icon: const Icon(CupertinoIcons.bars),
-                onPressed: () {
-                  Scaffold.of(context).openDrawer();
-                },
-              );
-            },
-          ),
           bottom: TabBar(
             controller: _tabController,
             tabs: const [
-              Tab(
-                text: 'Images',
-              ),
-              Tab(
-                text: 'Videos',
-              ),
+              Tab(text: 'Images'),
+              Tab(text: 'Videos'),
+              Tab(text: 'Saved'),
             ],
           )),
       drawer: Drawer(
