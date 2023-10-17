@@ -3,8 +3,26 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   static final ThemeData appTheme = ThemeData().copyWith(
-    colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
     useMaterial3: true,
+    appBarTheme: AppBarTheme(
+      backgroundColor: Colors.green,
+      foregroundColor: Colors.white,
+      titleTextStyle: GoogleFonts.poppins(
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
+        color: Colors.white,
+      ),
+    ),
+    tabBarTheme: TabBarTheme(
+      labelColor: Colors.white,
+      unselectedLabelColor: Colors.grey[400],
+      indicatorColor: Colors.white,
+      labelStyle: GoogleFonts.poppins(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+      ),
+    ),
     textTheme: TextTheme(
       displayLarge: GoogleFonts.poppins(
         fontSize: 52,
