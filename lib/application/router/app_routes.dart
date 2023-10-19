@@ -1,3 +1,4 @@
 class AppRoutes {
-  static const String home = '/';
+  static const String onBoardingScreen = '/onboarding-screen';
+  static const String homeScreen = '/home-screen';
 }

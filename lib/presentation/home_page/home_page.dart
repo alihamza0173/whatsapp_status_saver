@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp_status_saver/presentation/home_page/ui/status_saver_images.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -41,8 +42,13 @@ class _HomePageState extends State<HomePage>
           children: [],
         ),
       ),
-      body: Column(
-        children: [],
+      body: TabBarView(
+        controller: _tabController,
+        children: const [
+          StatusSaverImages(),
+          Center(child: Text('Videos')),
+          Center(child: Text('Saved')),
+        ],
       ),
     );
   }
