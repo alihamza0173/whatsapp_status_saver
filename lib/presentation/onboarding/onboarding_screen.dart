@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:whatsapp_status_saver/application/common/app_images.dart';
 import 'package:whatsapp_status_saver/application/providers/file_manager_provider.dart';
+import 'package:whatsapp_status_saver/application/router/app_routes.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({super.key});
@@ -31,8 +33,13 @@ class OnBoardingScreen extends StatelessWidget {
                   foregroundColor: Colors.white,
                   fixedSize: Size.fromWidth(MediaQuery.sizeOf(context).width),
                 ),
-                onPressed: () {
-                  FileManagerProvider().checkPermission();
+                onPressed: () async {
+                  final isAllowed =
+                      await FileManagerProvider().checkPermission();
+                  if (isAllowed) {
+                    // ignore: use_build_context_synchronously
+                    context.go(AppRoutes.homeScreen);
+                  }
                 },
                 child: const Text('Grant Permission'),
               ),
