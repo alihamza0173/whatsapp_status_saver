@@ -20,27 +20,29 @@ class FileManagerProvider extends ChangeNotifier {
       return true;
     } else {
       final result = await Permission.manageExternalStorage.request();
+      log('permission result: $result');
       if (result.isGranted) {
         _isAccessAllowed = true;
-        log('permission granted');
+        log('whatsapp: ${_directory.path}');
+        if (!await _directory.exists()) {
+          log('whatsapp not exists');
+        }
+        try {
+          _directory.list().forEach((element) {
+            log('whatsapp: ${element.path}');
+          });
+        } catch (e) {
+          log('whatsapp: ${e.toString()}');
+        }
         return true;
+      } else if (status.isPermanentlyDenied) {
+        _isAccessAllowed = false;
+        openAppSettings().then((value) => log('open app settings: $value'));
+        return false;
       } else {
         _isAccessAllowed = false;
-        log('permission denied');
         return false;
       }
     }
-
-    // log('whatsapp: ${_directory.path}');
-    // if (!await _directory.exists()) {
-    //   log('whatsapp not exists');
-    // }
-    // try {
-    //   _directory.list().forEach((element) {
-    //     log('whatsapp: ${element.path}');
-    //   });
-    // } catch (e) {
-    //   log('whatsapp: ${e.toString()}');
-    // }
   }
 }
