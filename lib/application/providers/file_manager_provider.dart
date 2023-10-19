@@ -11,29 +11,28 @@ class FileManagerProvider extends ChangeNotifier {
 
   final Directory _directory = Directory(
       '/storage/emulated/0/Android/media/com.whatsapp/WhatsApp/Media/.Statuses');
+
+  File get file => File(
+      '/storage/emulated/0/Android/media/com.whatsapp/WhatsApp/Media/.Statuses/7e3483e083cc4f278230e6341aac3292.jpg');
+
+  // File get file2 => File(
+  //     '/storage/emulated/0/Android/media/com.whatsapp/WhatsApp/Media/.Statuses/93695ac9487f4052b548657144891155.mp4');
+
+  // Check if permission is granted
   Future<bool> checkPermission() async {
     final status = await Permission.manageExternalStorage.status;
+
     if (status.isGranted) {
       _isAccessAllowed = true;
-
       log('permission granted');
+      getFiles();
       return true;
     } else {
       final result = await Permission.manageExternalStorage.request();
       log('permission result: $result');
       if (result.isGranted) {
         _isAccessAllowed = true;
-        log('whatsapp: ${_directory.path}');
-        if (!await _directory.exists()) {
-          log('whatsapp not exists');
-        }
-        try {
-          _directory.list().forEach((element) {
-            log('whatsapp: ${element.path}');
-          });
-        } catch (e) {
-          log('whatsapp: ${e.toString()}');
-        }
+        getFiles();
         return true;
       } else if (status.isPermanentlyDenied) {
         _isAccessAllowed = false;
@@ -44,5 +43,11 @@ class FileManagerProvider extends ChangeNotifier {
         return false;
       }
     }
+  }
+
+  Future<List<FileSystemEntity>> getFiles() async {
+    final files = await _directory.list().toList();
+    log('files: ${files.runtimeType}, ${files.length}, ${files[4]}, ${files.first.runtimeType}');
+    return files;
   }
 }

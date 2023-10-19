@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp_status_saver/application/providers/file_manager_provider.dart';
 
 class StatusSaverImages extends StatelessWidget {
   const StatusSaverImages({
@@ -7,6 +8,13 @@ class StatusSaverImages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text('Images'));
+    final image = FileManagerProvider().file;
+    // final video = FileManagerProvider().file2;
+    return Center(
+        child: Column(
+      children: [
+        Image.file(image),
+      ],
+    ));
   }
 }
