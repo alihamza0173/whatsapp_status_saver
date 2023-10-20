@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:go_router/go_router.dart';
 import 'package:whatsapp_status_saver/application/providers/file_manager_provider.dart';
-import 'package:whatsapp_status_saver/presentation/home_page/ui/full_screen_image_view.dart';
+import 'package:whatsapp_status_saver/application/providers/full_screen_image_preview.dart';
+import 'package:whatsapp_status_saver/application/router/app_routes.dart';
 
 class StatusSaverImages extends StatelessWidget {
   const StatusSaverImages({
@@ -17,28 +19,29 @@ class StatusSaverImages extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final data = snapshot.data as List<FileSystemEntity>;
-            return StaggeredGrid.count(
-              crossAxisCount: 2,
-              axisDirection: AxisDirection.down,
-              crossAxisSpacing: 8.0,
-              mainAxisSpacing: 8.0,
-              children: data
-                  .map((e) => GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => FullscreenImageViewer(
-                                images: data,
-                                initialIndex: data.indexOf(e),
-                              ),
-                            ),
-                          );
-                        },
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: Image.file(e as File)),
-                      ))
-                  .toList(),
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: StaggeredGrid.count(
+                  crossAxisCount: 2,
+                  axisDirection: AxisDirection.down,
+                  crossAxisSpacing: 8.0,
+                  mainAxisSpacing: 8.0,
+                  children: data
+                      .map((e) => GestureDetector(
+                            onTap: () {
+                              fullScreenImagePreviewProvider.index =
+                                  data.indexOf(e);
+                              fullScreenImagePreviewProvider.images = data;
+                              context.push(AppRoutes.fullScreenImage);
+                            },
+                            child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: Image.file(e as File)),
+                          ))
+                      .toList(),
+                ),
+              ),
             );
             // return GridView.builder(
             //   itemCount: data.length,nm,.

@@ -38,8 +38,8 @@ class FileManagerProvider extends ChangeNotifier {
             video: element.path,
             imageFormat: ImageFormat.JPEG,
             maxWidth:
-                128, // specify the width of the thumbnail, let the height auto-scaled to keep the source aspect ratio
-            quality: 60,
+                200, // specify the width of the thumbnail, let the height auto-scaled to keep the source aspect ratio
+            quality: 100,
           );
           return uint8list;
         })

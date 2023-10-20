@@ -41,7 +41,6 @@ class StatusSaverVideos extends StatelessWidget {
                   }
                 },
               );
-              ;
             },
           );
         } else {

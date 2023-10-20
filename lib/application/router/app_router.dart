@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:whatsapp_status_saver/application/router/app_routes.dart';
 import 'package:whatsapp_status_saver/presentation/home_page/home_page.dart';
+import 'package:whatsapp_status_saver/presentation/home_page/ui/full_screen_image_view.dart';
 import 'package:whatsapp_status_saver/presentation/onboarding/onboarding_screen.dart';
 
 final appRouterSinglton = AppRouter();
@@ -16,17 +16,15 @@ class AppRouter {
       routes: [
         GoRoute(
           path: AppRoutes.homeScreen,
-          // builder: (context, state) => const HomePage(),
-          pageBuilder: (context, state) => const MaterialPage(
-            child: HomePage(),
-          ),
+          builder: (context, state) => const HomePage(),
         ),
         GoRoute(
           path: AppRoutes.onBoardingScreen,
-          // builder: (context, state) => const HomePage(),
-          pageBuilder: (context, state) => const MaterialPage(
-            child: OnBoardingScreen(),
-          ),
+          builder: (context, state) => const OnBoardingScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.fullScreenImage,
+          builder: (context, state) => const FullscreenImageViewer(),
         ),
       ],
       initialLocation: initialRouteResolver,

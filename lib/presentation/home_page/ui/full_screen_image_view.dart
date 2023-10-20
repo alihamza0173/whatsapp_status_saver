@@ -1,16 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:whatsapp_status_saver/application/providers/full_screen_image_preview.dart';
 
 class FullscreenImageViewer extends StatefulWidget {
-  final List<FileSystemEntity> images;
-  final int initialIndex;
-
-  const FullscreenImageViewer({
-    super.key,
-    required this.images,
-    required this.initialIndex,
-  });
+  const FullscreenImageViewer({super.key});
 
   @override
   State<FullscreenImageViewer> createState() => _FullscreenImageViewerState();
@@ -18,11 +12,15 @@ class FullscreenImageViewer extends StatefulWidget {
 
 class _FullscreenImageViewerState extends State<FullscreenImageViewer> {
   late final PageController _pageController;
+  late final List<FileSystemEntity> images;
+  late final int initialIndex;
 
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(initialPage: widget.initialIndex);
+    images = fullScreenImagePreviewProvider.images;
+    initialIndex = fullScreenImagePreviewProvider.index;
+    _pageController = PageController(initialPage: initialIndex);
   }
 
   @override
@@ -31,11 +29,11 @@ class _FullscreenImageViewerState extends State<FullscreenImageViewer> {
       backgroundColor: Colors.black,
       body: PageView.builder(
         controller: _pageController,
-        itemCount: widget.images.length,
+        itemCount: images.length,
         itemBuilder: (context, pageIndex) {
           return InteractiveViewer(
             child: Image.file(
-              widget.images[pageIndex] as File,
+              images[pageIndex] as File,
               fit: BoxFit.contain,
             ),
           );
