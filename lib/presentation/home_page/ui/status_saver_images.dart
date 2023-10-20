@@ -21,10 +21,14 @@ class StatusSaverImages extends StatelessWidget {
               axisDirection: AxisDirection.down,
               crossAxisSpacing: 8.0,
               mainAxisSpacing: 8.0,
-              children: data.map((e) => Image.file(e as File)).toList(),
+              children: data
+                  .map((e) => ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Image.file(e as File)))
+                  .toList(),
             );
             // return GridView.builder(
-            //   itemCount: data.length,
+            //   itemCount: data.length,nm,.
             //   padding: const EdgeInsets.all(8.0),
             //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             //     crossAxisCount: 2,
