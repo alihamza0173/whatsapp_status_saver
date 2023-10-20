@@ -17,6 +17,7 @@ class StatusSaverImages extends StatelessWidget {
             final data = snapshot.data as List<FileSystemEntity>;
             return GridView.builder(
               itemCount: data.length,
+              padding: const EdgeInsets.all(8.0),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisSpacing: 8.0,
@@ -24,7 +25,16 @@ class StatusSaverImages extends StatelessWidget {
               ),
               itemBuilder: (context, index) {
                 final file = data[index];
-                return Image.file(file as File, fit: BoxFit.cover);
+                return DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8.0),
+                    image: DecorationImage(
+                      image: FileImage(file as File),
+                      fit: BoxFit.scaleDown,
+                    ),
+                  ),
+                );
               },
             );
           } else {

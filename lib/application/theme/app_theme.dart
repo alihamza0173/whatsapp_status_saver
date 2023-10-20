@@ -6,6 +6,7 @@ class AppTheme {
     colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
     useMaterial3: true,
     fontFamily: GoogleFonts.poppins().fontFamily,
+    scaffoldBackgroundColor: const Color.fromRGBO(225, 251, 214, 1),
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.green,
       foregroundColor: Colors.white,
