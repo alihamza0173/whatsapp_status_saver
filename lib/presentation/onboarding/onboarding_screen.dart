@@ -4,8 +4,25 @@ import 'package:whatsapp_status_saver/application/common/app_images.dart';
 import 'package:whatsapp_status_saver/application/providers/file_manager_provider.dart';
 import 'package:whatsapp_status_saver/application/router/app_routes.dart';
 
-class OnBoardingScreen extends StatelessWidget {
+class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
+
+  @override
+  State<OnBoardingScreen> createState() => _OnBoardingScreenState();
+}
+
+class _OnBoardingScreenState extends State<OnBoardingScreen> {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final isAllowed = await FileManagerProvider().checkPermission();
+      if (isAllowed) {
+        // ignore: use_build_context_synchronously
+        context.go(AppRoutes.homeScreen);
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

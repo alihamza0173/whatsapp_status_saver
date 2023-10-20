@@ -63,3 +63,5 @@ class FileManagerProvider extends ChangeNotifier {
     return files;
   }
 }
+
+final fileManagerProvider = FileManagerProvider();
