@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:whatsapp_status_saver/application/common/app_images.dart';
@@ -17,7 +19,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final isAllowed = await fileManagerProvider.checkPermission();
       if (isAllowed) {
-        // ignore: use_build_context_synchronously
         context.go(AppRoutes.homeScreen);
       }
     });
@@ -51,9 +52,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   fixedSize: Size.fromWidth(MediaQuery.sizeOf(context).width),
                 ),
                 onPressed: () async {
-                  final isAllowed = await fileManagerProvider.checkPermission();
+                  final isAllowed =
+                      await fileManagerProvider.askForPermission();
                   if (isAllowed) {
-                    // ignore: use_build_context_synchronously
                     context.go(AppRoutes.homeScreen);
                   }
                 },
