@@ -17,6 +17,7 @@ class FileManagerProvider extends ChangeNotifier {
     }
   }
 
+  // Ask for permission
   Future<bool> askForPermission() async {
     final status = await Permission.manageExternalStorage.request();
     if (status.isGranted) {
@@ -26,9 +27,24 @@ class FileManagerProvider extends ChangeNotifier {
     }
   }
 
-  Stream<List<FileSystemEntity>> getFiles() {
+  getVideoFiles() {
     final lister = _directory.list(recursive: true, followLinks: false);
-    return lister.toList().asStream();
+    return lister
+        .where((event) => event.path.endsWith('.mp4'))
+        .toList()
+        .asStream();
+  }
+
+  Stream<List<FileSystemEntity>> getFilesImages() {
+    final lister = _directory.list(recursive: true, followLinks: false);
+    return lister
+        .where((event) {
+          final path = event.path;
+          final extension = path.split('.').last;
+          return extension == 'jpg' || extension == 'png';
+        })
+        .toList()
+        .asStream();
   }
 }
 
