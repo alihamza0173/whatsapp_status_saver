@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:whatsapp_status_saver/application/providers/file_manager_provider.dart';
 
 class StatusSaverVideos extends StatelessWidget {
@@ -11,37 +12,46 @@ class StatusSaverVideos extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final data = snapshot.data;
-          return GridView.builder(
-            itemCount: data?.length,
-            padding: const EdgeInsets.all(8.0),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 8.0,
-              crossAxisSpacing: 8.0,
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: StaggeredGrid.count(
+                crossAxisCount: 2,
+                axisDirection: AxisDirection.down,
+                crossAxisSpacing: 8.0,
+                mainAxisSpacing: 8.0,
+                children: data != null
+                    ? data
+                        .map(
+                          (e) => ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: FutureBuilder(
+                              future: e,
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  final data = snapshot.data;
+                                  return Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      Image.memory(data!),
+                                      const Icon(
+                                        Icons.play_arrow,
+                                        size: 50.0,
+                                        color: Colors.white,
+                                      ),
+                                    ],
+                                  );
+                                } else {
+                                  return const SizedBox();
+                                }
+                              },
+                            ),
+                          ),
+                        )
+                        .toList()
+                    : [const Center(child: Text('No videos found'))],
+              ),
             ),
-            itemBuilder: (context, index) {
-              final file = data?[index];
-              return FutureBuilder(
-                future: file,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    final data = snapshot.data;
-                    return DecoratedBox(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8.0),
-                        image: DecorationImage(
-                          image: MemoryImage(data!),
-                          fit: BoxFit.scaleDown,
-                        ),
-                      ),
-                    );
-                  } else {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                },
-              );
-            },
           );
         } else {
           return const Center(child: CircularProgressIndicator());
