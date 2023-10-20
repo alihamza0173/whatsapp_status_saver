@@ -8,8 +8,8 @@ class StatusSaverImages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final image = FileManagerProvider().file;
-    final video = FileManagerProvider().file2;
+    final image = fileManagerProvider.file;
+    final video = fileManagerProvider.file2;
     return Center(
         child: Column(
       children: [
