@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:whatsapp_status_saver/application/providers/file_manager_provider.dart';
+import 'package:whatsapp_status_saver/presentation/home_page/ui/full_screen_image_view.dart';
 
 class StatusSaverImages extends StatelessWidget {
   const StatusSaverImages({
@@ -22,9 +23,21 @@ class StatusSaverImages extends StatelessWidget {
               crossAxisSpacing: 8.0,
               mainAxisSpacing: 8.0,
               children: data
-                  .map((e) => ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: Image.file(e as File)))
+                  .map((e) => GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => FullscreenImageViewer(
+                                images: data,
+                                initialIndex: data.indexOf(e),
+                              ),
+                            ),
+                          );
+                        },
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.file(e as File)),
+                      ))
                   .toList(),
             );
             // return GridView.builder(
