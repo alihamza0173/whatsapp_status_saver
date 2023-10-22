@@ -26,6 +26,10 @@ class AppRouter {
           path: AppRoutes.fullScreenImage,
           builder: (context, state) => const FullscreenImageViewer(),
         ),
+        // GoRoute(
+        //   path: AppRoutes.videoPlayer,
+        //   builder: (context, state) => const VideoApp(),
+        // ),
       ],
       initialLocation: initialRouteResolver,
     );
