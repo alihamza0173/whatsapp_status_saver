@@ -2,7 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:go_router/go_router.dart';
 import 'package:whatsapp_status_saver/application/providers/file_manager_provider.dart';
+import 'package:whatsapp_status_saver/application/providers/full_screen_video_provider.dart';
+import 'package:whatsapp_status_saver/application/router/app_routes.dart';
 import 'package:whatsapp_status_saver/presentation/home_page/ui/video_grid.dart';
 
 class StatusSaverVideos extends StatelessWidget {
@@ -19,14 +22,22 @@ class StatusSaverVideos extends StatelessWidget {
             final data = snapshot.data as List<FileSystemEntity>;
             return SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(4.0),
                 child: StaggeredGrid.count(
                   crossAxisCount: 2,
                   axisDirection: AxisDirection.down,
-                  crossAxisSpacing: 8.0,
-                  mainAxisSpacing: 8.0,
-                  children:
-                      data.map((e) => VideoGrid(video: e as File)).toList(),
+                  crossAxisSpacing: 4.0,
+                  mainAxisSpacing: 4.0,
+                  children: data
+                      .map((e) => GestureDetector(
+                            onTap: () {
+                              fullScreenVideoProvider.index = data.indexOf(e);
+                              fullScreenVideoProvider.videos = data;
+                              context.push(AppRoutes.fullScreenVideo);
+                            },
+                            child: VideoGrid(video: e as File),
+                          ))
+                      .toList(),
                 ),
               ),
             );

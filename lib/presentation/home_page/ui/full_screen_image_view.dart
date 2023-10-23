@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:whatsapp_status_saver/application/providers/full_screen_image_preview.dart';
+import 'package:whatsapp_status_saver/application/providers/full_screen_image_provider.dart';
 
 class FullscreenImageViewer extends StatefulWidget {
   const FullscreenImageViewer({super.key});
@@ -18,8 +18,8 @@ class _FullscreenImageViewerState extends State<FullscreenImageViewer> {
   @override
   void initState() {
     super.initState();
-    images = fullScreenImagePreviewProvider.images;
-    initialIndex = fullScreenImagePreviewProvider.index;
+    images = fullScreenImageProvider.images;
+    initialIndex = fullScreenImageProvider.index;
     _pageController = PageController(initialPage: initialIndex);
   }
 

@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:whatsapp_status_saver/application/router/app_routes.dart';
 import 'package:whatsapp_status_saver/presentation/home_page/home_page.dart';
 import 'package:whatsapp_status_saver/presentation/home_page/ui/full_screen_image_view.dart';
+import 'package:whatsapp_status_saver/presentation/home_page/ui/full_screen_video_view.dart';
 import 'package:whatsapp_status_saver/presentation/onboarding/onboarding_screen.dart';
 
 final appRouterSinglton = AppRouter();
@@ -26,10 +27,10 @@ class AppRouter {
           path: AppRoutes.fullScreenImage,
           builder: (context, state) => const FullscreenImageViewer(),
         ),
-        // GoRoute(
-        //   path: AppRoutes.videoPlayer,
-        //   builder: (context, state) => const VideoApp(),
-        // ),
+        GoRoute(
+          path: AppRoutes.fullScreenVideo,
+          builder: (context, state) => const FullscreenVideoViewer(),
+        ),
       ],
       initialLocation: initialRouteResolver,
     );
