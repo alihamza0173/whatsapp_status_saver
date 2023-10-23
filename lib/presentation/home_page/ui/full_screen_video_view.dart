@@ -27,13 +27,15 @@ class _FullscreenImageViewerState extends State<FullscreenVideoViewer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: const Color.fromRGBO(0, 0, 0, 1),
       body: PageView.builder(
         controller: _pageController,
         scrollDirection: Axis.vertical,
         itemCount: videos.length,
         itemBuilder: (context, pageIndex) {
-          return FullScreenVideo(video: videos[pageIndex] as File);
+          return Center(
+            child: FullScreenVideo(video: videos[pageIndex] as File),
+          );
         },
       ),
     );

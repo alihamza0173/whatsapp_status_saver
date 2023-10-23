@@ -18,12 +18,10 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
   void initState() {
     super.initState();
     _controller = VideoPlayerController.file(widget.video)
-      ..addListener(() {
-        setState(() {});
-      })
+      ..setLooping(true)
       ..initialize().then((_) {
-        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
         setState(() {});
+        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
         _controller.play();
       });
   }
