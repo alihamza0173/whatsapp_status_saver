@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:whatsapp_status_saver/application/providers/file_manager_provider.dart';
 import 'package:whatsapp_status_saver/application/providers/full_screen_image_provider.dart';
 import 'package:whatsapp_status_saver/presentation/home_page/ui/status_saver_options_button.dart';
 
@@ -33,18 +34,16 @@ class _FullscreenImageViewerState extends State<FullscreenImageViewer> {
         controller: _pageController,
         itemCount: images.length,
         itemBuilder: (context, pageIndex) {
+          final image = images[pageIndex] as File;
           return Stack(
             alignment: Alignment.center,
             children: [
               InteractiveViewer(
                 clipBehavior: Clip.none,
-                child: Image.file(
-                  images[pageIndex] as File,
-                  fit: BoxFit.contain,
-                ),
+                child: Image.file(image, fit: BoxFit.contain),
               ),
               StatusSaverOptionsButton(
-                onSavePressed: () {},
+                onSavePressed: () async => fileManagerProvider.saveStus(image),
                 onSharePressed: () {},
               ),
             ],
