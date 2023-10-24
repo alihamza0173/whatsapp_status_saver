@@ -18,10 +18,10 @@ class _FullscreenImageViewerState extends State<FullscreenVideoViewer> {
 
   @override
   void initState() {
-    super.initState();
     videos = fullScreenVideoProvider.videos;
     initialIndex = fullScreenVideoProvider.index;
     _pageController = PageController(initialPage: initialIndex);
+    super.initState();
   }
 
   @override

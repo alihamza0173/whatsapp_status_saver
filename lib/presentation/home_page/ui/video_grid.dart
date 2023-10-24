@@ -16,12 +16,12 @@ class _VideoGridState extends State<VideoGrid> {
 
   @override
   void initState() {
-    super.initState();
     _controller = VideoPlayerController.file(widget.video)
       ..initialize().then((_) {
         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
         setState(() {});
       });
+    super.initState();
   }
 
   @override
@@ -48,7 +48,7 @@ class _VideoGridState extends State<VideoGrid> {
 
   @override
   void dispose() {
-    super.dispose();
     _controller.dispose();
+    super.dispose();
   }
 }

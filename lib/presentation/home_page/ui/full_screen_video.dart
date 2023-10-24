@@ -16,7 +16,6 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
 
   @override
   void initState() {
-    super.initState();
     _controller = VideoPlayerController.file(widget.video)
       ..setLooping(true)
       ..initialize().then((_) {
@@ -24,6 +23,7 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
         setState(() {});
         _controller.play();
       });
+    super.initState();
   }
 
   @override
@@ -47,7 +47,7 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
 
   @override
   void dispose() {
-    super.dispose();
     _controller.dispose();
+    super.dispose();
   }
 }

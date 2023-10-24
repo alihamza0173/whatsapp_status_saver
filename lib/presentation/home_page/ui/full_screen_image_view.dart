@@ -17,10 +17,10 @@ class _FullscreenImageViewerState extends State<FullscreenImageViewer> {
 
   @override
   void initState() {
-    super.initState();
     images = fullScreenImageProvider.images;
     initialIndex = fullScreenImageProvider.index;
     _pageController = PageController(initialPage: initialIndex);
+    super.initState();
   }
 
   @override
