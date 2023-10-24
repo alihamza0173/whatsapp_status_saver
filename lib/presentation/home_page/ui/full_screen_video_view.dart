@@ -28,6 +28,7 @@ class _FullscreenImageViewerState extends State<FullscreenVideoViewer> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(0, 0, 0, 1),
+      appBar: AppBar(backgroundColor: Colors.black),
       body: PageView.builder(
         controller: _pageController,
         scrollDirection: Axis.vertical,

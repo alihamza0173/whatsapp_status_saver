@@ -27,6 +27,7 @@ class _FullscreenImageViewerState extends State<FullscreenImageViewer> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
+      appBar: AppBar(backgroundColor: Colors.black),
       body: PageView.builder(
         controller: _pageController,
         itemCount: images.length,
