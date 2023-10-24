@@ -12,7 +12,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routerConfig: appRouterSinglton.router,
       title: 'WhatsApp Status Saver',
-      theme: AppTheme.appTheme,
+      themeMode: ThemeMode.system,
+      theme: AppTheme.lightThme,
+      darkTheme: AppTheme.darkTheme,
     );
   }
 }
