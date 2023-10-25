@@ -50,17 +50,16 @@ class FileManagerProvider extends ChangeNotifier {
   Future<String> saveStus(File file) async {
     final copiedStatusName = file.path.split('/').last;
 
-    Directory dir = Directory('/storage/emulated/0/DCIM/');
+    Directory dir = Directory('/storage/emulated/0/Download/StatusSaver');
+    if (!await dir.exists()) {
+      await dir.create();
+    }
 
-    if (await dir.exists()) {
-      try {
-        await file.copy('/storage/emulated/0/DCIM/Camera/$copiedStatusName');
-        return 'Status saved successfully';
-      } catch (e) {
-        return 'e.toString()';
-      }
-    } else {
-      return 'There is not directory';
+    try {
+      await file.copy('${dir.path}/$copiedStatusName');
+      return 'Status saved successfully';
+    } catch (e) {
+      return e.toString();
     }
   }
 }
