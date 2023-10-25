@@ -43,7 +43,13 @@ class _FullscreenImageViewerState extends State<FullscreenImageViewer> {
                 child: Image.file(image, fit: BoxFit.contain),
               ),
               StatusSaverOptionsButton(
-                onSavePressed: () async => fileManagerProvider.saveStus(image),
+                onSavePressed: () async {
+                  final result = await fileManagerProvider.saveStus(image);
+                  // ignore: use_build_context_synchronously
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(result)),
+                  );
+                },
                 onSharePressed: () {},
               ),
             ],

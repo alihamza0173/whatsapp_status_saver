@@ -47,7 +47,7 @@ class FileManagerProvider extends ChangeNotifier {
         .asStream();
   }
 
-  Future<void> saveStus(File file) async {
+  Future<String> saveStus(File file) async {
     final copiedStatusName = file.path.split('/').last;
 
     Directory dir = Directory('/storage/emulated/0/DCIM/');
@@ -55,14 +55,13 @@ class FileManagerProvider extends ChangeNotifier {
     if (await dir.exists()) {
       try {
         await file.copy('/storage/emulated/0/DCIM/Camera/$copiedStatusName');
+        return 'Status saved successfully';
       } catch (e) {
-        debugPrint(e.toString());
+        return 'e.toString()';
       }
     } else {
-      debugPrint('There is not directory');
+      return 'There is not directory';
     }
-
-    debugPrint('by');
   }
 }
 
