@@ -3,15 +3,15 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
-class VideoGrid extends StatefulWidget {
-  const VideoGrid({super.key, required this.video});
+class GridVideo extends StatefulWidget {
+  const GridVideo({super.key, required this.video});
   final File video;
 
   @override
-  State<VideoGrid> createState() => _VideoGridState();
+  State<GridVideo> createState() => _GridVideoState();
 }
 
-class _VideoGridState extends State<VideoGrid> {
+class _GridVideoState extends State<GridVideo> {
   late VideoPlayerController _controller;
 
   @override

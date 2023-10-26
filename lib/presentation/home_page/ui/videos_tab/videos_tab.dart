@@ -6,10 +6,10 @@ import 'package:go_router/go_router.dart';
 import 'package:whatsapp_status_saver/application/providers/file_manager_provider.dart';
 import 'package:whatsapp_status_saver/application/providers/full_screen_video_provider.dart';
 import 'package:whatsapp_status_saver/application/router/app_routes.dart';
-import 'package:whatsapp_status_saver/presentation/home_page/ui/videos_tab/video_grid.dart';
+import 'package:whatsapp_status_saver/presentation/home_page/ui/videos_tab/grid_video.dart';
 
-class StatusSaverVideos extends StatelessWidget {
-  const StatusSaverVideos({
+class VideosTab extends StatelessWidget {
+  const VideosTab({
     super.key,
   });
 
@@ -35,7 +35,7 @@ class StatusSaverVideos extends StatelessWidget {
                               fullScreenVideoProvider.videos = data;
                               context.push(AppRoutes.fullScreenVideo);
                             },
-                            child: VideoGrid(video: e as File),
+                            child: GridVideo(video: e as File),
                           ))
                       .toList(),
                 ),

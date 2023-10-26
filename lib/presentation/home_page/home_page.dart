@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:whatsapp_status_saver/presentation/home_page/ui/images_tab/status_saver_images.dart';
+import 'package:whatsapp_status_saver/presentation/home_page/ui/images_tab/images_tab.dart';
 import 'package:whatsapp_status_saver/presentation/home_page/ui/saved_status_tab/saved_status_tab.dart';
-import 'package:whatsapp_status_saver/presentation/home_page/ui/videos_tab/status_saver_videos.dart';
+import 'package:whatsapp_status_saver/presentation/home_page/ui/videos_tab/videos_tab.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -47,8 +47,8 @@ class _HomePageState extends State<HomePage>
       body: TabBarView(
         controller: _tabController,
         children: const [
-          StatusSaverImages(),
-          StatusSaverVideos(),
+          ImagesTab(),
+          VideosTab(),
           SavedStatusTab(),
         ],
       ),

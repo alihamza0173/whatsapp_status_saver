@@ -25,7 +25,7 @@ class AppRouter {
         ),
         GoRoute(
           path: AppRoutes.fullScreenImage,
-          builder: (context, state) => const FullscreenImageViewer(),
+          builder: (context, state) => const FullscreenImageView(),
         ),
         GoRoute(
           path: AppRoutes.fullScreenVideo,

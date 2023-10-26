@@ -5,14 +5,14 @@ import 'package:whatsapp_status_saver/application/providers/file_manager_provide
 import 'package:whatsapp_status_saver/application/providers/full_screen_image_provider.dart';
 import 'package:whatsapp_status_saver/presentation/common/status_saver_options_button.dart';
 
-class FullscreenImageViewer extends StatefulWidget {
-  const FullscreenImageViewer({super.key});
+class FullscreenImageView extends StatefulWidget {
+  const FullscreenImageView({super.key});
 
   @override
-  State<FullscreenImageViewer> createState() => _FullscreenImageViewerState();
+  State<FullscreenImageView> createState() => _FullscreenImageViewState();
 }
 
-class _FullscreenImageViewerState extends State<FullscreenImageViewer> {
+class _FullscreenImageViewState extends State<FullscreenImageView> {
   late final PageController _pageController;
   late final List<FileSystemEntity> images;
   late final int initialIndex;

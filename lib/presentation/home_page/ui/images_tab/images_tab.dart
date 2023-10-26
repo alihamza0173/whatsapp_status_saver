@@ -7,8 +7,8 @@ import 'package:whatsapp_status_saver/application/providers/file_manager_provide
 import 'package:whatsapp_status_saver/application/providers/full_screen_image_provider.dart';
 import 'package:whatsapp_status_saver/application/router/app_routes.dart';
 
-class StatusSaverImages extends StatelessWidget {
-  const StatusSaverImages({
+class ImagesTab extends StatelessWidget {
+  const ImagesTab({
     super.key,
   });
 

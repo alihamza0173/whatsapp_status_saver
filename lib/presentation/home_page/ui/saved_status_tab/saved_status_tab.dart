@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:whatsapp_status_saver/application/providers/file_manager_provider.dart';
-import 'package:whatsapp_status_saver/presentation/home_page/ui/videos_tab/video_grid.dart';
+import 'package:whatsapp_status_saver/presentation/home_page/ui/videos_tab/grid_video.dart';
 
 class SavedStatusTab extends StatelessWidget {
   const SavedStatusTab({
@@ -36,7 +36,7 @@ class SavedStatusTab extends StatelessWidget {
                     } else if (extension == 'mp4') {
                       return ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
-                        child: VideoGrid(video: e as File),
+                        child: GridVideo(video: e as File),
                       );
                     } else {
                       return const SizedBox();
