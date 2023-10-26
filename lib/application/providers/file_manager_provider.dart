@@ -50,7 +50,7 @@ class FileManagerProvider extends ChangeNotifier {
         .asStream();
   }
 
-  Stream<List<FileSystemEntity>> getFiles() {
+  Stream<List<FileSystemEntity>> getSavedStatus() {
     final lister = _statusSaverDir.list(recursive: true, followLinks: false);
     return lister.toList().asStream();
   }
