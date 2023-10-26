@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:whatsapp_status_saver/application/providers/file_manager_provider.dart';
 import 'package:whatsapp_status_saver/application/providers/full_screen_video_provider.dart';
 import 'package:whatsapp_status_saver/application/router/app_routes.dart';
-import 'package:whatsapp_status_saver/presentation/home_page/ui/video_grid.dart';
+import 'package:whatsapp_status_saver/presentation/home_page/ui/videos_tab/video_grid.dart';
 
 class StatusSaverVideos extends StatelessWidget {
   const StatusSaverVideos({

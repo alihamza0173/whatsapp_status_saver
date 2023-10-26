@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:whatsapp_status_saver/application/providers/file_manager_provider.dart';
 import 'package:whatsapp_status_saver/application/providers/full_screen_image_provider.dart';
-import 'package:whatsapp_status_saver/presentation/home_page/ui/status_saver_options_button.dart';
+import 'package:whatsapp_status_saver/presentation/common/status_saver_options_button.dart';
 
 class FullscreenImageViewer extends StatefulWidget {
   const FullscreenImageViewer({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:whatsapp_status_saver/presentation/home_page/ui/status_saver_images.dart';
-import 'package:whatsapp_status_saver/presentation/home_page/ui/status_saver_videos.dart';
+import 'package:whatsapp_status_saver/presentation/home_page/ui/images_tab/status_saver_images.dart';
+import 'package:whatsapp_status_saver/presentation/home_page/ui/videos_tab/status_saver_videos.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
