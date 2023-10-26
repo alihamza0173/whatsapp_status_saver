@@ -14,8 +14,8 @@ class ImagesTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-        stream: fileManagerProvider.getFilesImages(),
+    return FutureBuilder(
+        future: fileManagerProvider.getFilesImages(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final data = snapshot.data as List<FileSystemEntity>;

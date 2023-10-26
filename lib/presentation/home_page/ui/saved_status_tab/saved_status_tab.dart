@@ -12,8 +12,8 @@ class SavedStatusTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-        stream: fileManagerProvider.getSavedStatus(),
+    return FutureBuilder(
+        future: fileManagerProvider.getSavedStatus(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final data = snapshot.data as List<FileSystemEntity>;

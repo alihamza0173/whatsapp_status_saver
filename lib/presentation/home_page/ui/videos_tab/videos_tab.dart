@@ -15,11 +15,11 @@ class VideosTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-        stream: fileManagerProvider.getFilesVidos(),
+    return FutureBuilder(
+        future: fileManagerProvider.getFilesVidos(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            final data = snapshot.data as List<FileSystemEntity>;
+            final data = snapshot.data;
             return SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(4.0),
@@ -28,16 +28,16 @@ class VideosTab extends StatelessWidget {
                   axisDirection: AxisDirection.down,
                   crossAxisSpacing: 4.0,
                   mainAxisSpacing: 4.0,
-                  children: data
-                      .map((e) => GestureDetector(
-                            onTap: () {
-                              fullScreenVideoProvider.index = data.indexOf(e);
-                              fullScreenVideoProvider.videos = data;
-                              context.push(AppRoutes.fullScreenVideo);
-                            },
-                            child: GridVideo(video: e as File),
-                          ))
-                      .toList(),
+                  children: data!.map((e) {
+                    return GestureDetector(
+                      onTap: () {
+                        fullScreenVideoProvider.index = data.indexOf(e);
+                        fullScreenVideoProvider.videos = data;
+                        context.push(AppRoutes.fullScreenVideo);
+                      },
+                      child: GridVideo(video: e as File),
+                    );
+                  }).toList(),
                 ),
               ),
             );

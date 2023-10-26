@@ -30,29 +30,23 @@ class FileManagerProvider extends ChangeNotifier {
     }
   }
 
-  Stream<List<FileSystemEntity>> getFilesImages() {
+  Future<List<FileSystemEntity>> getFilesImages() {
     final lister = _directory.list(recursive: true, followLinks: false);
-    return lister
-        .where((event) {
-          final path = event.path;
-          final extension = path.split('.').last;
-          return extension == 'jpg' || extension == 'png';
-        })
-        .toList()
-        .asStream();
+    return lister.where((event) {
+      final path = event.path;
+      final extension = path.split('.').last;
+      return extension == 'jpg' || extension == 'png';
+    }).toList();
   }
 
-  Stream<List<FileSystemEntity>> getFilesVidos() {
+  Future<List<FileSystemEntity>> getFilesVidos() {
     final lister = _directory.list(recursive: true, followLinks: false);
-    return lister
-        .where((event) => event.path.endsWith('.mp4'))
-        .toList()
-        .asStream();
+    return lister.where((event) => event.path.endsWith('.mp4')).toList();
   }
 
-  Stream<List<FileSystemEntity>> getSavedStatus() {
+  Future<List<FileSystemEntity>> getSavedStatus() {
     final lister = _statusSaverDir.list(recursive: true, followLinks: false);
-    return lister.toList().asStream();
+    return lister.toList();
   }
 
   Future<String> saveStatus(File file) async {
