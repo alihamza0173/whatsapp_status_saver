@@ -7,6 +7,9 @@ class FileManagerProvider extends ChangeNotifier {
   final Directory _directory = Directory(
       '/storage/emulated/0/Android/media/com.whatsapp/WhatsApp/Media/.Statuses');
 
+  final Directory _statusSaverDir =
+      Directory('/storage/emulated/0/Download/StatusSaver');
+
   // Check if permission is granted
   Future<bool> checkPermission() async {
     final status = await Permission.manageExternalStorage.status;
@@ -47,16 +50,20 @@ class FileManagerProvider extends ChangeNotifier {
         .asStream();
   }
 
-  Future<String> saveStus(File file) async {
+  Stream<List<FileSystemEntity>> getFiles() {
+    final lister = _statusSaverDir.list(recursive: true, followLinks: false);
+    return lister.toList().asStream();
+  }
+
+  Future<String> saveStatus(File file) async {
     final copiedStatusName = file.path.split('/').last;
 
-    Directory dir = Directory('/storage/emulated/0/Download/StatusSaver');
-    if (!await dir.exists()) {
-      await dir.create();
+    if (!await _statusSaverDir.exists()) {
+      await _statusSaverDir.create();
     }
 
     try {
-      await file.copy('${dir.path}/$copiedStatusName');
+      await file.copy('${_statusSaverDir.path}/$copiedStatusName');
       return 'Status saved successfully';
     } catch (e) {
       return e.toString();

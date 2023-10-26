@@ -44,7 +44,7 @@ class _FullscreenImageViewerState extends State<FullscreenImageViewer> {
               ),
               StatusSaverOptionsButton(
                 onSavePressed: () async {
-                  final result = await fileManagerProvider.saveStus(image);
+                  final result = await fileManagerProvider.saveStatus(image);
                   // ignore: use_build_context_synchronously
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text(result)),

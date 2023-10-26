@@ -43,7 +43,7 @@ class _FullscreenImageViewerState extends State<FullscreenVideoViewer> {
               FullScreenVideo(video: video),
               StatusSaverOptionsButton(
                 onSavePressed: () async {
-                  final result = await fileManagerProvider.saveStus(video);
+                  final result = await fileManagerProvider.saveStatus(video);
                   // ignore: use_build_context_synchronously
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text(result)),
