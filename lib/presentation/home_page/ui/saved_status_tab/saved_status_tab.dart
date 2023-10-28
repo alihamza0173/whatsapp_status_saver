@@ -2,7 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:go_router/go_router.dart';
 import 'package:whatsapp_status_saver/application/providers/file_manager_provider.dart';
+import 'package:whatsapp_status_saver/application/providers/full_screen_image_provider.dart';
+import 'package:whatsapp_status_saver/application/providers/full_screen_video_provider.dart';
+import 'package:whatsapp_status_saver/application/router/app_routes.dart';
+import 'package:whatsapp_status_saver/presentation/home_page/ui/saved_status_tab/ui/grid_child.dart';
 import 'package:whatsapp_status_saver/presentation/home_page/ui/videos_tab/grid_video.dart';
 
 class SavedStatusTab extends StatelessWidget {
@@ -29,13 +34,32 @@ class SavedStatusTab extends StatelessWidget {
                     final path = e.path;
                     final extension = path.split('.').last;
                     if (extension == 'jpg' || extension == 'png') {
-                      return ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
+                      return GridChild(
+                        onTap: () {
+                          final images = data
+                              .where((element) =>
+                                  element.path.split('.').last == 'jpg' ||
+                                  element.path.split('.').last == 'png')
+                              .toList();
+                          fullScreenImageProvider.isStatusSaved = true;
+                          fullScreenImageProvider.index = images.indexOf(e);
+                          fullScreenImageProvider.images = images;
+                          context.push(AppRoutes.fullScreenImage);
+                        },
                         child: Image.file(e as File),
                       );
                     } else if (extension == 'mp4') {
-                      return ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
+                      return GridChild(
+                        onTap: () {
+                          final videos = data
+                              .where((element) =>
+                                  element.path.split('.').last == 'mp4')
+                              .toList();
+                          fullScreenVideoProvider.isStatusSaved = true;
+                          fullScreenVideoProvider.index = videos.indexOf(e);
+                          fullScreenVideoProvider.videos = videos;
+                          context.push(AppRoutes.fullScreenVideo);
+                        },
                         child: GridVideo(video: e as File),
                       );
                     } else {

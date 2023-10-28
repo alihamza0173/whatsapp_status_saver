@@ -3,5 +3,4 @@ class AppRoutes {
   static const String homeScreen = '/home-screen';
   static const String fullScreenImage = '/full-screen-image';
   static const String fullScreenVideo = '/full-video-image';
-  static const String videoPlayer = '/video-player';
 }

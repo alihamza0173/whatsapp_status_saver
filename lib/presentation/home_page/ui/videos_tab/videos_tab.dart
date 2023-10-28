@@ -31,6 +31,7 @@ class VideosTab extends StatelessWidget {
                   children: data!.map((e) {
                     return GestureDetector(
                       onTap: () {
+                        fullScreenVideoProvider.isStatusSaved = false;
                         fullScreenVideoProvider.index = data.indexOf(e);
                         fullScreenVideoProvider.videos = data;
                         context.push(AppRoutes.fullScreenVideo);

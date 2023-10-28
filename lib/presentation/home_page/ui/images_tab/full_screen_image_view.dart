@@ -41,7 +41,8 @@ class _FullscreenImageViewState extends State<FullscreenImageView> {
                 clipBehavior: Clip.none,
                 child: Image.file(image, fit: BoxFit.contain),
               ),
-              StatusSaverOptionsButton(file: image),
+              if (!fullScreenImageProvider.isStatusSaved)
+                StatusSaverOptionsButton(file: image),
             ],
           );
         },
