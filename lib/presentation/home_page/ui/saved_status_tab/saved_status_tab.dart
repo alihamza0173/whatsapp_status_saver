@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
 import 'package:whatsapp_status_saver/application/providers/file_manager_provider.dart';
-import 'package:whatsapp_status_saver/application/providers/full_screen_image_provider.dart';
-import 'package:whatsapp_status_saver/application/providers/full_screen_video_provider.dart';
+import 'package:whatsapp_status_saver/application/providers/full_screen_media_provider.dart';
 import 'package:whatsapp_status_saver/application/router/app_routes.dart';
 import 'package:whatsapp_status_saver/presentation/home_page/ui/saved_status_tab/ui/grid_child.dart';
 import 'package:whatsapp_status_saver/presentation/home_page/ui/videos_tab/grid_video.dart';
@@ -41,9 +40,9 @@ class SavedStatusTab extends StatelessWidget {
                                   element.path.split('.').last == 'jpg' ||
                                   element.path.split('.').last == 'png')
                               .toList();
-                          fullScreenImageProvider.isStatusSaved = true;
-                          fullScreenImageProvider.index = images.indexOf(e);
-                          fullScreenImageProvider.images = images;
+                          fullScreenMediaProvider.isStatusSaved = true;
+                          fullScreenMediaProvider.index = images.indexOf(e);
+                          fullScreenMediaProvider.media = images;
                           context.push(AppRoutes.fullScreenImage);
                         },
                         child: Image.file(e as File),
@@ -55,9 +54,9 @@ class SavedStatusTab extends StatelessWidget {
                               .where((element) =>
                                   element.path.split('.').last == 'mp4')
                               .toList();
-                          fullScreenVideoProvider.isStatusSaved = true;
-                          fullScreenVideoProvider.index = videos.indexOf(e);
-                          fullScreenVideoProvider.videos = videos;
+                          fullScreenMediaProvider.isStatusSaved = true;
+                          fullScreenMediaProvider.index = videos.indexOf(e);
+                          fullScreenMediaProvider.media = videos;
                           context.push(AppRoutes.fullScreenVideo);
                         },
                         child: GridVideo(video: e as File),

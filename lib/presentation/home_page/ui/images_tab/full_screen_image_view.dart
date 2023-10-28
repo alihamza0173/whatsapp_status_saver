@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:whatsapp_status_saver/application/providers/full_screen_image_provider.dart';
+import 'package:whatsapp_status_saver/application/providers/full_screen_media_provider.dart';
 import 'package:whatsapp_status_saver/presentation/common/status_saver_options_button.dart';
 
 class FullscreenImageView extends StatefulWidget {
@@ -18,8 +18,8 @@ class _FullscreenImageViewState extends State<FullscreenImageView> {
 
   @override
   void initState() {
-    images = fullScreenImageProvider.images;
-    initialIndex = fullScreenImageProvider.index;
+    images = fullScreenMediaProvider.media;
+    initialIndex = fullScreenMediaProvider.index;
     _pageController = PageController(initialPage: initialIndex);
     super.initState();
   }
@@ -41,7 +41,7 @@ class _FullscreenImageViewState extends State<FullscreenImageView> {
                 clipBehavior: Clip.none,
                 child: Image.file(image, fit: BoxFit.contain),
               ),
-              if (!fullScreenImageProvider.isStatusSaved)
+              if (!fullScreenMediaProvider.isStatusSaved)
                 StatusSaverOptionsButton(file: image),
             ],
           );

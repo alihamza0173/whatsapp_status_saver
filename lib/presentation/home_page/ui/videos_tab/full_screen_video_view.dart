@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:whatsapp_status_saver/application/providers/full_screen_video_provider.dart';
+import 'package:whatsapp_status_saver/application/providers/full_screen_media_provider.dart';
 import 'package:whatsapp_status_saver/presentation/home_page/ui/videos_tab/full_screen_video.dart';
 import 'package:whatsapp_status_saver/presentation/common/status_saver_options_button.dart';
 
@@ -19,8 +19,8 @@ class _FullscreenImageViewerState extends State<FullscreenVideoViewer> {
 
   @override
   void initState() {
-    videos = fullScreenVideoProvider.videos;
-    initialIndex = fullScreenVideoProvider.index;
+    videos = fullScreenMediaProvider.media;
+    initialIndex = fullScreenMediaProvider.index;
     _pageController = PageController(initialPage: initialIndex);
     super.initState();
   }
@@ -40,7 +40,7 @@ class _FullscreenImageViewerState extends State<FullscreenVideoViewer> {
             alignment: Alignment.center,
             children: [
               FullScreenVideo(video: video),
-              if (!fullScreenVideoProvider.isStatusSaved)
+              if (!fullScreenMediaProvider.isStatusSaved)
                 StatusSaverOptionsButton(file: video),
             ],
           );

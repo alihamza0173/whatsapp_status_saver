@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
 import 'package:whatsapp_status_saver/application/providers/file_manager_provider.dart';
-import 'package:whatsapp_status_saver/application/providers/full_screen_image_provider.dart';
+import 'package:whatsapp_status_saver/application/providers/full_screen_media_provider.dart';
 import 'package:whatsapp_status_saver/application/router/app_routes.dart';
 
 class ImagesTab extends StatelessWidget {
@@ -30,9 +30,9 @@ class ImagesTab extends StatelessWidget {
                   children: data
                       .map((e) => GestureDetector(
                             onTap: () {
-                              fullScreenImageProvider.isStatusSaved = false;
-                              fullScreenImageProvider.index = data.indexOf(e);
-                              fullScreenImageProvider.images = data;
+                              fullScreenMediaProvider.isStatusSaved = false;
+                              fullScreenMediaProvider.index = data.indexOf(e);
+                              fullScreenMediaProvider.media = data;
                               context.push(AppRoutes.fullScreenImage);
                             },
                             child: ClipRRect(

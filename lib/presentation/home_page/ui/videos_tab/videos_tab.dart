@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
 import 'package:whatsapp_status_saver/application/providers/file_manager_provider.dart';
-import 'package:whatsapp_status_saver/application/providers/full_screen_video_provider.dart';
+import 'package:whatsapp_status_saver/application/providers/full_screen_media_provider.dart';
 import 'package:whatsapp_status_saver/application/router/app_routes.dart';
 import 'package:whatsapp_status_saver/presentation/home_page/ui/videos_tab/grid_video.dart';
 
@@ -31,9 +31,9 @@ class VideosTab extends StatelessWidget {
                   children: data!.map((e) {
                     return GestureDetector(
                       onTap: () {
-                        fullScreenVideoProvider.isStatusSaved = false;
-                        fullScreenVideoProvider.index = data.indexOf(e);
-                        fullScreenVideoProvider.videos = data;
+                        fullScreenMediaProvider.isStatusSaved = false;
+                        fullScreenMediaProvider.index = data.indexOf(e);
+                        fullScreenMediaProvider.media = data;
                         context.push(AppRoutes.fullScreenVideo);
                       },
                       child: GridVideo(video: e as File),
