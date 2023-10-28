@@ -10,6 +10,8 @@ class FileManagerProvider extends ChangeNotifier {
   final Directory _statusSaverDir =
       Directory('/storage/emulated/0/Download/StatusSaver');
 
+  String get statusSaverDir => _statusSaverDir.path;
+
   // Check if permission is granted
   Future<bool> checkPermission() async {
     final status = await Permission.manageExternalStorage.status;

@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:whatsapp_status_saver/application/providers/file_manager_provider.dart';
 import 'package:whatsapp_status_saver/application/providers/full_screen_image_provider.dart';
 import 'package:whatsapp_status_saver/presentation/common/status_saver_options_button.dart';
 
@@ -42,16 +41,7 @@ class _FullscreenImageViewState extends State<FullscreenImageView> {
                 clipBehavior: Clip.none,
                 child: Image.file(image, fit: BoxFit.contain),
               ),
-              StatusSaverOptionsButton(
-                onSavePressed: () async {
-                  final result = await fileManagerProvider.saveStatus(image);
-                  // ignore: use_build_context_synchronously
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(result)),
-                  );
-                },
-                onSharePressed: () {},
-              ),
+              StatusSaverOptionsButton(file: image),
             ],
           );
         },
