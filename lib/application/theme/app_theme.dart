@@ -18,6 +18,7 @@ class AppTheme {
       labelColor: Colors.white,
       unselectedLabelColor: Colors.grey[400],
       indicatorColor: Colors.white,
+      indicatorSize: TabBarIndicatorSize.tab,
     ),
   );
   static final ThemeData darkTheme = ThemeData(
@@ -27,5 +28,8 @@ class AppTheme {
     ),
     fontFamily: GoogleFonts.poppins().fontFamily,
     useMaterial3: true,
+    tabBarTheme: const TabBarTheme(
+      indicatorSize: TabBarIndicatorSize.tab,
+    ),
   );
 }
