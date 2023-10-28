@@ -30,9 +30,8 @@ class ImagesTab extends StatelessWidget {
                   children: data
                       .map((e) => GestureDetector(
                             onTap: () {
-                              fullScreenMediaProvider.isStatusSaved = false;
-                              fullScreenMediaProvider.index = data.indexOf(e);
-                              fullScreenMediaProvider.media = data;
+                              fullScreenMediaProvider.setMedia(
+                                  data, data.indexOf(e), false);
                               context.push(AppRoutes.fullScreenImage);
                             },
                             child: ClipRRect(

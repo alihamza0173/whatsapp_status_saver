@@ -40,9 +40,8 @@ class SavedStatusTab extends StatelessWidget {
                                   element.path.split('.').last == 'jpg' ||
                                   element.path.split('.').last == 'png')
                               .toList();
-                          fullScreenMediaProvider.isStatusSaved = true;
-                          fullScreenMediaProvider.index = images.indexOf(e);
-                          fullScreenMediaProvider.media = images;
+                          fullScreenMediaProvider.setMedia(
+                              images, images.indexOf(e), true);
                           context.push(AppRoutes.fullScreenImage);
                         },
                         child: Image.file(e as File),
@@ -54,9 +53,8 @@ class SavedStatusTab extends StatelessWidget {
                               .where((element) =>
                                   element.path.split('.').last == 'mp4')
                               .toList();
-                          fullScreenMediaProvider.isStatusSaved = true;
-                          fullScreenMediaProvider.index = videos.indexOf(e);
-                          fullScreenMediaProvider.media = videos;
+                          fullScreenMediaProvider.setMedia(
+                              videos, videos.indexOf(e), true);
                           context.push(AppRoutes.fullScreenVideo);
                         },
                         child: GridVideo(video: e as File),
