@@ -1,8 +1,6 @@
 import 'dart:io';
 
-import 'package:flutter/widgets.dart';
-
-class FullScreenMediaProvider extends ChangeNotifier {
+class FullScreenMediaProvider {
   bool isStatusSaved = false;
   int index = 0;
   List<FileSystemEntity> media = [];
