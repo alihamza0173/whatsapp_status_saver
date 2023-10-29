@@ -39,7 +39,10 @@ class _FullscreenImageViewState extends State<FullscreenImageView> {
             children: [
               InteractiveViewer(
                 clipBehavior: Clip.none,
-                child: Image.file(image, fit: BoxFit.contain),
+                child: Hero(
+                  tag: 'image$pageIndex',
+                  child: Image.file(image, fit: BoxFit.contain),
+                ),
               ),
               if (!fullScreenMediaProvider.isStatusSaved)
                 StatusSaverOptionsButton(file: image),

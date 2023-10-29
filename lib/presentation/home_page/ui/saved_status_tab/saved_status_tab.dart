@@ -44,7 +44,9 @@ class SavedStatusTab extends StatelessWidget {
                               images, images.indexOf(e), true);
                           context.push(AppRoutes.fullScreenImage);
                         },
-                        child: Image.file(e as File),
+                        child: Hero(
+                            tag: 'image${data.indexOf(e)}',
+                            child: Image.file(e as File)),
                       );
                     } else if (extension == 'mp4') {
                       return GridChild(

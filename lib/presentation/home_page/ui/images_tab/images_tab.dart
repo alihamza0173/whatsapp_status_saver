@@ -34,9 +34,13 @@ class ImagesTab extends StatelessWidget {
                                   data, data.indexOf(e), false);
                               context.push(AppRoutes.fullScreenImage);
                             },
-                            child: ClipRRect(
+                            child: Hero(
+                              tag: 'image${data.indexOf(e)}',
+                              child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
-                                child: Image.file(e as File)),
+                                child: Image.file(e as File),
+                              ),
+                            ),
                           ))
                       .toList(),
                 ),
