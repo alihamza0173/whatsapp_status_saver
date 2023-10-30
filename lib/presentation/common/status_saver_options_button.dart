@@ -8,8 +8,10 @@ class StatusSaverOptionsButton extends StatelessWidget {
   const StatusSaverOptionsButton({
     super.key,
     required this.file,
+    required this.isSaved,
   });
   final File file;
+  final bool isSaved;
 
   @override
   Widget build(BuildContext context) {
@@ -18,26 +20,23 @@ class StatusSaverOptionsButton extends StatelessWidget {
       right: 16,
       child: Column(
         children: [
-          OptionsButton(
-            onPressed: () async {
-              final result = await fileManagerProvider.saveStatus(file);
-              // ignore: use_build_context_synchronously
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(result)),
-              );
-            },
-            icon: const Icon(Icons.download_sharp),
-          ),
+          if (!isSaved)
+            OptionsButton(
+              onPressed: () async {
+                final result = await fileManagerProvider.saveStatus(file);
+                // ignore: use_build_context_synchronously
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(result)),
+                );
+              },
+              icon: const Icon(Icons.download_sharp),
+            ),
           const SizedBox(height: 16),
           OptionsButton(
-            onPressed: () async {
-              final result = await Share.shareXFiles(
+            onPressed: () {
+              Share.shareXFiles(
                 [XFile(file.path)],
                 text: 'Shared from WhatsApp Status Saver',
-              );
-              // ignore: use_build_context_synchronously
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(result.status.toString())),
               );
             },
             icon: const Icon(Icons.share),

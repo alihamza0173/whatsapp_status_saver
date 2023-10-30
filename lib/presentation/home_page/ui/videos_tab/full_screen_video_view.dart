@@ -40,8 +40,10 @@ class _FullscreenImageViewerState extends State<FullscreenVideoViewer> {
             alignment: Alignment.center,
             children: [
               FullScreenVideo(video: video),
-              if (!fullScreenMediaProvider.isStatusSaved)
-                StatusSaverOptionsButton(file: video),
+              StatusSaverOptionsButton(
+                file: video,
+                isSaved: fullScreenMediaProvider.isStatusSaved,
+              ),
             ],
           );
         },

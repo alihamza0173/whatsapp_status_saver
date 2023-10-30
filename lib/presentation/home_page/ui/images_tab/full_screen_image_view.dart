@@ -44,8 +44,10 @@ class _FullscreenImageViewState extends State<FullscreenImageView> {
                   child: Image.file(image, fit: BoxFit.contain),
                 ),
               ),
-              if (!fullScreenMediaProvider.isStatusSaved)
-                StatusSaverOptionsButton(file: image),
+              StatusSaverOptionsButton(
+                file: image,
+                isSaved: fullScreenMediaProvider.isStatusSaved,
+              ),
             ],
           );
         },
