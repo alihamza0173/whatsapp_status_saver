@@ -16,6 +16,8 @@ class SavedStatusTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<FileSystemEntity> images = [];
+    final List<FileSystemEntity> videos = [];
     return FutureBuilder(
         future: fileManagerProvider.getSavedStatus(),
         builder: (context, snapshot) {
@@ -31,12 +33,8 @@ class SavedStatusTab extends StatelessWidget {
                   mainAxisSpacing: 4.0,
                   children: data.map((e) {
                     final extension = e.path.split('.').last;
-                    final images = data
-                        .where((element) =>
-                            element.path.split('.').last == 'jpg' ||
-                            element.path.split('.').last == 'png')
-                        .toList();
                     if (extension == 'jpg' || extension == 'png') {
+                      images.add(e);
                       return GridChild(
                         onTap: () {
                           fullScreenMediaProvider.setMedia(
@@ -48,10 +46,7 @@ class SavedStatusTab extends StatelessWidget {
                             child: Image.file(e as File)),
                       );
                     } else if (extension == 'mp4') {
-                      final videos = data
-                          .where((element) =>
-                              element.path.split('.').last == 'mp4')
-                          .toList();
+                      videos.add(e);
                       return GridChild(
                         onTap: () {
                           fullScreenMediaProvider.setMedia(
