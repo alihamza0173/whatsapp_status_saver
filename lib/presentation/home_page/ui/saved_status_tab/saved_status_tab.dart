@@ -30,31 +30,30 @@ class SavedStatusTab extends StatelessWidget {
                   crossAxisSpacing: 4.0,
                   mainAxisSpacing: 4.0,
                   children: data.map((e) {
-                    final path = e.path;
-                    final extension = path.split('.').last;
+                    final extension = e.path.split('.').last;
+                    final images = data
+                        .where((element) =>
+                            element.path.split('.').last == 'jpg' ||
+                            element.path.split('.').last == 'png')
+                        .toList();
                     if (extension == 'jpg' || extension == 'png') {
                       return GridChild(
                         onTap: () {
-                          final images = data
-                              .where((element) =>
-                                  element.path.split('.').last == 'jpg' ||
-                                  element.path.split('.').last == 'png')
-                              .toList();
                           fullScreenMediaProvider.setMedia(
                               images, images.indexOf(e), true);
                           context.push(AppRoutes.fullScreenImage);
                         },
                         child: Hero(
-                            tag: 'image${data.indexOf(e)}',
+                            tag: 'image${images.indexOf(e)}',
                             child: Image.file(e as File)),
                       );
                     } else if (extension == 'mp4') {
+                      final videos = data
+                          .where((element) =>
+                              element.path.split('.').last == 'mp4')
+                          .toList();
                       return GridChild(
                         onTap: () {
-                          final videos = data
-                              .where((element) =>
-                                  element.path.split('.').last == 'mp4')
-                              .toList();
                           fullScreenMediaProvider.setMedia(
                               videos, videos.indexOf(e), true);
                           context.push(AppRoutes.fullScreenVideo);
