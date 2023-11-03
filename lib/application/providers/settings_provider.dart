@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 
-class ThemeManager extends ChangeNotifier {
+class SettingsProvider extends ChangeNotifier {
+  // Language settings
+  Locale? _locale;
+  Locale? get locale => _locale;
+  void setLocale(Locale locale) {
+    _locale = locale;
+    notifyListeners();
+  }
+
+  // Theme settings
   ThemeMode _themeMode = ThemeMode.system;
-
   ThemeMode get themeMode => _themeMode;
-
   bool get isDarkMode => _themeMode == ThemeMode.dark;
 
   void toggleTheme() {

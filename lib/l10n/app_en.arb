@@ -26,5 +26,9 @@
   "saved": "Saved",
   "@saved": {
     "description": "Tab related to saved statuses in the app"
+  },
+  "language": "App Language",
+  "@language": {
+    "description": "Label for the language selection dropdown"
   }
 }

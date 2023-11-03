@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:whatsapp_status_saver/application/providers/settings_provider.dart';
+import 'package:whatsapp_status_saver/l10n/l10n.dart';
 import 'package:whatsapp_status_saver/presentation/common/toggle_theme_button.dart';
 import 'package:whatsapp_status_saver/presentation/home_page/ui/images_tab/images_tab.dart';
 import 'package:whatsapp_status_saver/presentation/home_page/ui/saved_status_tab/saved_status_tab.dart';
@@ -34,7 +37,15 @@ class _HomePageState extends State<HomePage>
     return Scaffold(
       appBar: AppBar(
           title: Text(locale.appName),
-          actions: const [ToggleTheme()],
+          actions: [
+            const ToggleTheme(),
+            IconButton(
+              onPressed: () {
+                _switchLanguage(context, locale);
+              },
+              icon: const Icon(Icons.language),
+            ),
+          ],
           bottom: TabBar(
             controller: _tabController,
             tabs: [
@@ -56,6 +67,34 @@ class _HomePageState extends State<HomePage>
           SavedStatusTab(),
         ],
       ),
+    );
+  }
+
+  Future<dynamic> _switchLanguage(
+      BuildContext context, AppLocalizations locale) {
+    final provider = context.read<SettingsProvider>();
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(locale.language),
+          content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: L10n.languages.entries
+                  .map(
+                    (e) => RadioListTile(
+                      title: Text(e.value),
+                      value: e.key,
+                      groupValue: provider.locale?.languageCode,
+                      onChanged: (value) {
+                        provider.setLocale(Locale(e.key));
+                        Navigator.pop(context);
+                      },
+                    ),
+                  )
+                  .toList()),
+        );
+      },
     );
   }
 }
