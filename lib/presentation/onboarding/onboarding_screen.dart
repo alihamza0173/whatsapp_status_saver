@@ -29,7 +29,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   Widget build(BuildContext context) {
     final locale = AppLocalizations.of(context)!;
-
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
