@@ -1,0 +1,10 @@
+{
+    "appName": "Guardador de Estados",
+    "statusSaverDescription": "Una Forma Sencilla de Guardar tus Estados",
+    "permissionPrompt": "Para Guardar Estados, Necesitas Conceder Permiso",
+    "grantPermission": "Conceder Permiso",
+    "images": "Imágenes",
+    "videos": "Videos",
+    "saved": "Guardados"
+  }
+  

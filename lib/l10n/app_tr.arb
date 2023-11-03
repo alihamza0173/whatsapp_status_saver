@@ -1,0 +1,10 @@
+{
+    "appName": "Durum Kaydedici",
+    "statusSaverDescription": "Durumlarınızı Kaydetmek için Basit Bir Yol",
+    "permissionPrompt": "Durumları Kaydetmek İçin İzin Vermeniz Gerekiyor",
+    "grantPermission": "İzni Ver",
+    "images": "Resimler",
+    "videos": "Videolar",
+    "saved": "Kaydedilenler"
+  }
+  

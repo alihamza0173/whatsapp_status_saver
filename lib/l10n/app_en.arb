@@ -1,0 +1,30 @@
+{
+  "appName": "Status Saver",
+  "@appName": {
+    "description": "The name of the app displayed on all the screens"
+  },
+  "statusSaverDescription": "A Simple Way to Save Your Statuses",
+  "@statusSaverDescription": {
+    "description": "Description for a feature or function in the app"
+  },
+  "permissionPrompt": "In Order to Save Statuses, You Need to Grant Permission",
+  "@permissionPrompt": {
+    "description": "Prompt asking the user to grant permission for status saving"
+  },
+  "grantPermission": "Grant Permission",
+  "@grantPermission": {
+    "description": "Prompt asking the user to grant a specific permission"
+  },
+  "images": "Images",
+  "@images": {
+    "description": "Tab related to images in the app"
+  },
+  "videos": "Videos",
+  "@videos": {
+    "description": "Tab related to videos in the app"
+  },
+  "saved": "Saved",
+  "@saved": {
+    "description": "Tab related to saved statuses in the app"
+  }
+}
