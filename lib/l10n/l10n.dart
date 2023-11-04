@@ -17,6 +17,7 @@ class L10n {
     Locale('fa'),
     Locale('fr'),
     Locale('hi'),
+    Locale('tr'),
     Locale('ur'),
   ];
 
@@ -27,6 +28,7 @@ class L10n {
     'fa': 'فارسی',
     'fr': 'Français',
     'hi': 'हिन्दी',
+    'tr': 'Türkçe',
     'ur': 'اردو',
   };
 }
