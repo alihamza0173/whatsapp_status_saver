@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:media_scanner/media_scanner.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class FileManagerProvider extends ChangeNotifier {
@@ -59,7 +60,9 @@ class FileManagerProvider extends ChangeNotifier {
     }
 
     try {
-      await file.copy('${_statusSaverDir.path}/$copiedStatusName');
+      final fileToBeSave = '${_statusSaverDir.path}/$copiedStatusName';
+      await file.copy(fileToBeSave);
+      await MediaScanner.loadMedia(path: fileToBeSave);
       return 'Status saved successfully';
     } catch (e) {
       return e.toString();
