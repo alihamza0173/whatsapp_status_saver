@@ -1,11 +1,21 @@
 {
-    "appName": "Durum Kaydedici",
-    "statusSaverDescription": "Durumlarınızı Kaydetmek için Basit Bir Yol",
-    "permissionPrompt": "Durumları Kaydetmek İçin İzin Vermeniz Gerekiyor",
-    "grantPermission": "İzni Ver",
-    "images": "Resimler",
-    "videos": "Videolar",
-    "saved": "Kaydedilenler",
-    "language": "Dil"
-  }
-  
+  "appName": "Durum Saklayıcı",
+  "statusSaverDescription": "Durumlarınızı saklamak için basit bir yöntem",
+  "permissionPrompt": "Durumları saklamak için izin vermeniz gerekmektedir",
+  "grantPermission": "İzni Ver",
+  "images": "Resimler",
+  "videos": "Videolar",
+  "saved": "Kaydedildi",
+  "language": "Dil",
+  "darkTheme": "Karanlık Mod",
+  "howToUse": "Nasıl Kullanılır",
+  "howToUseDescription": "1. WhatsApp'ı açın ve kaydetmek istediğiniz durumu görün.\n2. Durum Saklayıcıyı açın ve kaydetmek istediğiniz duruma tıklayın.\n3. Durumu telefonunuza kaydetmek için kaydet düğmesine basın.",
+  "rateUs": "Bize Puan Ver",
+  "rateUsDescription": "Uygulamayı beğendiyseniz, lütfen Play Mağaza'da puanlayın.",
+  "share": "Paylaş",
+  "shareDescription": "Eğer uygulama size beğendiyseniz, lütfen arkadaşlarınızla ve ailenizle paylaşın.",
+  "privacyPolicy": "Gizlilik Politikası",
+  "privacyPolicyDescription": "Kişisel bilgilerinizi toplamıyoruz. Kişisel bilgilerinizi kimseyle satmıyor veya paylaşmıyoruz.",
+  "contactUs": "Bizimle İletişime Geçin",
+  "contactUsDescription": "Herhangi bir sorunuz veya öneriniz varsa, lütfen bize şuradan ulaşın"
+}

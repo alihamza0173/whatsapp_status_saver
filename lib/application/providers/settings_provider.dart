@@ -12,23 +12,17 @@ class SettingsProvider extends ChangeNotifier {
   // Theme settings
   ThemeMode _themeMode = ThemeMode.system;
   ThemeMode get themeMode => _themeMode;
-  bool get isDarkMode => _themeMode == ThemeMode.dark;
-
-  void toggleTheme() {
-    switch (_themeMode) {
-      case ThemeMode.dark:
-        _themeMode = ThemeMode.light;
-        break;
-      case ThemeMode.light:
-        _themeMode = ThemeMode.dark;
-        break;
-      case ThemeMode.system:
-        _themeMode = ThemeMode.dark;
-        break;
-      default:
-        _themeMode = ThemeMode.system;
-        break;
+  bool get isDarkMode {
+    if (_themeMode == ThemeMode.system) {
+      return WidgetsBinding.instance.platformDispatcher.platformBrightness ==
+          Brightness.dark;
+    } else {
+      return _themeMode == ThemeMode.dark;
     }
+  }
+
+  void toggleTheme(bool isDarkMode) {
+    _themeMode = isDarkMode ? ThemeMode.dark : ThemeMode.light;
     notifyListeners();
   }
 }

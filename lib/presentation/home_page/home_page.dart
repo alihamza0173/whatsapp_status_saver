@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:whatsapp_status_saver/presentation/common/toggle_theme_button.dart';
 import 'package:whatsapp_status_saver/presentation/home_page/ui/images_tab/images_tab.dart';
 import 'package:whatsapp_status_saver/presentation/home_page/ui/saved_status_tab/saved_status_tab.dart';
-import 'package:whatsapp_status_saver/presentation/home_page/ui/settings/language_settings.dart';
+import 'package:whatsapp_status_saver/presentation/home_page/ui/status_saver_drawer.dart';
 import 'package:whatsapp_status_saver/presentation/home_page/ui/videos_tab/videos_tab.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -35,10 +34,6 @@ class _HomePageState extends State<HomePage>
     return Scaffold(
       appBar: AppBar(
           title: Text(locale.appName),
-          actions: const [
-            ToggleTheme(),
-            LanguageSettings(),
-          ],
           bottom: TabBar(
             controller: _tabController,
             tabs: [
@@ -47,11 +42,7 @@ class _HomePageState extends State<HomePage>
               Tab(text: locale.saved),
             ],
           )),
-      drawer: Drawer(
-        child: ListView(
-          children: const [],
-        ),
-      ),
+      drawer: const Drawer(child: StatusSaverDrawer()),
       body: TabBarView(
         controller: _tabController,
         children: const [

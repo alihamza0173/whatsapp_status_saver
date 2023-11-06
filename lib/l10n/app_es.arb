@@ -1,11 +1,21 @@
 {
-    "appName": "Guardador de Estados",
-    "statusSaverDescription": "Una Forma Sencilla de Guardar tus Estados",
-    "permissionPrompt": "Para Guardar Estados, Necesitas Conceder Permiso",
-    "grantPermission": "Conceder Permiso",
-    "images": "Imágenes",
-    "videos": "Videos",
-    "saved": "Guardados",
-    "language": "Idioma"
-  }
-  
+  "appName": "Guardador de Estados",
+  "statusSaverDescription": "Una Forma Sencilla de Guardar Tus Estados",
+  "permissionPrompt": "Para Guardar Estados, Necesitas Conceder Permiso",
+  "grantPermission": "Conceder Permiso",
+  "images": "Imágenes",
+  "videos": "Videos",
+  "saved": "Guardados",
+  "language": "Idioma",
+  "darkTheme": "Tema Oscuro",
+  "howToUse": "Cómo Usar",
+  "howToUseDescription": "1. Abre WhatsApp y ve el estado que deseas guardar.\n2. Abre Guardador de Estados y toca el estado que deseas guardar.\n3. Toca el botón de guardar para guardar el estado en tu teléfono.",
+  "rateUs": "Califícanos",
+  "rateUsDescription": "Si te gusta la aplicación, por favor califícanos en la tienda de aplicaciones.",
+  "share": "Compartir",
+  "shareDescription": "Si te gusta la aplicación, por favor compártela con tus amigos y familiares.",
+  "privacyPolicy": "Política de Privacidad",
+  "privacyPolicyDescription": "No recopilamos información personal. No vendemos ni compartimos tu información personal con nadie.",
+  "contactUs": "Contáctanos",
+  "contactUsDescription": "Si tienes alguna pregunta o sugerencia, por favor contáctanos en"
+}

@@ -27,8 +27,52 @@
   "@saved": {
     "description": "Tab related to saved statuses in the app"
   },
-  "language": "App Language",
+  "language": "Language",
   "@language": {
     "description": "Label for the language selection dropdown"
-  }
+  },
+  "darkTheme": "Dark Theme",
+  "@darkTheme": {
+    "description": "Label for the dark theme toggle"
+  },
+  "howToUse": "How to Use",
+  "@howToUse": {
+    "description": "Label for the how to use section"
+  },
+  "howToUseDescription": "1. Open WhatsApp and view the status you want to save.\n2. Open Status Saver and tap on the status you want to save.\n3. Tap on the save button to save the status to your phone.",
+  "@howToUseDescription": {
+    "description": "Description for the how to use section"
+  },
+  "rateUs": "Rate Us",
+  "@rateUs": {
+    "description": "Label for the rate us section"
+  },
+  "rateUsDescription": "If you like the app, please rate us on the Play Store",
+  "@rateUsDescription": {
+    "description": "Description for the rate us section"
+  },
+  "share": "Share",
+  "@share": {
+    "description": "Label for the share section"
+  },
+  "shareDescription": "If you like the app, please share it with your friends and family",
+  "@shareDescription": {
+    "description": "Description for the share section"
+  },
+  "privacyPolicy": "Privacy Policy",
+  "@privacyPolicy": {
+    "description": "Label for the privacy policy section"
+  },
+  "privacyPolicyDescription": "We do not collect any personal information from you. We do not sell or share your personal information with anyone.",
+  "@privacyPolicyDescription": {
+    "description": "Description for the privacy policy section"
+  },
+  "contactUs": "Contact Us",
+  "@contactUs": {
+    "description": "Label for the contact us section"
+  },
+  "contactUsDescription": "If you have any questions or suggestions, please contact us at",
+  "@contactUsDescription": {
+    "description": "Description for the contact us section"
+  } 
 }

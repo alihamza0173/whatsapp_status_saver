@@ -1,11 +1,21 @@
 {
-    "appName": "Économiseur d'États",
-    "statusSaverDescription": "Un Moyen Simple d'Économiser Vos États",
-    "permissionPrompt": "Pour Économiser les États, Vous Devez Accorder la Permission",
-    "grantPermission": "Accorder la Permission",
-    "images": "Images",
-    "videos": "Vidéos",
-    "saved": "Sauvegardés",
-    "language": "Langue"
-  }
-  
+  "appName": "Sauvegarder des Statuts",
+  "statusSaverDescription": "Une manière simple de sauvegarder vos statuts",
+  "permissionPrompt": "Pour sauvegarder des statuts, vous devez accorder la permission",
+  "grantPermission": "Accorder la permission",
+  "images": "Images",
+  "videos": "Vidéos",
+  "saved": "Sauvegardés",
+  "language": "Langue",
+  "darkTheme": "Thème sombre",
+  "howToUse": "Comment Utiliser",
+  "howToUseDescription": "1. Ouvrez WhatsApp et visualisez le statut que vous souhaitez sauvegarder.\n2. Ouvrez Sauvegarder des Statuts et appuyez sur le statut que vous souhaitez sauvegarder.\n3. Appuyez sur le bouton de sauvegarde pour enregistrer le statut sur votre téléphone.",
+  "rateUs": "Évaluez-nous",
+  "rateUsDescription": "Si vous aimez l'application, veuillez nous évaluer sur la boutique d'applications.",
+  "share": "Partager",
+  "shareDescription": "Si vous aimez l'application, veuillez la partager avec vos amis et votre famille.",
+  "privacyPolicy": "Politique de Confidentialité",
+  "privacyPolicyDescription": "Nous ne recueillons pas d'informations personnelles. Nous ne vendons ni ne partageons vos informations personnelles avec qui que ce soit.",
+  "contactUs": "Contactez-nous",
+  "contactUsDescription": "Si vous avez des questions ou des suggestions, veuillez nous contacter à l'adresse"
+}
