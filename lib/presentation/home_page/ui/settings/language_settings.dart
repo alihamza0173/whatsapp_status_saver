@@ -6,27 +6,61 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Future<dynamic> switchLanguage(BuildContext context) {
   final provider = context.read<SettingsProvider>();
+  final locale = AppLocalizations.of(context)!;
+  final currentLocale = Localizations.localeOf(context);
+  String selected = currentLocale.languageCode;
+
   return showDialog(
     context: context,
     builder: (context) {
-      return AlertDialog(
-        title: Text(AppLocalizations.of(context)!.language),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: L10n.languages.entries
-              .map(
-                (e) => RadioListTile(
-                  title: Text(e.value),
-                  value: e.key,
-                  groupValue: provider.locale?.languageCode,
-                  onChanged: (value) {
-                    provider.setLocale(Locale(e.key));
-                    Navigator.pop(context);
-                  },
-                ),
-              )
-              .toList(),
-        ),
+      return StatefulBuilder(
+        builder: (context, setState) {
+          return AlertDialog(
+            title: Text(locale.language),
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: L10n.languages.entries
+                    .map(
+                      (e) => RadioListTile(
+                        shape: selected == e.key
+                            ? RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                side: const BorderSide(
+                                  color: Colors.green,
+                                ),
+                              )
+                            : null,
+                        title: Text(e.value),
+                        value: e.key,
+                        groupValue: selected,
+                        onChanged: (value) {
+                          setState(() {
+                            selected = e.key;
+                          });
+                        },
+                      ),
+                    )
+                    .toList(),
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text(locale.cancel),
+              ),
+              TextButton(
+                onPressed: () {
+                  provider.setLocale(Locale(selected));
+                  Navigator.pop(context);
+                },
+                child: Text(locale.ok),
+              ),
+            ],
+          );
+        },
       );
     },
   );

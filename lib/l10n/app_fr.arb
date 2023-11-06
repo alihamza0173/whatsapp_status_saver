@@ -17,5 +17,7 @@
   "privacyPolicy": "Politique de Confidentialité",
   "privacyPolicyDescription": "Nous ne recueillons pas d'informations personnelles. Nous ne vendons ni ne partageons vos informations personnelles avec qui que ce soit.",
   "contactUs": "Contactez-nous",
-  "contactUsDescription": "Si vous avez des questions ou des suggestions, veuillez nous contacter à l'adresse"
+  "contactUsDescription": "Si vous avez des questions ou des suggestions, veuillez nous contacter à l'adresse",
+  "ok": "OK",
+  "cancel": "Annuler"
 }

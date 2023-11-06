@@ -22,13 +22,13 @@ class L10n {
   ];
 
   static const Map<String, String> languages = {
-    'ar': 'العربية',
+    'ar': 'Arabic (العربية)',
     'en': 'English',
-    'es': 'Español',
-    'fa': 'فارسی',
-    'fr': 'Français',
-    'hi': 'हिन्दी',
-    'tr': 'Türkçe',
-    'ur': 'اردو',
+    'es': 'Spanish (Español)',
+    'fa': 'Persian (فارسی)',
+    'fr': 'French (Français)',
+    'hi': 'Hindi (हिन्दी)',
+    'tr': 'Turkish (Türkçe)',
+    'ur': 'Urdu (اردو)',
   };
 }

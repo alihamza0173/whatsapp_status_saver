@@ -17,5 +17,7 @@
   "privacyPolicy": "Gizlilik Politikası",
   "privacyPolicyDescription": "Kişisel bilgilerinizi toplamıyoruz. Kişisel bilgilerinizi kimseyle satmıyor veya paylaşmıyoruz.",
   "contactUs": "Bizimle İletişime Geçin",
-  "contactUsDescription": "Herhangi bir sorunuz veya öneriniz varsa, lütfen bize şuradan ulaşın"
+  "contactUsDescription": "Herhangi bir sorunuz veya öneriniz varsa, lütfen bize şuradan ulaşın",
+  "ok": "Tamam",
+  "cancel": "İptal"
 }

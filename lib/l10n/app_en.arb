@@ -74,5 +74,13 @@
   "contactUsDescription": "If you have any questions or suggestions, please contact us at",
   "@contactUsDescription": {
     "description": "Description for the contact us section"
-  } 
+  } ,
+  "ok": "OK",
+  "@ok": {
+    "description": "Label for the OK button"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Label for the cancel button"
+  }
 }
