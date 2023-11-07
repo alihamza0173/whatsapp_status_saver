@@ -59,5 +59,3 @@ class SettingsProvider extends ChangeNotifier {
     notifyListeners();
   }
 }
-
-final SettingsProvider settingsProvider = SettingsProvider();
