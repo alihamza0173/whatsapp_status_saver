@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsProvider extends ChangeNotifier {
-  // Singleton
+  // Singletons
   static final SettingsProvider _instance = SettingsProvider._internal();
 
   factory SettingsProvider() {
@@ -11,12 +11,24 @@ class SettingsProvider extends ChangeNotifier {
 
   SettingsProvider._internal();
 
+  // Prefs instance
+  SharedPreferences? _prefs;
+
+  // Init prefs
+  Future<void> initPrefs() async {
+    _prefs = await SharedPreferences.getInstance();
+    await initSettings();
+  }
+
+  // Prefs Keys
+  static const String _languageCodeKey = 'languageCode';
+  static const String _themeModeKey = 'themeMode';
+
   // Initial settings
-  Future<void> init() async {
-    final prefs = await SharedPreferences.getInstance();
-    final languageCode = prefs.getString('languageCode') ?? 'en';
-    _locale = Locale(languageCode);
-    final themeModeIndex = prefs.getInt('themeMode') ?? 0;
+  Future<void> initSettings() async {
+    final languageCode = _prefs?.getString(_languageCodeKey);
+    _locale = languageCode != null ? Locale(languageCode) : null;
+    final themeModeIndex = _prefs?.getInt(_themeModeKey) ?? 0;
     _themeMode = ThemeMode.values[themeModeIndex];
   }
 
@@ -25,8 +37,7 @@ class SettingsProvider extends ChangeNotifier {
   Locale? get locale => _locale;
   void setLocale(Locale locale) {
     _locale = locale;
-    final prefs = SharedPreferences.getInstance();
-    prefs.then((value) => value.setString('languageCode', locale.languageCode));
+    _prefs?.setString(_languageCodeKey, locale.languageCode);
     notifyListeners();
   }
 
@@ -44,8 +55,7 @@ class SettingsProvider extends ChangeNotifier {
 
   void toggleTheme(bool isDarkMode) {
     _themeMode = isDarkMode ? ThemeMode.dark : ThemeMode.light;
-    final prefs = SharedPreferences.getInstance();
-    prefs.then((value) => value.setInt('themeMode', _themeMode.index));
+    _prefs?.setInt(_themeModeKey, _themeMode.index);
     notifyListeners();
   }
 }

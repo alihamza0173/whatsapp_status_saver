@@ -5,6 +5,6 @@ import 'package:whatsapp_status_saver/application/providers/settings_provider.da
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SettingsProvider().init();
+  await SettingsProvider().initPrefs();
   runApp(const Injector(child: MyApp()));
 }
