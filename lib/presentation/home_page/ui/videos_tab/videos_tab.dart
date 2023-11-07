@@ -35,7 +35,10 @@ class VideosTab extends StatelessWidget {
                             data, data.indexOf(e), false);
                         context.push(AppRoutes.fullScreenVideo);
                       },
-                      child: GridVideo(video: e as File),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: GridVideo(video: e as File),
+                      ),
                     );
                   }).toList(),
                 ),
