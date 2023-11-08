@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_status_saver/presentation/home_page/ui/images_tab/images_tab.dart';
 import 'package:whatsapp_status_saver/presentation/home_page/ui/saved_status_tab/saved_status_tab.dart';
-import 'package:whatsapp_status_saver/presentation/home_page/ui/status_saver_drawer.dart';
+import 'package:whatsapp_status_saver/presentation/home_page/ui/drawer/status_saver_drawer.dart';
 import 'package:whatsapp_status_saver/presentation/home_page/ui/videos_tab/videos_tab.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

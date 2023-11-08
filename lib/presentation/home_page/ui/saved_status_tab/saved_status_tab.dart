@@ -19,7 +19,7 @@ class SavedStatusTab extends StatelessWidget {
     final List<FileSystemEntity> images = [];
     final List<FileSystemEntity> videos = [];
     return FutureBuilder(
-        future: fileManagerProvider.getSavedStatus(),
+        future: fileManagerProvider.getSavedStatuses(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final data = snapshot.data as List<FileSystemEntity>;

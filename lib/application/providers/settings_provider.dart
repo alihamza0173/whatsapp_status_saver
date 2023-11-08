@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:whatsapp_status_saver/application/common/directories.dart';
+import 'package:whatsapp_status_saver/core/enums/whatsapp.dart';
 
 class SettingsProvider extends ChangeNotifier {
   // Singletons
@@ -23,13 +27,38 @@ class SettingsProvider extends ChangeNotifier {
   // Prefs Keys
   static const String _languageCodeKey = 'languageCode';
   static const String _themeModeKey = 'themeMode';
+  static const String _whatsappKey = 'whatsapp';
 
   // Initial settings
   Future<void> initSettings() async {
+    // Get language code
     final languageCode = _prefs?.getString(_languageCodeKey);
     _locale = languageCode != null ? Locale(languageCode) : null;
+    // Get theme mode
     final themeModeIndex = _prefs?.getInt(_themeModeKey) ?? 0;
     _themeMode = ThemeMode.values[themeModeIndex];
+    // Get whatsapp dir
+    final whatsappDir = _prefs?.getString(_whatsappKey);
+    if (whatsappDir == WhtasappStatusDir.whatsapp.toString()) {
+      _statusDirectory = whatsappStatusDir;
+    } else if (whatsappDir == WhtasappStatusDir.whatsappBusiness.toString()) {
+      _statusDirectory = whatsappBzStatusDir;
+    }
+  }
+
+  // Status Directory
+  Directory _statusDirectory = whatsappStatusDir;
+  Directory get statusDirectory => _statusDirectory;
+  bool get isWhatsapp => _statusDirectory == whatsappStatusDir;
+
+  void setStatusDir(WhtasappStatusDir dir) {
+    if (dir == WhtasappStatusDir.whatsapp) {
+      _statusDirectory = whatsappStatusDir;
+    } else if (dir == WhtasappStatusDir.whatsappBusiness) {
+      _statusDirectory = whatsappBzStatusDir;
+    }
+    _prefs?.setString(_whatsappKey, dir.toString());
+    notifyListeners();
   }
 
   // Language settings

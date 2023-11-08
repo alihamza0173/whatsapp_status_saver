@@ -1,0 +1,4 @@
+enum WhtasappStatusDir {
+  whatsappBusiness,
+  whatsapp,
+}
