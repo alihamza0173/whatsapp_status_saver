@@ -46,8 +46,8 @@ class StatusSaverDrawer extends StatelessWidget {
           title: Text(locale.share),
           onTap: () {
             Share.share(
-              'You can download all Whatsapp status for free aad fast. Download it here: https://youtube.com',
-              subject: 'Share App',
+              'You can download all Whatsapp status for free aad fast. Download it here: https://play.google.com/store/apps/details?id=com.devzeal.status_saver',
+              subject: 'Status Saver',
             );
           },
         ),
