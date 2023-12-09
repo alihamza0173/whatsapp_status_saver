@@ -36,7 +36,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           width: double.infinity,
           child: Column(
             children: [
-              const Spacer(),
+               const Spacer(),
               Image.asset(AppImages.illustation, height: 150, width: 150),
               const SizedBox(height: 18.0),
               Text(locale.statusSaverDescription),
