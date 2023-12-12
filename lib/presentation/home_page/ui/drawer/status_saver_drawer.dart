@@ -3,6 +3,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:whatsapp_status_saver/application/common/app_images.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:whatsapp_status_saver/presentation/home_page/ui/drawer/select_whatsapp.dart';
+import 'package:whatsapp_status_saver/presentation/home_page/ui/drawer/ui/how_to_use.dart';
 import 'package:whatsapp_status_saver/presentation/home_page/ui/settings/language_settings.dart';
 import 'package:whatsapp_status_saver/presentation/home_page/ui/settings/toggle_theme_switch.dart';
 
@@ -40,6 +41,7 @@ class StatusSaverDrawer extends StatelessWidget {
         ListTile(
           leading: const Icon(Icons.info, color: Colors.amber),
           title: Text(locale.howToUse),
+          onTap: () => howToUse(context, locale),
         ),
         ListTile(
           leading: const Icon(Icons.share, color: Colors.blue),
@@ -60,6 +62,16 @@ class StatusSaverDrawer extends StatelessWidget {
           title: Text(locale.privacyPolicy),
         ),
       ],
+    );
+  }
+
+  void howToUse(BuildContext context, AppLocalizations locale) {
+    Navigator.of(context).pop();
+    showDialog(
+      context: context,
+      builder: (context) {
+        return HowToUseDialog(locale: locale);
+      },
     );
   }
 }
