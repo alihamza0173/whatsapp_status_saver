@@ -12,7 +12,7 @@ class GridVideo extends StatefulWidget {
 }
 
 class _GridVideoState extends State<GridVideo> {
-  late VideoPlayerController _controller;
+  VideoPlayerController? _controller;
 
   @override
   void initState() {
@@ -26,15 +26,15 @@ class _GridVideoState extends State<GridVideo> {
 
   @override
   Widget build(BuildContext context) {
-    return _controller.value.isInitialized
+    return _controller?.value.isInitialized ?? false
         ? Stack(
             alignment: Alignment.center,
             children: [
               AspectRatio(
-                aspectRatio: _controller.value.aspectRatio,
-                child: VideoPlayer(_controller),
+                aspectRatio: _controller!.value.aspectRatio,
+                child: VideoPlayer(_controller!),
               ),
-              _controller.value.isPlaying
+              _controller!.value.isPlaying
                   ? const SizedBox()
                   : const Icon(
                       Icons.play_arrow,
@@ -48,7 +48,7 @@ class _GridVideoState extends State<GridVideo> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller?.dispose();
     super.dispose();
   }
 }
