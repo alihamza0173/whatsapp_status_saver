@@ -1,8 +1,10 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:media_scanner/media_scanner.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
 import 'package:whatsapp_status_saver/application/common/directories.dart';
 
 class FileManagerProvider extends ChangeNotifier {
@@ -27,33 +29,76 @@ class FileManagerProvider extends ChangeNotifier {
   }
 
   // Get all images
-  Future<List<FileSystemEntity>> getFilesImages(Directory directory) async {
+  Future<List<Pair<Uint8List?, FileSystemEntity>>> getFilesImages(
+      Directory directory) async {
     if (await directory.exists()) {
       final lister = directory.list(recursive: true, followLinks: false);
-      return lister.where((event) {
-        final path = event.path;
+      final List<Pair<Uint8List?, FileSystemEntity>> listOfImages = [];
+      await for (FileSystemEntity entity in lister) {
+        final path = entity.path;
+
         final extension = path.split('.').last;
-        return extension == 'jpg' || extension == 'png';
-      }).toList();
+        if (extension == 'jpg' || extension == 'png') {
+          listOfImages.add(Pair(null, entity));
+        }
+      }
+
+      return listOfImages;
     } else {
       return [];
     }
   }
 
-  // Get all videos
-  Future<List<FileSystemEntity>> getFilesVideos(Directory directory) async {
+  Future<List<Pair<Uint8List?, FileSystemEntity>>> getFilesVideosThumbnail(
+      Directory directory) async {
     if (await directory.exists()) {
       final lister = directory.list(recursive: true, followLinks: false);
-      return lister.where((event) => event.path.endsWith('.mp4')).toList();
+      List<Pair<Uint8List?, FileSystemEntity>> videosAndThumbnails = [];
+
+      await for (FileSystemEntity entity in lister) {
+        if (entity is File && entity.path.endsWith('.mp4')) {
+          final uint8list = await VideoThumbnail.thumbnailData(
+            video: entity.path,
+            imageFormat: ImageFormat.JPEG,
+            maxWidth: 200,
+            quality: 100,
+          );
+          videosAndThumbnails.add(Pair(uint8list, entity));
+        }
+      }
+
+      return videosAndThumbnails;
     } else {
       return [];
     }
   }
 
-  // Get all saved statuses
-  Future<List<FileSystemEntity>> getSavedStatuses() {
+  // Get all saved statuses (videos with thumbnails and images)
+  Future<List<Pair<Uint8List?, FileSystemEntity>>>
+      getSavedStatusesWithThumbnails() async {
     final lister = savedStatusDir.list(recursive: true, followLinks: false);
-    return lister.toList();
+    List<Pair<Uint8List?, FileSystemEntity>> statusesAndThumbnails = [];
+
+    await for (FileSystemEntity entity in lister) {
+      if (entity is File) {
+        if (entity.path.endsWith('.mp4')) {
+          // For video files, generate thumbnails
+          final uint8list = await VideoThumbnail.thumbnailData(
+            video: entity.path,
+            imageFormat: ImageFormat.JPEG,
+            maxWidth: 200,
+            quality: 100,
+          );
+          statusesAndThumbnails.add(Pair(uint8list, entity));
+        } else if (entity.path.endsWith('.jpg') ||
+            entity.path.endsWith('.png')) {
+          // For image files, directly add them with null thumbnail
+          statusesAndThumbnails.add(Pair(null, entity));
+        }
+      }
+    }
+
+    return statusesAndThumbnails;
   }
 
   // Save status
@@ -73,6 +118,13 @@ class FileManagerProvider extends ChangeNotifier {
       return e.toString();
     }
   }
+}
+
+class Pair<T1, T2> {
+  final T1 first;
+  final T2 second;
+
+  Pair(this.first, this.second);
 }
 
 final fileManagerProvider = FileManagerProvider();

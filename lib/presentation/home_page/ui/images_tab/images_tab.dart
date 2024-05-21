@@ -22,8 +22,8 @@ class ImagesTab extends StatelessWidget {
         future: fileManagerProvider.getFilesImages(dir),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            final data = snapshot.data as List<FileSystemEntity>;
-            return data.isNotEmpty
+            final data = snapshot.data;
+            return data!.isNotEmpty
                 ? SingleChildScrollView(
                     child: Padding(
                       padding: const EdgeInsets.all(4.0),
@@ -43,7 +43,7 @@ class ImagesTab extends StatelessWidget {
                                     tag: 'image${data.indexOf(e)}',
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(8.0),
-                                      child: Image.file(e as File),
+                                      child: Image.file(e.second as File),
                                     ),
                                   ),
                                 ))

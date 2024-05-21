@@ -1,6 +1,8 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:whatsapp_status_saver/application/providers/file_manager_provider.dart';
 import 'package:whatsapp_status_saver/application/providers/full_screen_media_provider.dart';
 import 'package:whatsapp_status_saver/presentation/common/status_saver_options_button.dart';
 
@@ -13,7 +15,7 @@ class FullscreenImageView extends StatefulWidget {
 
 class _FullscreenImageViewState extends State<FullscreenImageView> {
   late final PageController _pageController;
-  late final List<FileSystemEntity> images;
+  late final List<Pair<Uint8List?, FileSystemEntity>> images;
   late final int initialIndex;
 
   @override
@@ -33,7 +35,7 @@ class _FullscreenImageViewState extends State<FullscreenImageView> {
         controller: _pageController,
         itemCount: images.length,
         itemBuilder: (context, pageIndex) {
-          final image = images[pageIndex] as File;
+          final image = images[pageIndex].second as File;
           return Stack(
             alignment: Alignment.center,
             children: [
