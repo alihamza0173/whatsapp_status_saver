@@ -10,6 +10,8 @@ import 'package:whatsapp_status_saver/application/common/directories.dart';
 class FileManagerProvider extends ChangeNotifier {
   // Check if permission is granted
   Future<bool> checkPermission() async {
+    //  Saf saf = Saf('Android/media/com.whatsapp/WhatsApp/Media/.Statuses');
+    // Android/media/com.whatsapp.w4b/WhatsApp Business/Media/.Statuses
     final status = await Permission.manageExternalStorage.status;
     if (status.isGranted) {
       return true;
