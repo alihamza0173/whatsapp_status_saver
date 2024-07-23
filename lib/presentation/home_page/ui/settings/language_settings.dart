@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:whatsapp_status_saver/application/extenstions/context_extentions.dart';
 import 'package:whatsapp_status_saver/application/providers/settings_provider.dart';
 import 'package:whatsapp_status_saver/l10n/l10n.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Future<dynamic> switchLanguage(BuildContext context) {
   final provider = context.read<SettingsProvider>();
-  final locale = AppLocalizations.of(context)!;
   final currentLocale = Localizations.localeOf(context);
   String selected = currentLocale.languageCode;
 
@@ -16,7 +15,7 @@ Future<dynamic> switchLanguage(BuildContext context) {
       return StatefulBuilder(
         builder: (context, setState) {
           return AlertDialog(
-            title: Text(locale.language),
+            title: Text(context.l10n.language),
             content: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -49,14 +48,14 @@ Future<dynamic> switchLanguage(BuildContext context) {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text(locale.cancel),
+                child: Text(context.l10n.cancel),
               ),
               TextButton(
                 onPressed: () {
                   provider.setLocale(Locale(selected));
                   Navigator.pop(context);
                 },
-                child: Text(locale.ok),
+                child: Text(context.l10n.ok),
               ),
             ],
           );

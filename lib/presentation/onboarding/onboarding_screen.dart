@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:whatsapp_status_saver/application/common/app_images.dart';
+import 'package:whatsapp_status_saver/application/extenstions/context_extentions.dart';
 import 'package:whatsapp_status_saver/application/providers/file_manager_provider.dart';
 import 'package:whatsapp_status_saver/application/router/app_routes.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -28,7 +28,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final locale = AppLocalizations.of(context)!;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -36,13 +35,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           width: double.infinity,
           child: Column(
             children: [
-               const Spacer(),
+              const Spacer(),
               Image.asset(AppImages.illustation, height: 150, width: 150),
               const SizedBox(height: 18.0),
-              Text(locale.statusSaverDescription),
+              Text(context.l10n.statusSaverDescription),
               const Spacer(),
               Text(
-                locale.permissionPrompt,
+                context.l10n.permissionPrompt,
                 style: const TextStyle(fontSize: 8.0),
               ),
               const SizedBox(height: 8.0),
@@ -59,7 +58,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     context.go(AppRoutes.homeScreen);
                   }
                 },
-                child: Text(locale.grantPermission),
+                child: Text(context.l10n.grantPermission),
               ),
               const SizedBox(height: 16.0),
             ],

@@ -1,0 +1,23 @@
+{
+    "appName": "Status Saver",
+    "statusSaverDescription": "A Simple Way to Save Your Statuses",
+    "permissionPrompt": "In Order to Save Statuses, You Need to Grant Permission",
+    "grantPermission": "Grant Permission",
+    "images": "Images",
+    "videos": "Videos",
+    "saved": "Saved",
+    "language": "Language",
+    "darkTheme": "Dark Theme",
+    "howToUse": "How to Use",
+    "howToUseDescription": "1. Open WhatsApp and view the status you want to save.\n2. Open Status Saver and tap on the status you want to save.\n3. Tap on the save button to save the status to your phone.",
+    "rateUs": "Rate Us",
+    "rateUsDescription": "If you like the app, please rate us on the Play Store",
+    "share": "Share",
+    "shareDescription": "If you like the app, please share it with your friends and family",
+    "privacyPolicy": "Privacy Policy",
+    "privacyPolicyDescription": "We do not collect any personal information from you. We do not sell or share your personal information with anyone.",
+    "contactUs": "Contact Us",
+    "contactUsDescription": "If you have any questions or suggestions, please contact us at",
+    "ok": "OK",
+    "cancel": "Cancel"
+}

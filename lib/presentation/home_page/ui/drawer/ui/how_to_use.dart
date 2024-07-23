@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:whatsapp_status_saver/application/extenstions/context_extentions.dart';
 import 'package:whatsapp_status_saver/presentation/home_page/ui/drawer/ui/circle_border_text.dart';
 
 class HowToUseDialog extends StatelessWidget {
-  const HowToUseDialog({
-    super.key,
-    required this.locale,
-  });
-
-  final AppLocalizations locale;
+  const HowToUseDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
-      title: Text('${locale.howToUse} ?'),
+      title: Text('${context.l10n.howToUse} ?'),
       children: [
         const ListTile(
           leading: CircleBorderedText(
@@ -37,7 +32,7 @@ class HowToUseDialog extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text(locale.ok),
+              child: Text(context.l10n.ok),
             ),
           ],
         )

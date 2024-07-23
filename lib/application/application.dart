@@ -3,7 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:whatsapp_status_saver/application/router/app_router.dart';
 import 'package:whatsapp_status_saver/application/theme/app_theme.dart';
 import 'package:whatsapp_status_saver/application/providers/settings_provider.dart';
-import 'package:whatsapp_status_saver/l10n/l10n.dart';
+import 'package:whatsapp_status_saver/generated/l10n.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -19,8 +20,13 @@ class MyApp extends StatelessWidget {
       themeMode: provider.themeMode,
       theme: AppTheme.lightThme,
       darkTheme: AppTheme.darkTheme,
-      localizationsDelegates: L10n.localizationsDelegates,
-      supportedLocales: L10n.supportedLocales,
+      localizationsDelegates: [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
       locale: provider.locale,
     );
   }

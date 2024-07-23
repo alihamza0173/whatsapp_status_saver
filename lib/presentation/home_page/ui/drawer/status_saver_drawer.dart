@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:whatsapp_status_saver/application/common/app_images.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:whatsapp_status_saver/application/extenstions/context_extentions.dart';
 import 'package:whatsapp_status_saver/presentation/home_page/ui/drawer/select_whatsapp.dart';
 import 'package:whatsapp_status_saver/presentation/home_page/ui/drawer/ui/how_to_use.dart';
 import 'package:whatsapp_status_saver/presentation/home_page/ui/settings/language_settings.dart';
@@ -14,7 +14,6 @@ class StatusSaverDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final locale = AppLocalizations.of(context)!;
     return ListView(
       children: [
         DrawerHeader(
@@ -30,22 +29,22 @@ class StatusSaverDrawer extends StatelessWidget {
         const Divider(),
         ListTile(
           leading: const Icon(Icons.dark_mode),
-          title: Text(locale.darkTheme),
+          title: Text(context.l10n.darkTheme),
           trailing: const ToggleThemeSwitch(),
         ),
         ListTile(
           leading: const Icon(Icons.language),
-          title: Text(locale.language),
+          title: Text(context.l10n.language),
           onTap: () => switchLanguage(context),
         ),
         ListTile(
           leading: const Icon(Icons.info, color: Colors.amber),
-          title: Text(locale.howToUse),
-          onTap: () => howToUse(context, locale),
+          title: Text(context.l10n.howToUse),
+          onTap: () => howToUse(context),
         ),
         ListTile(
           leading: const Icon(Icons.share, color: Colors.blue),
-          title: Text(locale.share),
+          title: Text(context.l10n.share),
           onTap: () {
             Share.share(
               'You can download all Whatsapp status for free aad fast. Download it here: https://play.google.com/store/apps/details?id=com.devzeal.status_saver',
@@ -55,22 +54,22 @@ class StatusSaverDrawer extends StatelessWidget {
         ),
         ListTile(
           leading: const Icon(Icons.star, color: Colors.green),
-          title: Text(locale.rateUs),
+          title: Text(context.l10n.rateUs),
         ),
         ListTile(
           leading: const Icon(Icons.privacy_tip, color: Colors.red),
-          title: Text(locale.privacyPolicy),
+          title: Text(context.l10n.privacyPolicy),
         ),
       ],
     );
   }
 
-  void howToUse(BuildContext context, AppLocalizations locale) {
+  void howToUse(BuildContext context) {
     Navigator.of(context).pop();
     showDialog(
       context: context,
       builder: (context) {
-        return HowToUseDialog(locale: locale);
+        return const HowToUseDialog();
       },
     );
   }
