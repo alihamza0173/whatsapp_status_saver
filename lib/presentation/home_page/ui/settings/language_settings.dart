@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:whatsapp_status_saver/application/extenstions/context_extentions.dart';
+import 'package:whatsapp_status_saver/application/extensions/context_extentions.dart';
 import 'package:whatsapp_status_saver/application/providers/settings_provider.dart';
 import 'package:whatsapp_status_saver/l10n/l10n.dart';
 

@@ -60,8 +60,8 @@ class OptionsButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       color: Colors.white,
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Colors.green),
+      style: IconButton.styleFrom(
+        backgroundColor: Colors.green,
       ),
       onPressed: onPressed,
       icon: icon,

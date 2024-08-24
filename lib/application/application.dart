@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       routerConfig: appRouterSingleton.router,
       title: 'WhatsApp Status Saver',
       themeMode: provider.themeMode,
-      theme: AppTheme.lightThme,
+      theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       localizationsDelegates: const [
         S.delegate,
