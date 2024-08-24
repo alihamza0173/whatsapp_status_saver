@@ -5,7 +5,7 @@ import 'package:whatsapp_status_saver/presentation/home_page/ui/images_tab/full_
 import 'package:whatsapp_status_saver/presentation/home_page/ui/videos_tab/full_screen_video_view.dart';
 import 'package:whatsapp_status_saver/presentation/onboarding/onboarding_screen.dart';
 
-final appRouterSinglton = AppRouter();
+final appRouterSingleton = AppRouter();
 
 class AppRouter {
   late final GoRouter router;

@@ -15,12 +15,12 @@ class MyApp extends StatelessWidget {
     final provider = context.watch<SettingsProvider>();
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      routerConfig: appRouterSinglton.router,
+      routerConfig: appRouterSingleton.router,
       title: 'WhatsApp Status Saver',
       themeMode: provider.themeMode,
       theme: AppTheme.lightThme,
       darkTheme: AppTheme.darkTheme,
-      localizationsDelegates: [
+      localizationsDelegates: const [
         S.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
