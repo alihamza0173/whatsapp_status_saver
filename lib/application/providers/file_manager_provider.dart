@@ -2,9 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:media_scanner/media_scanner.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:video_thumbnail/video_thumbnail.dart';
 import 'package:whatsapp_status_saver/application/common/directories.dart';
 
 class FileManagerProvider extends ChangeNotifier {
@@ -58,14 +56,14 @@ class FileManagerProvider extends ChangeNotifier {
       List<Pair<Uint8List?, FileSystemEntity>> videosAndThumbnails = [];
 
       await for (FileSystemEntity entity in lister) {
-        if (entity is File && entity.path.endsWith('.mp4')) {
-          final uint8list = await VideoThumbnail.thumbnailData(
-            video: entity.path,
-            imageFormat: ImageFormat.JPEG,
-            maxWidth: 200,
-            quality: 100,
-          );
-          videosAndThumbnails.add(Pair(uint8list, entity));
+        if (entity is File && entity.path.endsWith('.png')) {
+          // final uint8list = await VideoThumbnail.thumbnailData(
+          //   video: entity.path,
+          //   imageFormat: ImageFormat.JPEG,
+          //   maxWidth: 200,
+          //   quality: 100,
+          // );
+          videosAndThumbnails.add(Pair(null, entity));
         }
       }
 
@@ -85,13 +83,13 @@ class FileManagerProvider extends ChangeNotifier {
       if (entity is File) {
         if (entity.path.endsWith('.mp4')) {
           // For video files, generate thumbnails
-          final uint8list = await VideoThumbnail.thumbnailData(
-            video: entity.path,
-            imageFormat: ImageFormat.JPEG,
-            maxWidth: 200,
-            quality: 100,
-          );
-          statusesAndThumbnails.add(Pair(uint8list, entity));
+          // final uint8list = await VideoThumbnail.thumbnailData(
+          //   video: entity.path,
+          //   imageFormat: ImageFormat.JPEG,
+          //   maxWidth: 200,
+          //   quality: 100,
+          // );
+          statusesAndThumbnails.add(Pair(null, entity));
         } else if (entity.path.endsWith('.jpg') ||
             entity.path.endsWith('.png')) {
           // For image files, directly add them with null thumbnail
@@ -114,7 +112,6 @@ class FileManagerProvider extends ChangeNotifier {
     try {
       final fileToBeSave = '${savedStatusDir.path}/$copiedStatusName';
       await file.copy(fileToBeSave);
-      await MediaScanner.loadMedia(path: fileToBeSave);
       return 'Status saved successfully';
     } catch (e) {
       return e.toString();
