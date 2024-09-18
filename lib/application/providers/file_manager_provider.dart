@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
 import 'package:whatsapp_status_saver/application/common/directories.dart';
 
 class FileManagerProvider extends ChangeNotifier {
@@ -57,13 +58,13 @@ class FileManagerProvider extends ChangeNotifier {
 
       await for (FileSystemEntity entity in lister) {
         if (entity is File && entity.path.endsWith('.png')) {
-          // final uint8list = await VideoThumbnail.thumbnailData(
-          //   video: entity.path,
-          //   imageFormat: ImageFormat.JPEG,
-          //   maxWidth: 200,
-          //   quality: 100,
-          // );
-          videosAndThumbnails.add(Pair(null, entity));
+          final uint8list = await VideoThumbnail.thumbnailData(
+            video: entity.path,
+            imageFormat: ImageFormat.JPEG,
+            maxWidth: 200,
+            quality: 100,
+          );
+          videosAndThumbnails.add(Pair(uint8list, entity));
         }
       }
 
@@ -83,13 +84,13 @@ class FileManagerProvider extends ChangeNotifier {
       if (entity is File) {
         if (entity.path.endsWith('.mp4')) {
           // For video files, generate thumbnails
-          // final uint8list = await VideoThumbnail.thumbnailData(
-          //   video: entity.path,
-          //   imageFormat: ImageFormat.JPEG,
-          //   maxWidth: 200,
-          //   quality: 100,
-          // );
-          statusesAndThumbnails.add(Pair(null, entity));
+          final uint8list = await VideoThumbnail.thumbnailData(
+            video: entity.path,
+            imageFormat: ImageFormat.JPEG,
+            maxWidth: 200,
+            quality: 100,
+          );
+          statusesAndThumbnails.add(Pair(uint8list, entity));
         } else if (entity.path.endsWith('.jpg') ||
             entity.path.endsWith('.png')) {
           // For image files, directly add them with null thumbnail
