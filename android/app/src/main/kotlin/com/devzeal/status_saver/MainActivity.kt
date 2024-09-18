@@ -1,31 +1,34 @@
 package com.devzeal.status_saver
-import android.content.pm.PackageManager
-import android.content.Intent
+
+import android.media.MediaScannerConnection
+import android.os.Bundle
 import io.flutter.embedding.android.FlutterActivity
-import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 
 class MainActivity: FlutterActivity() {
-    private val CHANNEL = "app_check"
+    private val CHANNEL = "com.devzeal.status_saver/fileScanner"
 
-    override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
-        super.configureFlutterEngine(flutterEngine)
-        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL)
-            .setMethodCallHandler { call, result ->
-                if (call.method == "isAppInstalled") {
-                    val packageName = call.argument<String>("packageName")
-                    val installed = isAppInstalled(packageName)
-                    result.success(installed)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        MethodChannel(flutterEngine!!.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler { call, result ->
+            if (call.method == "scanFile") {
+                val filePath = call.argument<String>("path")
+                if (filePath != null) {
+                    scanFile(filePath)
+                    result.success("File scanned successfully: $filePath")
                 } else {
-                    result.notImplemented()
+                    result.error("INVALID_ARGUMENT", "File path is null", null)
                 }
+            } else {
+                result.notImplemented()
             }
+        }
     }
 
-    private fun isAppInstalled(packageName: String?): Boolean {
-        val packageManager = packageManager
-        val intent = packageManager.getLaunchIntentForPackage(packageName!!)
-        return intent != null
+    private fun scanFile(path: String) {
+        MediaScannerConnection.scanFile(this, arrayOf(path), null) { path, uri ->
+            println("Scanned file: $path")
+        }
     }
 }
-

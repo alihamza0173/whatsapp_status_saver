@@ -1,7 +1,8 @@
+import 'dart:developer';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 import 'package:whatsapp_status_saver/application/common/directories.dart';
@@ -57,7 +58,7 @@ class FileManagerProvider extends ChangeNotifier {
       List<Pair<Uint8List?, FileSystemEntity>> videosAndThumbnails = [];
 
       await for (FileSystemEntity entity in lister) {
-        if (entity is File && entity.path.endsWith('.png')) {
+        if (entity is File && entity.path.endsWith('.mp4')) {
           final uint8list = await VideoThumbnail.thumbnailData(
             video: entity.path,
             imageFormat: ImageFormat.JPEG,
@@ -113,9 +114,20 @@ class FileManagerProvider extends ChangeNotifier {
     try {
       final fileToBeSave = '${savedStatusDir.path}/$copiedStatusName';
       await file.copy(fileToBeSave);
+      scanFileForGallery(fileToBeSave);
       return 'Status saved successfully';
     } catch (e) {
       return e.toString();
+    }
+  }
+
+  Future<void> scanFileForGallery(String filePath) async {
+    const platform = MethodChannel('com.devzeal.status_saver/fileScanner');
+    try {
+      final result = await platform.invokeMethod('scanFile', {"path": filePath});
+      log(result);
+    } on PlatformException catch (e) {
+      log("Failed to scan file: '${e.message}'.");
     }
   }
 }
