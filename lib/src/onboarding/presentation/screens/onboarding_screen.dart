@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:whatsapp_status_saver/application/common/app_images.dart';
 import 'package:whatsapp_status_saver/application/extensions/context_extentions.dart';
 import 'package:whatsapp_status_saver/application/providers/file_manager_provider.dart';
-import 'package:whatsapp_status_saver/application/router/app_routes.dart';
+import 'package:whatsapp_status_saver/router/app_routes.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});

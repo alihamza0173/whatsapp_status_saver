@@ -7,7 +7,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
 import 'package:whatsapp_status_saver/application/providers/file_manager_provider.dart';
 import 'package:whatsapp_status_saver/application/providers/full_screen_media_provider.dart';
-import 'package:whatsapp_status_saver/application/router/app_routes.dart';
+import 'package:whatsapp_status_saver/router/app_routes.dart';
 import 'package:whatsapp_status_saver/src/saved_status/presentation/providers/saved_status_provider.dart';
 import 'package:whatsapp_status_saver/src/saved_status/presentation/widgets/grid_child.dart';
 
