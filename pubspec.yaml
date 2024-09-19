@@ -22,7 +22,6 @@ dependencies:
   permission_handler: ^10.4.5
   media_scanner: ^2.1.0
   saf: ^1.0.3+4
-  provider: ^6.1.2
   flutter_riverpod: ^2.5.1
   share_plus: ^10.0.2
   shared_preferences: ^2.3.2

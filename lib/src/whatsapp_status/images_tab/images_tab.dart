@@ -1,23 +1,23 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 import 'package:whatsapp_status_saver/application/providers/file_manager_provider.dart';
 import 'package:whatsapp_status_saver/application/providers/full_screen_media_provider.dart';
-import 'package:whatsapp_status_saver/application/providers/settings_provider.dart';
 import 'package:whatsapp_status_saver/application/router/app_routes.dart';
 import 'package:whatsapp_status_saver/shared/presentation/widgets/no_media_available.dart';
+import 'package:whatsapp_status_saver/src/settings/providers/settings_provider.dart';
 
-class ImagesTab extends StatelessWidget {
+class ImagesTab extends ConsumerWidget {
   const ImagesTab({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
-    final dir = context.watch<SettingsProvider>().statusDirectory;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final dir = ref.watch(settingsProvider).statusDirectory;
     return FutureBuilder(
         future: fileManagerProvider.getFilesImages(dir),
         builder: (context, snapshot) {

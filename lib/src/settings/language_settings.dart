@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:whatsapp_status_saver/application/extensions/context_extentions.dart';
-import 'package:whatsapp_status_saver/application/providers/settings_provider.dart';
 import 'package:whatsapp_status_saver/l10n/l10n.dart';
+import 'package:whatsapp_status_saver/src/settings/providers/settings_provider.dart';
 
-Future<dynamic> switchLanguage(BuildContext context) {
-  final provider = context.read<SettingsProvider>();
+Future<dynamic> switchLanguage(BuildContext context, WidgetRef ref) {
+  final provider = ref.read(settingsProvider.notifier);
   final currentLocale = Localizations.localeOf(context);
   String selected = currentLocale.languageCode;
 

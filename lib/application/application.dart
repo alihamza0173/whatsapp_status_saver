@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:whatsapp_status_saver/application/router/app_router.dart';
 import 'package:whatsapp_status_saver/application/theme/app_theme.dart';
-import 'package:whatsapp_status_saver/application/providers/settings_provider.dart';
 import 'package:whatsapp_status_saver/generated/l10n.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:whatsapp_status_saver/src/settings/providers/settings_provider.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    final provider = context.watch<SettingsProvider>();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final settingsState = ref.watch(settingsProvider);
+
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       routerConfig: appRouterSingleton.router,
       title: 'WhatsApp Status Saver',
-      themeMode: provider.themeMode,
+      themeMode: settingsState.themeMode,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       localizationsDelegates: const [
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
-      locale: provider.locale,
+      locale: settingsState.locale,
     );
   }
 }

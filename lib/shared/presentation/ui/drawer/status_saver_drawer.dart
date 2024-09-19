@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:whatsapp_status_saver/application/common/app_images.dart';
 import 'package:whatsapp_status_saver/application/extensions/context_extentions.dart';
-import 'package:whatsapp_status_saver/shared/presentation/ui/drawer/widgets/select_whatsapp.dart';
 import 'package:whatsapp_status_saver/shared/presentation/ui/drawer/widgets/how_to_use.dart';
+import 'package:whatsapp_status_saver/shared/presentation/ui/drawer/widgets/select_whatsapp.dart';
 import 'package:whatsapp_status_saver/src/settings/language_settings.dart';
 import 'package:whatsapp_status_saver/src/settings/toggle_theme_switch.dart';
 
-class StatusSaverDrawer extends StatelessWidget {
+class StatusSaverDrawer extends ConsumerWidget {
   const StatusSaverDrawer({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return ListView(
       padding: EdgeInsets.zero,
       children: [
@@ -36,7 +37,9 @@ class StatusSaverDrawer extends StatelessWidget {
         ListTile(
           leading: const Icon(Icons.language),
           title: Text(context.l10n.language),
-          onTap: () => switchLanguage(context),
+          onTap: () {
+            switchLanguage(context, ref);
+          },
         ),
         ListTile(
           leading: const Icon(Icons.info, color: Colors.amber),
