@@ -10,8 +10,8 @@ import 'package:whatsapp_status_saver/application/router/app_routes.dart';
 import 'package:whatsapp_status_saver/shared/presentation/widgets/no_media_available.dart';
 import 'package:whatsapp_status_saver/src/settings/providers/settings_provider.dart';
 
-class ImagesTab extends ConsumerWidget {
-  const ImagesTab({
+class ImageStatus extends ConsumerWidget {
+  const ImageStatus({
     super.key,
   });
 
@@ -39,12 +39,9 @@ class ImagesTab extends ConsumerWidget {
                                         data, data.indexOf(e), false);
                                     context.push(AppRoutes.fullScreenImage);
                                   },
-                                  child: Hero(
-                                    tag: 'image${data.indexOf(e)}',
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      child: Image.file(e.second as File),
-                                    ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    child: Image.file(e.second as File),
                                   ),
                                 ))
                             .toList(),

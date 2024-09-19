@@ -9,8 +9,8 @@ import 'package:whatsapp_status_saver/shared/presentation/widgets/no_media_avail
 import 'package:whatsapp_status_saver/src/saved_status/presentation/widgets/grid_child.dart';
 import 'package:whatsapp_status_saver/src/settings/providers/settings_provider.dart';
 
-class VideosTab extends ConsumerWidget {
-  const VideosTab({
+class VideosStatus extends ConsumerWidget {
+  const VideosStatus({
     super.key,
   });
 

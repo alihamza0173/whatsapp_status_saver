@@ -14,14 +14,7 @@ final settingsProvider = StateNotifierProvider<SettingsNotifier, SettingsState>(
 class SettingsNotifier extends StateNotifier<SettingsState> {
   SharedPreferences? _prefs;
 
-  SettingsNotifier()
-      : super(
-          SettingsState(
-            locale: null,
-            themeMode: ThemeMode.system,
-            statusDirectory: whatsappStatusDir,
-          ),
-        );
+  SettingsNotifier() : super(SettingsState.initial());
 
   Future<void> initPrefs() async {
     _prefs = await SharedPreferences.getInstance();
@@ -33,30 +26,33 @@ class SettingsNotifier extends StateNotifier<SettingsState> {
     final themeModeIndex = _prefs?.getInt('themeMode') ?? 0;
     final whatsappDir = _prefs?.getString('whatsapp');
 
-    final Directory statusDir =
+    final Directory? statusDir =
         whatsappDir == WhtasappStatusDir.whatsapp.toString()
             ? whatsappStatusDir
-            : whatsappBzStatusDir;
+            : whatsappDir == WhtasappStatusDir.whatsappBusiness.toString()
+                ? whatsappBzStatusDir
+                : null;
 
+    final themeMode = ThemeMode.values[themeModeIndex];
     state = state.copyWith(
       locale: languageCode != null ? Locale(languageCode) : null,
       statusDirectory: statusDir,
-      themeMode: ThemeMode.values[themeModeIndex],
-      isDarkMode: isDarkMode,
+      themeMode: themeMode,
+      isDarkMode: themeMode == ThemeMode.dark,
     );
   }
-
-  // Check if the current status directory is WhatsApp
-  bool get isWhatsapp => state.statusDirectory == whatsappStatusDir;
-
-  // Check if the current status directory is WhatsApp Business
-  bool get isWhatsappBusiness => state.statusDirectory == whatsappBzStatusDir;
 
   void setStatusDir(WhtasappStatusDir dir) {
     final Directory statusDir = dir == WhtasappStatusDir.whatsapp
         ? whatsappStatusDir
         : whatsappBzStatusDir;
-    state = state.copyWith(statusDirectory: statusDir);
+    final isWhatsapp = statusDir == whatsappStatusDir;
+    final isWhatsappBusiness = statusDir == whatsappBzStatusDir;
+    state = state.copyWith(
+      statusDirectory: statusDir,
+      isWhatsapp: isWhatsapp,
+      isWhatsappBusiness: isWhatsappBusiness,
+    );
     _prefs?.setString('whatsapp', dir.toString());
   }
 
@@ -67,7 +63,7 @@ class SettingsNotifier extends StateNotifier<SettingsState> {
 
   void toggleTheme(bool isDarkMode) {
     final themeMode = isDarkMode ? ThemeMode.dark : ThemeMode.light;
-    state = state.copyWith(themeMode: themeMode);
+    state = state.copyWith(themeMode: themeMode, isDarkMode: isDarkMode);
     _prefs?.setInt('themeMode', themeMode.index);
   }
 

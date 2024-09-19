@@ -12,13 +12,14 @@ class SelectWhatsapp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Builder(builder: (context) {
+      final state = ref.watch(settingsProvider);
       final provider = ref.read(settingsProvider.notifier);
       return Column(
         children: [
           ListTile(
             leading: Image.asset(AppImages.whatsapp, height: 30),
             title: const Text('WhatsApp'),
-            trailing: provider.isWhatsapp
+            trailing: state.isWhatsapp
                 ? const Icon(Icons.check, color: Colors.green)
                 : null,
             onTap: () => provider.setStatusDir(WhtasappStatusDir.whatsapp),
@@ -26,7 +27,7 @@ class SelectWhatsapp extends ConsumerWidget {
           ListTile(
             leading: Image.asset(AppImages.whatsappBuisness, height: 30),
             title: const Text('WhatsApp Buisness'),
-            trailing: provider.isWhatsappBusiness
+            trailing: state.isWhatsappBusiness
                 ? const Icon(Icons.check, color: Colors.green)
                 : null,
             onTap: () =>
