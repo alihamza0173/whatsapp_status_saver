@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_status_saver/application/extensions/context_extentions.dart';
-import 'package:whatsapp_status_saver/presentation/home_page/ui/drawer/ui/circle_border_text.dart';
+import 'package:whatsapp_status_saver/shared/presentation/ui/drawer/widgets/circle_border_text.dart';
 
 class HowToUseDialog extends StatelessWidget {
   const HowToUseDialog({super.key});

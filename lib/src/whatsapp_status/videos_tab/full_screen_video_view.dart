@@ -4,8 +4,8 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:whatsapp_status_saver/application/providers/file_manager_provider.dart';
 import 'package:whatsapp_status_saver/application/providers/full_screen_media_provider.dart';
-import 'package:whatsapp_status_saver/presentation/home_page/ui/videos_tab/full_screen_video.dart';
-import 'package:whatsapp_status_saver/presentation/common/status_saver_options_button.dart';
+import 'package:whatsapp_status_saver/shared/presentation/widgets/status_saver_options_button.dart';
+import 'package:whatsapp_status_saver/src/whatsapp_status/videos_tab/full_screen_video.dart';
 
 class FullscreenVideoViewer extends StatefulWidget {
   const FullscreenVideoViewer({super.key});

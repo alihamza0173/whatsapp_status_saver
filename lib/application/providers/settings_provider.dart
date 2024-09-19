@@ -1,9 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:whatsapp_status_saver/application/common/directories.dart';
 import 'package:whatsapp_status_saver/core/enums/whatsapp.dart';
+
+final settingsProvider = ChangeNotifierProvider(
+  create: (context) => SettingsProvider(),
+);
 
 class SettingsProvider extends ChangeNotifier {
   // Singletons

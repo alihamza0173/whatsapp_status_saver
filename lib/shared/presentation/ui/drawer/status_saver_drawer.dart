@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:whatsapp_status_saver/application/common/app_images.dart';
 import 'package:whatsapp_status_saver/application/extensions/context_extentions.dart';
-import 'package:whatsapp_status_saver/presentation/home_page/ui/drawer/select_whatsapp.dart';
-import 'package:whatsapp_status_saver/presentation/home_page/ui/drawer/ui/how_to_use.dart';
-import 'package:whatsapp_status_saver/presentation/home_page/ui/settings/language_settings.dart';
-import 'package:whatsapp_status_saver/presentation/home_page/ui/settings/toggle_theme_switch.dart';
+import 'package:whatsapp_status_saver/shared/presentation/ui/drawer/widgets/select_whatsapp.dart';
+import 'package:whatsapp_status_saver/shared/presentation/ui/drawer/widgets/how_to_use.dart';
+import 'package:whatsapp_status_saver/src/settings/language_settings.dart';
+import 'package:whatsapp_status_saver/src/settings/toggle_theme_switch.dart';
 
 class StatusSaverDrawer extends StatelessWidget {
   const StatusSaverDrawer({

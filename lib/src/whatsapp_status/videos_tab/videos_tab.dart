@@ -6,8 +6,8 @@ import 'package:whatsapp_status_saver/application/providers/file_manager_provide
 import 'package:whatsapp_status_saver/application/providers/full_screen_media_provider.dart';
 import 'package:whatsapp_status_saver/application/providers/settings_provider.dart';
 import 'package:whatsapp_status_saver/application/router/app_routes.dart';
-import 'package:whatsapp_status_saver/presentation/common/no_media_available.dart';
-import 'package:whatsapp_status_saver/presentation/home_page/ui/saved_status_tab/ui/grid_child.dart';
+import 'package:whatsapp_status_saver/shared/presentation/widgets/no_media_available.dart';
+import 'package:whatsapp_status_saver/src/saved_status/presentation/widgets/grid_child.dart';
 
 class VideosTab extends StatelessWidget {
   const VideosTab({

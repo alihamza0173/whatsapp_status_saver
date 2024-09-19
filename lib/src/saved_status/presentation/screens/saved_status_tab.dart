@@ -7,7 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:whatsapp_status_saver/application/providers/file_manager_provider.dart';
 import 'package:whatsapp_status_saver/application/providers/full_screen_media_provider.dart';
 import 'package:whatsapp_status_saver/application/router/app_routes.dart';
-import 'package:whatsapp_status_saver/presentation/home_page/ui/saved_status_tab/ui/grid_child.dart';
+import 'package:whatsapp_status_saver/src/saved_status/presentation/widgets/grid_child.dart';
 
 class SavedStatusTab extends StatelessWidget {
   const SavedStatusTab({
@@ -54,7 +54,7 @@ class SavedStatusTab extends StatelessWidget {
                               } else {
                                 fullScreenMediaProvider.setMedia(
                                   images,
-                                  videos.indexOf(e),
+                                  images.indexOf(e),
                                   true,
                                 );
                                 context.push(AppRoutes.fullScreenImage);
@@ -63,12 +63,9 @@ class SavedStatusTab extends StatelessWidget {
                             child: Stack(
                               alignment: Alignment.center,
                               children: [
-                                Hero(
-                                  tag: 'image${data.indexOf(e)}',
-                                  child: isVideo
-                                      ? Image.memory(e.first!)
-                                      : Image.file(e.second as File),
-                                ),
+                                isVideo
+                                    ? Image.memory(e.first!)
+                                    : Image.file(e.second as File),
                                 if (isVideo)
                                   const Icon(
                                     Icons.play_arrow,

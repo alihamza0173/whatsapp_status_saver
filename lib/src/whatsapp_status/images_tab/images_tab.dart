@@ -8,7 +8,7 @@ import 'package:whatsapp_status_saver/application/providers/file_manager_provide
 import 'package:whatsapp_status_saver/application/providers/full_screen_media_provider.dart';
 import 'package:whatsapp_status_saver/application/providers/settings_provider.dart';
 import 'package:whatsapp_status_saver/application/router/app_routes.dart';
-import 'package:whatsapp_status_saver/presentation/common/no_media_available.dart';
+import 'package:whatsapp_status_saver/shared/presentation/widgets/no_media_available.dart';
 
 class ImagesTab extends StatelessWidget {
   const ImagesTab({
