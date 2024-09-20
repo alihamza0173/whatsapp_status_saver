@@ -35,8 +35,9 @@ class VideosStatus extends ConsumerWidget {
                         children: data.map((e) {
                           return GestureDetector(
                             onTap: () {
-                              fullScreenMediaProvider.setMedia(
-                                  data, data.indexOf(e), false);
+                              ref
+                                  .read(fullScreenMediaProvider)
+                                  .setMedia(data, data.indexOf(e), false);
                               context.push(AppRoutes.fullScreenVideo);
                             },
                             child: GridChild(

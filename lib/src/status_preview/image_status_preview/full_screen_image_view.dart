@@ -17,11 +17,12 @@ class _FullscreenImageViewState extends State<FullscreenImageView> {
   late final PageController _pageController;
   late final List<Pair<Uint8List?, FileSystemEntity>> images;
   late final int initialIndex;
+  late final FullScreenMediaProvider notifier;
 
   @override
   void initState() {
-    images = fullScreenMediaProvider.media;
-    initialIndex = fullScreenMediaProvider.index;
+    images = notifier.media;
+    initialIndex = notifier.index;
     _pageController = PageController(initialPage: initialIndex);
     super.initState();
   }
@@ -45,7 +46,7 @@ class _FullscreenImageViewState extends State<FullscreenImageView> {
               ),
               StatusSaverOptionsButton(
                 file: image,
-                isSaved: fullScreenMediaProvider.isStatusSaved,
+                isSaved: notifier.isStatusSaved,
               ),
             ],
           );

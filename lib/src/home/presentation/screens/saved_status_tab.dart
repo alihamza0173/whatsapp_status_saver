@@ -50,15 +50,16 @@ class SavedStatusTab extends ConsumerWidget {
                   // Return GridChild for display
                   return GridChild(
                     onTap: () {
+                      final notifier = ref.read(fullScreenMediaProvider);
                       if (isVideo) {
-                        fullScreenMediaProvider.setMedia(
+                        notifier.setMedia(
                           videos,
                           videos.indexOf(e),
                           true,
                         );
                         context.push(AppRoutes.fullScreenVideo);
                       } else {
-                        fullScreenMediaProvider.setMedia(
+                        notifier.setMedia(
                           images,
                           images.indexOf(e),
                           true,

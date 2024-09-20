@@ -2,27 +2,31 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:whatsapp_status_saver/src/status_preview/providers/full_screen_media_provider.dart';
 import 'package:whatsapp_status_saver/shared/presentation/widgets/status_saver_options_button.dart';
 import 'package:whatsapp_status_saver/src/home/domain/entities/pair.dart';
 import 'package:whatsapp_status_saver/src/status_preview/videos_status_preview/full_screen_video.dart';
 
-class FullscreenVideoViewer extends StatefulWidget {
+class FullscreenVideoViewer extends ConsumerStatefulWidget {
   const FullscreenVideoViewer({super.key});
 
   @override
-  State<FullscreenVideoViewer> createState() => _FullscreenImageViewerState();
+  ConsumerState<FullscreenVideoViewer> createState() =>
+      _FullscreenImageViewerState();
 }
 
-class _FullscreenImageViewerState extends State<FullscreenVideoViewer> {
+class _FullscreenImageViewerState extends ConsumerState<FullscreenVideoViewer> {
   late final PageController _pageController;
   late final List<Pair<Uint8List?, FileSystemEntity>> videos;
   late final int initialIndex;
+  late final FullScreenMediaProvider notifier;
 
   @override
   void initState() {
-    videos = fullScreenMediaProvider.media;
-    initialIndex = fullScreenMediaProvider.index;
+    notifier = ref.read(fullScreenMediaProvider);
+    videos = notifier.media;
+    initialIndex = notifier.index;
     _pageController = PageController(initialPage: initialIndex);
     super.initState();
   }
@@ -44,7 +48,7 @@ class _FullscreenImageViewerState extends State<FullscreenVideoViewer> {
               FullScreenVideo(video: video),
               StatusSaverOptionsButton(
                 file: video,
-                isSaved: fullScreenMediaProvider.isStatusSaved,
+                isSaved: notifier.isStatusSaved,
               ),
             ],
           );

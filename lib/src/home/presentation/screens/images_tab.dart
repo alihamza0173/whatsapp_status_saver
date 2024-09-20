@@ -35,8 +35,9 @@ class ImageStatus extends ConsumerWidget {
                         children: data
                             .map((e) => GestureDetector(
                                   onTap: () {
-                                    fullScreenMediaProvider.setMedia(
-                                        data, data.indexOf(e), false);
+                                    ref
+                                        .read(fullScreenMediaProvider)
+                                        .setMedia(data, data.indexOf(e), false);
                                     context.push(AppRoutes.fullScreenImage);
                                   },
                                   child: ClipRRect(
