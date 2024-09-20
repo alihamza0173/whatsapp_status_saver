@@ -60,19 +60,15 @@ class OnboardingNotifier extends StateNotifier<OnBoardingState> {
     final storageStatus = await Permission.storage.request();
 
     if (storageStatus.isGranted) {
-      // If storage permission is granted, check for WhatsApp directories
       await checkPermission();
     } else if (storageStatus.isPermanentlyDenied) {
-      // If permission is permanently denied, open app settings
       await openAppSettings();
       state = state.copyWith(isStoragePermissionAllowed: false);
     } else if (storageStatus.isDenied) {
-      // If permission is denied temporarily, update the state
       state = state.copyWith(isStoragePermissionAllowed: false);
     }
   }
 
-  // Function to request directory access specifically for WhatsApp or WhatsApp Business
   Future<void> requestDirectoryAccess(Directory directory) async {
     final storageStatus = await Permission.storage.request();
 
@@ -92,7 +88,6 @@ class OnboardingNotifier extends StateNotifier<OnBoardingState> {
         );
       }
     } else if (storageStatus.isPermanentlyDenied) {
-      // If permission is permanently denied, open app settings
       await openAppSettings();
     }
   }

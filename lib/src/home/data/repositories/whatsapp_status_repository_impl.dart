@@ -19,26 +19,6 @@ class WhatsappStatusRepositoryImpl extends WhatsappStatusRepository {
   Future<List<Pair<Uint8List?, FileSystemEntity>>> getVideoStatus(
       Directory directory) async {
     final files = await _getFilesInDirectory(directory);
-    final videosAndImages =
-        _filterMediaFiles(files, includeVideos: true, includeImages: true);
-
-    final results = await Future.wait(
-      videosAndImages.map((pair) async {
-        if (pair.second.path.endsWith('.mp4')) {
-          final thumbnail = await _generateVideoThumbnail(pair.second.path);
-          return Pair(thumbnail, pair.second);
-        }
-        return pair;
-      }),
-    );
-
-    return results;
-  }
-
-  @override
-  Future<List<Pair<Uint8List?, FileSystemEntity>>> getSavedStatus(
-      Directory directory) async {
-    final files = await _getFilesInDirectory(directory);
     final videoFiles = _filterMediaFiles(files, includeVideos: true);
 
     // Generate thumbnails concurrently
@@ -50,6 +30,31 @@ class WhatsappStatusRepositoryImpl extends WhatsappStatusRepository {
     );
 
     return videosAndThumbnails;
+  }
+
+  @override
+  Future<List<Pair<Uint8List?, FileSystemEntity>>> getSavedStatus(
+      Directory directory) async {
+    final files = await _getFilesInDirectory(directory);
+    final mediaFiles = _filterMediaFiles(
+      files,
+      includeVideos: true,
+      includeImages: true,
+    );
+
+    // Generate thumbnails concurrently for videos
+    final mediaAndThumbnails = await Future.wait(
+      mediaFiles.map((pair) async {
+        if (pair.second.path.endsWith('.mp4')) {
+          // Generate thumbnail for videos only
+          final thumbnail = await _generateVideoThumbnail(pair.second.path);
+          return Pair(thumbnail, pair.second);
+        }
+        return pair;
+      }),
+    );
+
+    return mediaAndThumbnails;
   }
 
   @override
@@ -79,24 +84,14 @@ class WhatsappStatusRepositoryImpl extends WhatsappStatusRepository {
     }
   }
 
-  // A simple in-memory cache for thumbnails
-  final Map<String, Uint8List?> _thumbnailCache = {};
-
   Future<Uint8List?> _generateVideoThumbnail(String videoPath) async {
-    // Return from cache if available
-    if (_thumbnailCache.containsKey(videoPath)) {
-      return _thumbnailCache[videoPath];
-    }
-
-    // Generate the thumbnail and cache it
     final uint8list = await VideoThumbnail.thumbnailData(
       video: videoPath,
       imageFormat: ImageFormat.JPEG,
-      maxWidth: 150, // Adjust for faster performance
-      quality: 80, // Adjust for faster performance
+      maxWidth: 200,
+      quality: 100,
     );
 
-    _thumbnailCache[videoPath] = uint8list; // Cache the result
     return uint8list;
   }
 

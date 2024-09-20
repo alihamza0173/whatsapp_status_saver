@@ -22,6 +22,7 @@ class VideosStatus extends ConsumerWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final data = snapshot.data;
+
             return data!.isNotEmpty
                 ? SingleChildScrollView(
                     child: Padding(
