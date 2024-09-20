@@ -22,7 +22,7 @@ class SelectWhatsapp extends ConsumerWidget {
             trailing: state.isWhatsapp
                 ? const Icon(Icons.check, color: Colors.green)
                 : null,
-            onTap: () => provider.setStatusDir(WhtasappStatusDir.whatsapp),
+            onTap: () => provider.setStatusDir(WhatsappStatusDir.whatsapp),
           ),
           ListTile(
             leading: Image.asset(AppImages.whatsappBuisness, height: 30),
@@ -31,7 +31,7 @@ class SelectWhatsapp extends ConsumerWidget {
                 ? const Icon(Icons.check, color: Colors.green)
                 : null,
             onTap: () =>
-                provider.setStatusDir(WhtasappStatusDir.whatsappBusiness),
+                provider.setStatusDir(WhatsappStatusDir.whatsappBusiness),
           ),
         ],
       );

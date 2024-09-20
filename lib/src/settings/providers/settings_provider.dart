@@ -27,9 +27,9 @@ class SettingsNotifier extends StateNotifier<SettingsState> {
     final whatsappDir = _prefs?.getString('whatsapp');
 
     final Directory? statusDir =
-        whatsappDir == WhtasappStatusDir.whatsapp.toString()
+        whatsappDir == WhatsappStatusDir.whatsapp.toString()
             ? whatsappStatusDir
-            : whatsappDir == WhtasappStatusDir.whatsappBusiness.toString()
+            : whatsappDir == WhatsappStatusDir.whatsappBusiness.toString()
                 ? whatsappBzStatusDir
                 : null;
 
@@ -42,8 +42,8 @@ class SettingsNotifier extends StateNotifier<SettingsState> {
     );
   }
 
-  void setStatusDir(WhtasappStatusDir dir) {
-    final Directory statusDir = dir == WhtasappStatusDir.whatsapp
+  void setStatusDir(WhatsappStatusDir dir) {
+    final Directory statusDir = dir == WhatsappStatusDir.whatsapp
         ? whatsappStatusDir
         : whatsappBzStatusDir;
     final isWhatsapp = statusDir == whatsappStatusDir;
