@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:whatsapp_status_saver/application/providers/file_manager_provider.dart';
+import 'package:whatsapp_status_saver/src/home/domain/entities/pair.dart';
 
 class FullScreenMediaProvider {
   bool isStatusSaved = false;

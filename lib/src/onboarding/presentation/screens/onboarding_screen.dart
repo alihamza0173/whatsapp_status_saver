@@ -1,33 +1,18 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:whatsapp_status_saver/application/common/app_images.dart';
 import 'package:whatsapp_status_saver/application/extensions/context_extentions.dart';
-import 'package:whatsapp_status_saver/application/providers/file_manager_provider.dart';
 import 'package:whatsapp_status_saver/router/app_routes.dart';
+import 'package:whatsapp_status_saver/src/onboarding/presentation/providers/onboarding_provider.dart';
 
-class OnBoardingScreen extends StatefulWidget {
+class OnBoardingScreen extends ConsumerWidget {
   const OnBoardingScreen({super.key});
 
   @override
-  State<OnBoardingScreen> createState() => _OnBoardingScreenState();
-}
-
-class _OnBoardingScreenState extends State<OnBoardingScreen> {
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final isAllowed = await fileManagerProvider.checkPermission();
-      if (isAllowed) {
-        context.go(AppRoutes.homeScreen);
-      }
-    });
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -52,11 +37,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   fixedSize: Size.fromWidth(MediaQuery.sizeOf(context).width),
                 ),
                 onPressed: () async {
-                  final isAllowed =
-                      await fileManagerProvider.askForPermission();
-                  if (isAllowed) {
-                    context.go(AppRoutes.homeScreen);
-                  }
+                  await ref
+                      .read(onBoardingProvider.notifier)
+                      .requestPermission();
+
+                  context.go(AppRoutes.homeScreen);
                 },
                 child: Text(context.l10n.grantPermission),
               ),

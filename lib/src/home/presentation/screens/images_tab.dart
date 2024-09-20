@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
-import 'package:whatsapp_status_saver/application/providers/file_manager_provider.dart';
-import 'package:whatsapp_status_saver/application/providers/full_screen_media_provider.dart';
+import 'package:whatsapp_status_saver/src/status_preview/providers/full_screen_media_provider.dart';
 import 'package:whatsapp_status_saver/router/app_routes.dart';
 import 'package:whatsapp_status_saver/shared/presentation/widgets/no_media_available.dart';
 import 'package:whatsapp_status_saver/src/settings/providers/settings_provider.dart';
+import 'package:whatsapp_status_saver/src/home/presentation/providers/usecase_providers.dart';
 
 class ImageStatus extends ConsumerWidget {
   const ImageStatus({
@@ -17,9 +17,9 @@ class ImageStatus extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final dir = ref.watch(settingsProvider).statusDirectory;
+    final directory = ref.watch(settingsProvider).statusDirectory;
     return FutureBuilder(
-        future: fileManagerProvider.getFilesImages(dir),
+        future: ref.read(getImageStatusUseCaseProvider).execute(directory),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final data = snapshot.data;

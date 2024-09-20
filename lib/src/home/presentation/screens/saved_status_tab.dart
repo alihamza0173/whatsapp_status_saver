@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
-import 'package:whatsapp_status_saver/application/providers/file_manager_provider.dart';
-import 'package:whatsapp_status_saver/application/providers/full_screen_media_provider.dart';
+import 'package:whatsapp_status_saver/src/status_preview/providers/full_screen_media_provider.dart';
 import 'package:whatsapp_status_saver/router/app_routes.dart';
-import 'package:whatsapp_status_saver/src/saved_status/presentation/providers/saved_status_provider.dart';
-import 'package:whatsapp_status_saver/src/saved_status/presentation/widgets/grid_child.dart';
+import 'package:whatsapp_status_saver/src/home/presentation/providers/saved_status_provider.dart';
+import 'package:whatsapp_status_saver/shared/presentation/widgets/grid_child.dart';
+import 'package:whatsapp_status_saver/src/home/domain/entities/pair.dart';
 
 class SavedStatusTab extends ConsumerWidget {
   const SavedStatusTab({
@@ -18,7 +18,7 @@ class SavedStatusTab extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final savedStatusesState = ref.watch(savedStatusesProvider);
+    final savedStatusesState = ref.watch(savedStatuseProvider);
 
     final List<Pair<Uint8List?, FileSystemEntity>> images = [];
     final List<Pair<Uint8List?, FileSystemEntity>> videos = [];

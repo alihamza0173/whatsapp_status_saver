@@ -2,26 +2,25 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:whatsapp_status_saver/application/providers/file_manager_provider.dart';
-import 'package:whatsapp_status_saver/application/providers/full_screen_media_provider.dart';
+import 'package:whatsapp_status_saver/src/status_preview/providers/full_screen_media_provider.dart';
 import 'package:whatsapp_status_saver/shared/presentation/widgets/status_saver_options_button.dart';
-import 'package:whatsapp_status_saver/src/whatsapp_status/videos_status/full_screen_video.dart';
+import 'package:whatsapp_status_saver/src/home/domain/entities/pair.dart';
 
-class FullscreenVideoViewer extends StatefulWidget {
-  const FullscreenVideoViewer({super.key});
+class FullscreenImageView extends StatefulWidget {
+  const FullscreenImageView({super.key});
 
   @override
-  State<FullscreenVideoViewer> createState() => _FullscreenImageViewerState();
+  State<FullscreenImageView> createState() => _FullscreenImageViewState();
 }
 
-class _FullscreenImageViewerState extends State<FullscreenVideoViewer> {
+class _FullscreenImageViewState extends State<FullscreenImageView> {
   late final PageController _pageController;
-  late final List<Pair<Uint8List?, FileSystemEntity>> videos;
+  late final List<Pair<Uint8List?, FileSystemEntity>> images;
   late final int initialIndex;
 
   @override
   void initState() {
-    videos = fullScreenMediaProvider.media;
+    images = fullScreenMediaProvider.media;
     initialIndex = fullScreenMediaProvider.index;
     _pageController = PageController(initialPage: initialIndex);
     super.initState();
@@ -30,20 +29,22 @@ class _FullscreenImageViewerState extends State<FullscreenVideoViewer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(0, 0, 0, 1),
+      backgroundColor: Colors.black,
       appBar: AppBar(backgroundColor: Colors.black),
       body: PageView.builder(
         controller: _pageController,
-        scrollDirection: Axis.vertical,
-        itemCount: videos.length,
+        itemCount: images.length,
         itemBuilder: (context, pageIndex) {
-          final video = videos[pageIndex].second as File;
+          final image = images[pageIndex].second as File;
           return Stack(
             alignment: Alignment.center,
             children: [
-              FullScreenVideo(video: video),
+              InteractiveViewer(
+                clipBehavior: Clip.none,
+                child: Image.file(image, fit: BoxFit.contain),
+              ),
               StatusSaverOptionsButton(
-                file: video,
+                file: image,
                 isSaved: fullScreenMediaProvider.isStatusSaved,
               ),
             ],

@@ -8,6 +8,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:saf/saf.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 import 'package:whatsapp_status_saver/application/common/directories.dart';
+import 'package:whatsapp_status_saver/src/home/domain/entities/pair.dart';
 
 class FileManagerProvider extends ChangeNotifier {
   Future<bool> checkPermission() async {
@@ -107,13 +108,6 @@ class FileManagerProvider extends ChangeNotifier {
       return e.toString();
     }
   }
-}
-
-class Pair<T1, T2> {
-  final T1 first;
-  final T2 second;
-
-  Pair(this.first, this.second);
 }
 
 final fileManagerProvider = FileManagerProvider();
