@@ -1,8 +1,9 @@
 import 'dart:developer';
 import 'dart:io';
-
+import 'dart:typed_data';
 import 'package:flutter/services.dart';
 import 'package:media_scanner/media_scanner.dart';
+import 'package:saf/saf.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 import 'package:whatsapp_status_saver/src/home/domain/entities/pair.dart';
 import 'package:whatsapp_status_saver/src/home/domain/repositories/whatsapp_status_repository.dart';
@@ -10,15 +11,17 @@ import 'package:whatsapp_status_saver/src/home/domain/repositories/whatsapp_stat
 class WhatsappStatusRepositoryImpl extends WhatsappStatusRepository {
   @override
   Future<List<Pair<Uint8List?, FileSystemEntity>>> getImageStatus(
-      Directory directory) async {
-    final files = await _getFilesInDirectory(directory);
+    Directory directory,
+  ) async {
+    final files = await _getSafFilesInDirectory(directory);
     return _filterMediaFiles(files, includeImages: true);
   }
 
   @override
   Future<List<Pair<Uint8List?, FileSystemEntity>>> getVideoStatus(
-      Directory directory) async {
-    final files = await _getFilesInDirectory(directory);
+    Directory directory,
+  ) async {
+    final files = await _getSafFilesInDirectory(directory);
     final videoFiles = _filterMediaFiles(files, includeVideos: true);
 
     // Generate thumbnails concurrently
@@ -34,8 +37,10 @@ class WhatsappStatusRepositoryImpl extends WhatsappStatusRepository {
 
   @override
   Future<List<Pair<Uint8List?, FileSystemEntity>>> getSavedStatus(
-      Directory directory) async {
-    final files = await _getFilesInDirectory(directory);
+    Directory directory,
+  ) async {
+    final files =
+        await directory.list(recursive: true, followLinks: false).toList();
     final mediaFiles = _filterMediaFiles(
       files,
       includeVideos: true,
@@ -74,25 +79,39 @@ class WhatsappStatusRepositoryImpl extends WhatsappStatusRepository {
     }
   }
 
-  Future<List<FileSystemEntity>> _getFilesInDirectory(
-      Directory directory) async {
-    if (await directory.exists()) {
-      return directory.list(recursive: true, followLinks: false).toList();
-    } else {
-      log('Directory does not exist: ${directory.path}');
+  Future<List<FileSystemEntity>> _getSafFilesInDirectory(
+    Directory directory,
+  ) async {
+    try {
+      final String relativePath = _getRelativePath(directory.path);
+      final Saf saf = Saf(relativePath);
+
+      // Get the list of files via SAF
+      List<String>? paths = await saf.getFilesPath(fileType: FileTypes.any);
+      if (paths != null) {
+        return paths.map((file) => File(file)).toList();
+      } else {
+        return [];
+      }
+    } catch (e) {
+      log('Error getting files from SAF directory: $e');
       return [];
     }
   }
 
+  String _getRelativePath(String fullPath) {
+    final startIndex = fullPath.indexOf('Android');
+    return startIndex != -1 ? fullPath.substring(startIndex) : fullPath;
+  }
+
+  // Generate video thumbnail
   Future<Uint8List?> _generateVideoThumbnail(String videoPath) async {
-    final uint8list = await VideoThumbnail.thumbnailData(
+    return await VideoThumbnail.thumbnailData(
       video: videoPath,
       imageFormat: ImageFormat.JPEG,
       maxWidth: 200,
       quality: 100,
     );
-
-    return uint8list;
   }
 
   List<Pair<Uint8List?, FileSystemEntity>> _filterMediaFiles(
@@ -104,7 +123,7 @@ class WhatsappStatusRepositoryImpl extends WhatsappStatusRepository {
     for (var entity in entities) {
       if (entity is File) {
         final path = entity.path;
-        final extension = path.split('.').last;
+        final extension = path.split('.').last.toLowerCase();
 
         if (includeImages && (extension == 'jpg' || extension == 'png')) {
           filteredFiles.add(Pair(null, entity));
