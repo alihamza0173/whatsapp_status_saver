@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:saf/saf.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -33,6 +34,7 @@ class OnboardingNotifier extends StateNotifier<OnBoardingState> {
 
         // SAF handles the directory permission for Android 11+
         permissionGranted = await saf.getDirectoryPermission() ?? false;
+        log('is permission granted to $relativePath? $permissionGranted');
       }
 
       state = state.copyWith(

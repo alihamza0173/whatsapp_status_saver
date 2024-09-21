@@ -88,6 +88,7 @@ class WhatsappStatusRepositoryImpl extends WhatsappStatusRepository {
 
       // Get the list of files via SAF
       List<String>? paths = await saf.getFilesPath(fileType: FileTypes.any);
+      log('path of files from the $relativePath: $paths');
       if (paths != null) {
         return paths.map((file) => File(file)).toList();
       } else {
