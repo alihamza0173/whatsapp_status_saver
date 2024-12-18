@@ -18,9 +18,7 @@ class GoRouterNotifier extends ChangeNotifier {
   }
 
   void _checkUserOnboarded(OnBoardingState state) {
-    _isStoragePermissionAllowed = state.isStoragePermissionAllowed &&
-        (state.isWhatsappPermissionAllowed ||
-            state.isWhatsappBznsPermissionAllowed);
+    _isStoragePermissionAllowed = state.isStoragePermissionAllowed;
     notifyListeners();
   }
 

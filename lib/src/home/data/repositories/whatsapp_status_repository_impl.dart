@@ -2,8 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/services.dart';
-import 'package:media_scanner/media_scanner.dart';
-import 'package:saf/saf.dart';
+import 'package:scan_media/scan_media.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 import 'package:whatsapp_status_saver/src/home/domain/entities/pair.dart';
 import 'package:whatsapp_status_saver/src/home/domain/repositories/whatsapp_status_repository.dart';
@@ -13,7 +12,7 @@ class WhatsappStatusRepositoryImpl extends WhatsappStatusRepository {
   Future<List<Pair<Uint8List?, FileSystemEntity>>> getImageStatus(
     Directory directory,
   ) async {
-    final files = await _getSafFilesInDirectory(directory);
+    final files = await _getFilesFromDirectory(directory);
     return _filterMediaFiles(files, includeImages: true);
   }
 
@@ -21,7 +20,7 @@ class WhatsappStatusRepositoryImpl extends WhatsappStatusRepository {
   Future<List<Pair<Uint8List?, FileSystemEntity>>> getVideoStatus(
     Directory directory,
   ) async {
-    final files = await _getSafFilesInDirectory(directory);
+    final files = await _getFilesFromDirectory(directory);
     final videoFiles = _filterMediaFiles(files, includeVideos: true);
 
     // Generate thumbnails concurrently
@@ -72,25 +71,19 @@ class WhatsappStatusRepositoryImpl extends WhatsappStatusRepository {
     try {
       final fileToBeSaved = '${directory.path}/$copiedStatusName';
       await file.copy(fileToBeSaved);
-      MediaScanner.loadMedia(path: fileToBeSaved);
+      ScanMedia().scan(fileToBeSaved);
       return 'Status saved successfully';
     } catch (e) {
       return e.toString();
     }
   }
 
-  Future<List<FileSystemEntity>> _getSafFilesInDirectory(
+  Future<List<FileSystemEntity>> _getFilesFromDirectory(
     Directory directory,
   ) async {
     try {
-      final String relativePath = _getRelativePath(directory.path);
-      final Saf saf = Saf(relativePath);
-
-      // Get the list of files via SAF
-      List<String>? paths = await saf.getFilesPath(fileType: FileTypes.any);
-      log('path of files from the $relativePath: $paths');
-      if (paths != null) {
-        return paths.map((file) => File(file)).toList();
+      if (await directory.exists()) {
+        return directory.list().toList();
       } else {
         return [];
       }
@@ -98,11 +91,6 @@ class WhatsappStatusRepositoryImpl extends WhatsappStatusRepository {
       log('Error getting files from SAF directory: $e');
       return [];
     }
-  }
-
-  String _getRelativePath(String fullPath) {
-    final startIndex = fullPath.indexOf('Android');
-    return startIndex != -1 ? fullPath.substring(startIndex) : fullPath;
   }
 
   // Generate video thumbnail

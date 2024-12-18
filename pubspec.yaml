@@ -20,8 +20,10 @@ dependencies:
   go_router: ^14.2.7
   google_fonts: ^6.2.1
   permission_handler: ^10.4.5
-  media_scanner: ^2.1.0
-  saf: ^1.0.3+4
+  scan_media:
+    git:
+      url: https://github.com/alihamza0173/scan_media
+      ref: master
   flutter_riverpod: ^2.5.1
   share_plus: ^10.0.2
   shared_preferences: ^2.3.2

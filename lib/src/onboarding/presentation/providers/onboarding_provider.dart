@@ -1,6 +1,4 @@
-import 'dart:developer';
 import 'dart:io';
-import 'package:saf/saf.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:whatsapp_status_saver/application/common/directories.dart';
@@ -15,11 +13,10 @@ class OnboardingNotifier extends StateNotifier<OnBoardingState> {
   OnboardingNotifier() : super(OnBoardingState());
 
   Future<void> checkPermission() async {
-    final status = await Permission.storage.status;
+    final status = await Permission.manageExternalStorage.status;
 
     if (status.isGranted) {
       Directory? directory;
-      bool permissionGranted = false;
 
       // Check for WhatsApp or WhatsApp Business directories
       if (await whatsappStatusDir.exists()) {
@@ -28,21 +25,14 @@ class OnboardingNotifier extends StateNotifier<OnBoardingState> {
         directory = whatsappBzStatusDir;
       }
 
-      if (directory != null) {
-        final String relativePath = _getRelativePath(directory.path);
-        final Saf saf = Saf(relativePath);
-
-        // SAF handles the directory permission for Android 11+
-        permissionGranted = await saf.getDirectoryPermission() ?? false;
-        log('is permission granted to $relativePath? $permissionGranted');
-      }
+      // if (directory != null) {
+      //   final String relativePath = _getRelativePath(directory.path);
+      // }
 
       state = state.copyWith(
         isStoragePermissionAllowed: status.isGranted,
-        isWhatsappPermissionAllowed:
-            permissionGranted && directory == whatsappStatusDir,
-        isWhatsappBznsPermissionAllowed:
-            permissionGranted && directory == whatsappBzStatusDir,
+        isWhatsappPermissionAllowed: directory == whatsappStatusDir,
+        isWhatsappBznsPermissionAllowed: directory == whatsappBzStatusDir,
       );
     } else {
       state = state.copyWith(
@@ -59,7 +49,7 @@ class OnboardingNotifier extends StateNotifier<OnBoardingState> {
 
   // Function to request storage permission and directory access on user tap
   Future<void> requestPermission() async {
-    final storageStatus = await Permission.storage.request();
+    final storageStatus = await Permission.manageExternalStorage.request();
 
     if (storageStatus.isGranted) {
       await checkPermission();
@@ -72,19 +62,16 @@ class OnboardingNotifier extends StateNotifier<OnBoardingState> {
   }
 
   Future<void> requestDirectoryAccess(Directory directory) async {
-    final storageStatus = await Permission.storage.request();
+    final storageStatus = await Permission.manageExternalStorage.request();
 
     if (storageStatus.isGranted) {
       final String relativePath = _getRelativePath(directory.path);
-      final Saf saf = Saf(relativePath);
-      final bool isPermissionGranted =
-          await saf.getDirectoryPermission() ?? false;
 
-      if (isPermissionGranted && directory == whatsappStatusDir) {
+      if (directory == whatsappStatusDir) {
         state = state.copyWith(
           isWhatsappPermissionAllowed: true,
         );
-      } else if (isPermissionGranted && directory == whatsappBzStatusDir) {
+      } else if (directory == whatsappBzStatusDir) {
         state = state.copyWith(
           isWhatsappBznsPermissionAllowed: true,
         );
