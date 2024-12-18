@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:whatsapp_status_saver/application/common/app_images.dart';
-import 'package:whatsapp_status_saver/core/enums/whatsapp.dart';
+import 'package:whatsapp_status_saver/core/enums/status_directory.dart';
 import 'package:whatsapp_status_saver/src/settings/providers/settings_provider.dart';
 
 class SelectWhatsapp extends ConsumerWidget {
@@ -22,7 +22,7 @@ class SelectWhatsapp extends ConsumerWidget {
             trailing: state.isWhatsapp
                 ? const Icon(Icons.check, color: Colors.green)
                 : null,
-            onTap: () => provider.setStatusDir(WhatsappStatusDir.whatsapp),
+            onTap: () => provider.setStatusDir(StatusDirectory.whatsapp),
           ),
           ListTile(
             leading: Image.asset(AppImages.whatsappBuisness, height: 30),
@@ -31,7 +31,7 @@ class SelectWhatsapp extends ConsumerWidget {
                 ? const Icon(Icons.check, color: Colors.green)
                 : null,
             onTap: () =>
-                provider.setStatusDir(WhatsappStatusDir.whatsappBusiness),
+                provider.setStatusDir(StatusDirectory.whatsappBusiness),
           ),
         ],
       );

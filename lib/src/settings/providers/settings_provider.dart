@@ -3,8 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:whatsapp_status_saver/application/common/directories.dart';
-import 'package:whatsapp_status_saver/core/enums/whatsapp.dart';
+import 'package:whatsapp_status_saver/core/enums/status_directory.dart';
 import 'package:whatsapp_status_saver/src/settings/stats/settings_state.dart';
 
 final settingsProvider = StateNotifierProvider<SettingsNotifier, SettingsState>(
@@ -27,10 +26,10 @@ class SettingsNotifier extends StateNotifier<SettingsState> {
     final whatsappDir = _prefs?.getString('whatsapp');
 
     final Directory? statusDir =
-        whatsappDir == WhatsappStatusDir.whatsapp.toString()
-            ? whatsappStatusDir
-            : whatsappDir == WhatsappStatusDir.whatsappBusiness.toString()
-                ? whatsappBzStatusDir
+        whatsappDir == StatusDirectory.whatsapp.toString()
+            ? StatusDirectory.whatsapp.directory
+            : whatsappDir == StatusDirectory.whatsappBusiness.toString()
+                ? StatusDirectory.whatsappBusiness.directory
                 : null;
 
     final themeMode = ThemeMode.values[themeModeIndex];
@@ -42,12 +41,13 @@ class SettingsNotifier extends StateNotifier<SettingsState> {
     );
   }
 
-  void setStatusDir(WhatsappStatusDir dir) {
-    final Directory statusDir = dir == WhatsappStatusDir.whatsapp
-        ? whatsappStatusDir
-        : whatsappBzStatusDir;
-    final isWhatsapp = statusDir == whatsappStatusDir;
-    final isWhatsappBusiness = statusDir == whatsappBzStatusDir;
+  void setStatusDir(StatusDirectory dir) {
+    final Directory statusDir = dir == StatusDirectory.whatsapp
+        ? StatusDirectory.whatsapp.directory
+        : StatusDirectory.whatsappBusiness.directory;
+    final isWhatsapp = statusDir == StatusDirectory.whatsapp.directory;
+    final isWhatsappBusiness =
+        statusDir == StatusDirectory.whatsappBusiness.directory;
     state = state.copyWith(
       statusDirectory: statusDir,
       isWhatsapp: isWhatsapp,

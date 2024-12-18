@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:whatsapp_status_saver/application/common/directories.dart';
+import 'package:whatsapp_status_saver/core/enums/status_directory.dart';
 
 class SettingsState {
   final Locale? locale;
@@ -24,7 +24,7 @@ class SettingsState {
     return SettingsState(
       locale: null,
       themeMode: ThemeMode.system,
-      statusDirectory: whatsappStatusDir,
+      statusDirectory: StatusDirectory.whatsapp.directory,
       isDarkMode: false,
       isWhatsapp: true,
       isWhatsappBusiness: false,
