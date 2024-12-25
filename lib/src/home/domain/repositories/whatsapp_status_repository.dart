@@ -16,7 +16,7 @@ abstract class WhatsappStatusRepository {
     Directory directory,
   );
 
-  Future<String> saveStatus(
+  Future<void> saveStatus(
     Directory directory,
     File file,
   );

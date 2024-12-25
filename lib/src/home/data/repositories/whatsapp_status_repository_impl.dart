@@ -62,7 +62,7 @@ class WhatsappStatusRepositoryImpl extends WhatsappStatusRepository {
   }
 
   @override
-  Future<String> saveStatus(Directory directory, File file) async {
+  Future<void> saveStatus(Directory directory, File file) async {
     final copiedStatusName = file.path.split('/').last;
     if (!await directory.exists()) {
       await directory.create();
@@ -72,9 +72,8 @@ class WhatsappStatusRepositoryImpl extends WhatsappStatusRepository {
       final fileToBeSaved = '${directory.path}/$copiedStatusName';
       await file.copy(fileToBeSaved);
       ScanMedia().scan(fileToBeSaved);
-      return 'Status saved successfully';
     } catch (e) {
-      return e.toString();
+      rethrow;
     }
   }
 

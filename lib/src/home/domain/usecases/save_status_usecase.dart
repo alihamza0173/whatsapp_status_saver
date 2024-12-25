@@ -7,7 +7,7 @@ class SaveStatusUsecase {
 
   const SaveStatusUsecase(this.whatsappStatusRepository);
 
-  Future<String> execute(
+  Future<void> execute(
     Directory directory,
     File file,
   ) async {

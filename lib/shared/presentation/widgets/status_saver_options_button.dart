@@ -1,8 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:whatsapp_status_saver/application/extensions/context_extentions.dart';
 import 'package:whatsapp_status_saver/core/enums/status_directory.dart';
 import 'package:whatsapp_status_saver/src/home/presentation/providers/usecase_providers.dart';
 
@@ -25,13 +28,14 @@ class StatusSaverOptionsButton extends ConsumerWidget {
           if (!isSaved)
             OptionsButton(
               onPressed: () async {
-                final result = await ref
-                    .read(saveSavedStatusUseCaseProvider)
-                    .execute(StatusDirectory.savedStatus.directory, file);
-                // ignore: use_build_context_synchronously
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(result)),
-                );
+                try {
+                  await ref
+                      .read(saveSavedStatusUseCaseProvider)
+                      .execute(StatusDirectory.savedStatus.directory, file);
+                  context.showSnackBarMessage('Status saved successfully');
+                } catch (e) {
+                  context.showSnackBarMessage('Error: $e');
+                }
               },
               icon: const Icon(Icons.download_sharp),
             ),
