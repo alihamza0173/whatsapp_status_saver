@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:whatsapp_status_saver/src/home/domain/repositories/whatsapp_status_repository.dart';
 
-class SaveStatusUsecase {
+class SaveStatusUseCase {
   final WhatsappStatusRepository whatsappStatusRepository;
 
-  const SaveStatusUsecase(this.whatsappStatusRepository);
+  const SaveStatusUseCase(this.whatsappStatusRepository);
 
   Future<void> execute(
     Directory directory,

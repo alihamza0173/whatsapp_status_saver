@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:whatsapp_status_saver/application/extensions/context_extentions.dart';
+import 'package:whatsapp_status_saver/application/extensions/context_extensions.dart';
 import 'package:whatsapp_status_saver/shared/presentation/ui/drawer/status_saver_drawer.dart';
 import 'package:whatsapp_status_saver/src/home/presentation/screens/images_tab.dart';
 import 'package:whatsapp_status_saver/src/home/presentation/screens/saved_status_tab.dart';

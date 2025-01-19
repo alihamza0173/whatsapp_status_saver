@@ -25,8 +25,8 @@ class SelectWhatsapp extends ConsumerWidget {
             onTap: () => provider.setStatusDir(StatusDirectory.whatsapp),
           ),
           ListTile(
-            leading: Image.asset(AppImages.whatsappBuisness, height: 30),
-            title: const Text('WhatsApp Buisness'),
+            leading: Image.asset(AppImages.whatsappBusiness, height: 30),
+            title: const Text('WhatsApp Business'),
             trailing: state.isWhatsappBusiness
                 ? const Icon(Icons.check, color: Colors.green)
                 : null,

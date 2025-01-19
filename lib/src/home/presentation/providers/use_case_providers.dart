@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:whatsapp_status_saver/src/home/domain/usecases/get_image_status_usecase.dart';
-import 'package:whatsapp_status_saver/src/home/domain/usecases/get_saved_status_usecase.dart';
-import 'package:whatsapp_status_saver/src/home/domain/usecases/get_video_status_usecase.dart';
-import 'package:whatsapp_status_saver/src/home/domain/usecases/save_status_usecase.dart';
+import 'package:whatsapp_status_saver/src/home/domain/use_cases/get_image_status_use_case.dart';
+import 'package:whatsapp_status_saver/src/home/domain/use_cases/get_saved_status_use_case.dart';
+import 'package:whatsapp_status_saver/src/home/domain/use_cases/get_video_status_use_case.dart';
+import 'package:whatsapp_status_saver/src/home/domain/use_cases/save_status_use_case.dart';
 import 'package:whatsapp_status_saver/src/home/presentation/providers/whatsapp_repository_provider.dart';
 
 final getImageStatusUseCaseProvider = Provider<GetImageStatusUseCase>((ref) {
@@ -20,7 +20,7 @@ final getSavedStatusUseCaseProvider = Provider<GetSavedStatusUseCase>((ref) {
   return GetSavedStatusUseCase(whatsappStatusRepository);
 });
 
-final saveSavedStatusUseCaseProvider = Provider<SaveStatusUsecase>((ref) {
+final saveSavedStatusUseCaseProvider = Provider<SaveStatusUseCase>((ref) {
   final whatsappStatusRepository = ref.read(whatsappRepositoryProvider);
-  return SaveStatusUsecase(whatsappStatusRepository);
+  return SaveStatusUseCase(whatsappStatusRepository);
 });

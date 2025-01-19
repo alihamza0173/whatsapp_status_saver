@@ -1,26 +1,27 @@
 class OnBoardingState {
   final bool isStoragePermissionAllowed;
   final bool isWhatsappPermissionAllowed;
-  final bool isWhatsappBznsPermissionAllowed;
+  final bool isWhatsappBusinessPermissionAllowed;
 
   OnBoardingState({
     this.isStoragePermissionAllowed = false,
     this.isWhatsappPermissionAllowed = false,
-    this.isWhatsappBznsPermissionAllowed = false,
+    this.isWhatsappBusinessPermissionAllowed = false,
   });
 
   OnBoardingState copyWith({
     bool? isStoragePermissionAllowed,
     bool? isWhatsappPermissionAllowed,
-    bool? isWhatsappBznsPermissionAllowed,
+    bool? isWhatsappBusinessPermissionAllowed,
   }) {
     return OnBoardingState(
       isStoragePermissionAllowed:
           isStoragePermissionAllowed ?? this.isStoragePermissionAllowed,
-      isWhatsappPermissionAllowed:
-          isWhatsappPermissionAllowed ?? this.isWhatsappBznsPermissionAllowed,
-      isWhatsappBznsPermissionAllowed: isWhatsappBznsPermissionAllowed ??
-          this.isWhatsappBznsPermissionAllowed,
+      isWhatsappPermissionAllowed: isWhatsappPermissionAllowed ??
+          this.isWhatsappBusinessPermissionAllowed,
+      isWhatsappBusinessPermissionAllowed:
+          isWhatsappBusinessPermissionAllowed ??
+              this.isWhatsappBusinessPermissionAllowed,
     );
   }
 }

@@ -34,7 +34,7 @@ class OnboardingNotifier extends StateNotifier<OnBoardingState> {
         isStoragePermissionAllowed: true,
         isWhatsappPermissionAllowed:
             directory == StatusDirectory.whatsapp.directory,
-        isWhatsappBznsPermissionAllowed:
+        isWhatsappBusinessPermissionAllowed:
             directory == StatusDirectory.whatsappBusiness.directory,
       );
     } else {

@@ -4,7 +4,7 @@ import 'dart:typed_data';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:whatsapp_status_saver/core/enums/status_directory.dart';
 import 'package:whatsapp_status_saver/src/home/domain/entities/pair.dart';
-import 'package:whatsapp_status_saver/src/home/presentation/providers/usecase_providers.dart';
+import 'package:whatsapp_status_saver/src/home/presentation/providers/use_case_providers.dart';
 import 'package:whatsapp_status_saver/src/settings/providers/settings_provider.dart';
 
 final imageStatusProvider =
@@ -19,7 +19,7 @@ final videoStatusProvider =
   return ref.read(getVideoStatusUseCaseProvider).execute(directory);
 });
 
-final savedStatuseProvider =
+final savedStatusProvider =
     FutureProvider<List<Pair<Uint8List?, FileSystemEntity>>>((ref) async {
   return ref.read(getSavedStatusUseCaseProvider).execute(
         StatusDirectory.savedStatus.directory,

@@ -18,7 +18,7 @@ class SavedStatusTab extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final savedStatusesState = ref.watch(savedStatuseProvider);
+    final savedStatusesState = ref.watch(savedStatusProvider);
 
     final List<Pair<Uint8List?, FileSystemEntity>> images = [];
     final List<Pair<Uint8List?, FileSystemEntity>> videos = [];

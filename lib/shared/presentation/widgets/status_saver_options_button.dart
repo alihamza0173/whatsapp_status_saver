@@ -5,9 +5,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:whatsapp_status_saver/application/extensions/context_extentions.dart';
+import 'package:whatsapp_status_saver/application/extensions/context_extensions.dart';
 import 'package:whatsapp_status_saver/core/enums/status_directory.dart';
-import 'package:whatsapp_status_saver/src/home/presentation/providers/usecase_providers.dart';
+import 'package:whatsapp_status_saver/src/home/presentation/providers/use_case_providers.dart';
 
 class StatusSaverOptionsButton extends ConsumerWidget {
   const StatusSaverOptionsButton({

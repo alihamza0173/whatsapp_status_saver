@@ -21,8 +21,6 @@ extension WhatsappStatusDirExtension on StatusDirectory {
         return Directory(
           '/storage/emulated/0/Download/StatusSaver',
         );
-      default:
-        throw ArgumentError('Invalid StatusDir');
     }
   }
 }

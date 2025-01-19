@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:whatsapp_status_saver/application/common/app_images.dart';
-import 'package:whatsapp_status_saver/application/extensions/context_extentions.dart';
+import 'package:whatsapp_status_saver/application/extensions/context_extensions.dart';
 import 'package:whatsapp_status_saver/router/app_routes.dart';
 import 'package:whatsapp_status_saver/src/onboarding/presentation/providers/onboarding_provider.dart';
 
@@ -21,7 +21,7 @@ class OnBoardingScreen extends ConsumerWidget {
           child: Column(
             children: [
               const Spacer(),
-              Image.asset(AppImages.illustation, height: 150, width: 150),
+              Image.asset(AppImages.illustration, height: 150, width: 150),
               const SizedBox(height: 18.0),
               Text(context.l10n.statusSaverDescription),
               const Spacer(),
