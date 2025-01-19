@@ -4,12 +4,12 @@ import 'dart:typed_data';
 import 'package:flutter/services.dart';
 import 'package:scan_media/scan_media.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
-import 'package:whatsapp_status_saver/src/home/domain/entities/pair.dart';
+import 'package:whatsapp_status_saver/src/home/domain/entities/whatsapp_status.dart';
 import 'package:whatsapp_status_saver/src/home/domain/repositories/whatsapp_status_repository.dart';
 
 class WhatsappStatusRepositoryImpl extends WhatsappStatusRepository {
   @override
-  Future<List<Pair<Uint8List?, FileSystemEntity>>> getImageStatus(
+  Future<List<WhatsappStatus>> getImageStatus(
     Directory directory,
   ) async {
     final files = await _getFilesFromDirectory(directory);
@@ -17,7 +17,7 @@ class WhatsappStatusRepositoryImpl extends WhatsappStatusRepository {
   }
 
   @override
-  Future<List<Pair<Uint8List?, FileSystemEntity>>> getVideoStatus(
+  Future<List<WhatsappStatus>> getVideoStatus(
     Directory directory,
   ) async {
     final files = await _getFilesFromDirectory(directory);
@@ -25,9 +25,9 @@ class WhatsappStatusRepositoryImpl extends WhatsappStatusRepository {
 
     // Generate thumbnails concurrently
     final videosAndThumbnails = await Future.wait(
-      videoFiles.map((pair) async {
-        final thumbnail = await _generateVideoThumbnail(pair.second.path);
-        return Pair(thumbnail, pair.second);
+      videoFiles.map((status) async {
+        final thumbnail = await _generateVideoThumbnail(status.file.path);
+        return WhatsappStatus(file: status.file, thumbnail: thumbnail);
       }),
     );
 
@@ -35,7 +35,7 @@ class WhatsappStatusRepositoryImpl extends WhatsappStatusRepository {
   }
 
   @override
-  Future<List<Pair<Uint8List?, FileSystemEntity>>> getSavedStatus(
+  Future<List<WhatsappStatus>> getSavedStatus(
     Directory directory,
   ) async {
     final files =
@@ -48,13 +48,13 @@ class WhatsappStatusRepositoryImpl extends WhatsappStatusRepository {
 
     // Generate thumbnails concurrently for videos
     final mediaAndThumbnails = await Future.wait(
-      mediaFiles.map((pair) async {
-        if (pair.second.path.endsWith('.mp4')) {
+      mediaFiles.map((status) async {
+        if (status.file.path.endsWith('.mp4')) {
           // Generate thumbnail for videos only
-          final thumbnail = await _generateVideoThumbnail(pair.second.path);
-          return Pair(thumbnail, pair.second);
+          final thumbnail = await _generateVideoThumbnail(status.file.path);
+          return WhatsappStatus(file: status.file, thumbnail: thumbnail);
         }
-        return pair;
+        return status;
       }),
     );
 
@@ -102,11 +102,9 @@ class WhatsappStatusRepositoryImpl extends WhatsappStatusRepository {
     );
   }
 
-  List<Pair<Uint8List?, FileSystemEntity>> _filterMediaFiles(
-      List<FileSystemEntity> entities,
-      {bool includeVideos = false,
-      bool includeImages = false}) {
-    final List<Pair<Uint8List?, FileSystemEntity>> filteredFiles = [];
+  List<WhatsappStatus> _filterMediaFiles(List<FileSystemEntity> entities,
+      {bool includeVideos = false, bool includeImages = false}) {
+    final List<WhatsappStatus> filteredFiles = [];
 
     for (var entity in entities) {
       if (entity is File) {
@@ -114,11 +112,11 @@ class WhatsappStatusRepositoryImpl extends WhatsappStatusRepository {
         final extension = path.split('.').last.toLowerCase();
 
         if (includeImages && (extension == 'jpg' || extension == 'png')) {
-          filteredFiles.add(Pair(null, entity));
+          filteredFiles.add(WhatsappStatus(file: entity));
         }
 
         if (includeVideos && extension == 'mp4') {
-          filteredFiles.add(Pair(null, entity));
+          filteredFiles.add(WhatsappStatus(file: entity));
         }
       }
     }

@@ -1,15 +1,14 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
+import 'package:whatsapp_status_saver/src/home/domain/entities/whatsapp_status.dart';
 import 'package:whatsapp_status_saver/src/status_preview/providers/full_screen_media_provider.dart';
 import 'package:whatsapp_status_saver/router/app_routes.dart';
 import 'package:whatsapp_status_saver/src/home/presentation/providers/whatsapp_status_providers.dart';
 import 'package:whatsapp_status_saver/shared/presentation/widgets/grid_child.dart';
-import 'package:whatsapp_status_saver/src/home/domain/entities/pair.dart';
 
 class SavedStatusTab extends ConsumerWidget {
   const SavedStatusTab({
@@ -20,8 +19,8 @@ class SavedStatusTab extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final savedStatusesState = ref.watch(savedStatusProvider);
 
-    final List<Pair<Uint8List?, FileSystemEntity>> images = [];
-    final List<Pair<Uint8List?, FileSystemEntity>> videos = [];
+    final List<WhatsappStatus> images = [];
+    final List<WhatsappStatus> videos = [];
 
     return savedStatusesState.when(
       data: (data) {
@@ -34,16 +33,16 @@ class SavedStatusTab extends ConsumerWidget {
                 axisDirection: AxisDirection.down,
                 crossAxisSpacing: 4.0,
                 mainAxisSpacing: 4.0,
-                children: data.map((e) {
-                  final extension = e.second.path.split('.').last;
+                children: data.map((status) {
+                  final extension = status.file.path.split('.').last;
                   bool isVideo = false;
 
                   // Separate images and videos
                   if (extension == 'jpg' || extension == 'png') {
-                    images.add(e);
+                    images.add(status);
                   }
                   if (extension == 'mp4') {
-                    videos.add(e);
+                    videos.add(status);
                     isVideo = true;
                   }
 
@@ -54,14 +53,14 @@ class SavedStatusTab extends ConsumerWidget {
                       if (isVideo) {
                         notifier.setMedia(
                           videos,
-                          videos.indexOf(e),
+                          videos.indexOf(status),
                           true,
                         );
                         context.push(AppRoutes.fullScreenVideo);
                       } else {
                         notifier.setMedia(
                           images,
-                          images.indexOf(e),
+                          images.indexOf(status),
                           true,
                         );
                         context.push(AppRoutes.fullScreenImage);
@@ -71,8 +70,8 @@ class SavedStatusTab extends ConsumerWidget {
                       alignment: Alignment.center,
                       children: [
                         isVideo
-                            ? Image.memory(e.first!)
-                            : Image.file(e.second as File),
+                            ? Image.memory(status.thumbnail!)
+                            : Image.file(status.file as File),
                         if (isVideo)
                           const Icon(
                             Icons.play_arrow,

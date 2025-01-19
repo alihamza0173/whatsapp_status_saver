@@ -28,19 +28,20 @@ class VideosStatus extends ConsumerWidget {
                 axisDirection: AxisDirection.down,
                 crossAxisSpacing: 4.0,
                 mainAxisSpacing: 4.0,
-                children: data.map((e) {
+                children: data.map((status) {
                   return GestureDetector(
                     onTap: () {
                       ref
                           .read(fullScreenMediaProvider)
-                          .setMedia(data, data.indexOf(e), false);
+                          .setMedia(data, data.indexOf(status), false);
                       context.push(AppRoutes.fullScreenVideo);
                     },
                     child: GridChild(
                       child: Stack(
                         alignment: Alignment.center,
                         children: [
-                          Image.memory(e.first!), // Display video thumbnail
+                          Image.memory(
+                              status.thumbnail!), // Display video thumbnail
                           const Icon(
                             Icons.play_arrow,
                             color: Colors.white,

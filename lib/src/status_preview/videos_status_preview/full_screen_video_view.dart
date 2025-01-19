@@ -1,11 +1,10 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:whatsapp_status_saver/src/home/domain/entities/whatsapp_status.dart';
 import 'package:whatsapp_status_saver/src/status_preview/providers/full_screen_media_provider.dart';
 import 'package:whatsapp_status_saver/shared/presentation/widgets/status_saver_options_button.dart';
-import 'package:whatsapp_status_saver/src/home/domain/entities/pair.dart';
 import 'package:whatsapp_status_saver/src/status_preview/videos_status_preview/full_screen_video.dart';
 
 class FullscreenVideoViewer extends ConsumerStatefulWidget {
@@ -18,7 +17,7 @@ class FullscreenVideoViewer extends ConsumerStatefulWidget {
 
 class _FullscreenImageViewerState extends ConsumerState<FullscreenVideoViewer> {
   late final PageController _pageController;
-  late final List<Pair<Uint8List?, FileSystemEntity>> videos;
+  late final List<WhatsappStatus> videos;
   late final int initialIndex;
   late final FullScreenMediaProvider notifier;
 
@@ -40,8 +39,8 @@ class _FullscreenImageViewerState extends ConsumerState<FullscreenVideoViewer> {
         controller: _pageController,
         scrollDirection: Axis.vertical,
         itemCount: videos.length,
-        itemBuilder: (context, pageIndex) {
-          final video = videos[pageIndex].second as File;
+        itemBuilder: (final _, final index) {
+          final video = videos[index].file as File;
           return Stack(
             alignment: Alignment.center,
             children: [

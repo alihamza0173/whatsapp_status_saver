@@ -1,8 +1,5 @@
-import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:whatsapp_status_saver/src/home/domain/entities/pair.dart';
+import 'package:whatsapp_status_saver/src/home/domain/entities/whatsapp_status.dart';
 
 final fullScreenMediaProvider = Provider<FullScreenMediaProvider>((ref) {
   return FullScreenMediaProvider();
@@ -11,10 +8,10 @@ final fullScreenMediaProvider = Provider<FullScreenMediaProvider>((ref) {
 class FullScreenMediaProvider {
   bool isStatusSaved = false;
   int index = 0;
-  List<Pair<Uint8List?, FileSystemEntity>> media = [];
+  List<WhatsappStatus> media = [];
 
   void setMedia(
-    List<Pair<Uint8List?, FileSystemEntity>> media,
+    List<WhatsappStatus> media,
     int index,
     bool? isStatusSaved,
   ) {

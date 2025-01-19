@@ -13,9 +13,9 @@ class ImageStatus extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final imageStatusAsyncValue = ref.watch(imageStatusProvider);
+    final imageStatus = ref.watch(imageStatusProvider);
 
-    return imageStatusAsyncValue.when(
+    return imageStatus.when(
       data: (data) {
         return data.isNotEmpty
             ? SingleChildScrollView(
@@ -27,16 +27,15 @@ class ImageStatus extends ConsumerWidget {
                     crossAxisSpacing: 4.0,
                     mainAxisSpacing: 4.0,
                     children: data
-                        .map((e) => GestureDetector(
+                        .map((status) => GestureDetector(
                               onTap: () {
-                                ref
-                                    .read(fullScreenMediaProvider)
-                                    .setMedia(data, data.indexOf(e), false);
+                                ref.read(fullScreenMediaProvider).setMedia(
+                                    data, data.indexOf(status), false);
                                 context.push(AppRoutes.fullScreenImage);
                               },
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
-                                child: Image.file(e.second as File),
+                                child: Image.file(status.file as File),
                               ),
                             ))
                         .toList(),

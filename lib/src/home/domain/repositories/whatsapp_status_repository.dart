@@ -1,18 +1,17 @@
 import 'dart:io';
-import 'dart:typed_data';
 
-import 'package:whatsapp_status_saver/src/home/domain/entities/pair.dart';
+import 'package:whatsapp_status_saver/src/home/domain/entities/whatsapp_status.dart';
 
 abstract class WhatsappStatusRepository {
-  Future<List<Pair<Uint8List?, FileSystemEntity>>> getImageStatus(
+  Future<List<WhatsappStatus>> getImageStatus(
     Directory directory,
   );
 
-  Future<List<Pair<Uint8List?, FileSystemEntity>>> getVideoStatus(
+  Future<List<WhatsappStatus>> getVideoStatus(
     Directory directory,
   );
 
-  Future<List<Pair<Uint8List?, FileSystemEntity>>> getSavedStatus(
+  Future<List<WhatsappStatus>> getSavedStatus(
     Directory directory,
   );
 
