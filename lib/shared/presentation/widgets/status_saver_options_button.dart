@@ -42,13 +42,15 @@ class StatusSaverOptionsButton extends ConsumerWidget {
           const SizedBox(height: 16),
           OptionsButton(
             onPressed: () {
-              Share.shareXFiles(
-                [XFile(file.path)],
-                text: 'Shared from WhatsApp Status Saver',
+              SharePlus.instance.share(
+                ShareParams(
+                  text: 'Shared from WhatsApp Status Saver',
+                  files: [XFile(file.path)],
+                ),
               );
             },
             icon: const Icon(Icons.share),
-          )
+          ),
         ],
       ),
     );
@@ -56,11 +58,7 @@ class StatusSaverOptionsButton extends ConsumerWidget {
 }
 
 class OptionsButton extends StatelessWidget {
-  const OptionsButton({
-    super.key,
-    required this.onPressed,
-    required this.icon,
-  });
+  const OptionsButton({super.key, required this.onPressed, required this.icon});
   final void Function()? onPressed;
   final Widget icon;
 
@@ -68,9 +66,7 @@ class OptionsButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       color: Colors.white,
-      style: IconButton.styleFrom(
-        backgroundColor: Colors.green,
-      ),
+      style: IconButton.styleFrom(backgroundColor: Colors.green),
       onPressed: onPressed,
       icon: icon,
     );
