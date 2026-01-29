@@ -1,4 +1,4 @@
-package com.devzeal.whatsapp_status_saver
+package com.alihamza0173.whatsapp_status_saver
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,12 +1,12 @@
 package_rename_config:
   android:
     app_name: Status Saver
-    package_name: com.devzeal.status_saver
+    package_name: com.alihamza0173.status_saver
 
   ios:
     app_name: Status Saver
     bundle_name: Status Saver
-    package_name: com.devzeal.status_saver
+    package_name: com.alihamza0173.status_saver
 
 web:
   app_name: Status Saver
