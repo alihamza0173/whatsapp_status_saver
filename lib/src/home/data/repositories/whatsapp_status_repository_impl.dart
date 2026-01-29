@@ -9,17 +9,13 @@ import 'package:whatsapp_status_saver/src/home/domain/repositories/whatsapp_stat
 
 class WhatsappStatusRepositoryImpl extends WhatsappStatusRepository {
   @override
-  Future<List<WhatsappStatus>> getImageStatus(
-    Directory directory,
-  ) async {
+  Future<List<WhatsappStatus>> getImageStatus(Directory directory) async {
     final files = await _getFilesFromDirectory(directory);
     return _filterMediaFiles(files, includeImages: true);
   }
 
   @override
-  Future<List<WhatsappStatus>> getVideoStatus(
-    Directory directory,
-  ) async {
+  Future<List<WhatsappStatus>> getVideoStatus(Directory directory) async {
     final files = await _getFilesFromDirectory(directory);
     final videoFiles = _filterMediaFiles(files, includeVideos: true);
 
@@ -35,11 +31,10 @@ class WhatsappStatusRepositoryImpl extends WhatsappStatusRepository {
   }
 
   @override
-  Future<List<WhatsappStatus>> getSavedStatus(
-    Directory directory,
-  ) async {
-    final files =
-        await directory.list(recursive: true, followLinks: false).toList();
+  Future<List<WhatsappStatus>> getSavedStatus(Directory directory) async {
+    final files = await directory
+        .list(recursive: true, followLinks: false)
+        .toList();
     final mediaFiles = _filterMediaFiles(
       files,
       includeVideos: true,
@@ -102,8 +97,11 @@ class WhatsappStatusRepositoryImpl extends WhatsappStatusRepository {
     );
   }
 
-  List<WhatsappStatus> _filterMediaFiles(List<FileSystemEntity> entities,
-      {bool includeVideos = false, bool includeImages = false}) {
+  List<WhatsappStatus> _filterMediaFiles(
+    List<FileSystemEntity> entities, {
+    bool includeVideos = false,
+    bool includeImages = false,
+  }) {
     final List<WhatsappStatus> filteredFiles = [];
 
     for (var entity in entities) {
