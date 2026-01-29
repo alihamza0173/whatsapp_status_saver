@@ -9,9 +9,7 @@ import 'package:whatsapp_status_saver/src/settings/language_settings.dart';
 import 'package:whatsapp_status_saver/src/settings/toggle_theme_switch.dart';
 
 class StatusSaverDrawer extends ConsumerWidget {
-  const StatusSaverDrawer({
-    super.key,
-  });
+  const StatusSaverDrawer({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -19,12 +17,8 @@ class StatusSaverDrawer extends ConsumerWidget {
       padding: EdgeInsets.zero,
       children: [
         DrawerHeader(
-          decoration: const BoxDecoration(
-            color: Colors.green,
-          ),
-          child: Image.asset(
-            AppImages.logo,
-          ),
+          decoration: const BoxDecoration(color: Colors.green),
+          child: Image.asset(AppImages.logo),
         ),
         // Select Whatsapp Dir Tile
         const SelectWhatsapp(),
@@ -50,9 +44,12 @@ class StatusSaverDrawer extends ConsumerWidget {
           leading: const Icon(Icons.share, color: Colors.blue),
           title: Text(context.l10n.share),
           onTap: () {
-            Share.share(
-              'You can download all Whatsapp status for free aad fast. Download it here: https://play.google.com/store/apps/details?id=com.devzeal.status_saver',
-              subject: 'Status Saver',
+            SharePlus.instance.share(
+              ShareParams(
+                subject: 'Status Saver',
+                text:
+                    'Download and save WhatsApp statuses for free! Get it here: https://github.com/alihamza0173/whatsapp_status_saver/releases',
+              ),
             );
           },
         ),

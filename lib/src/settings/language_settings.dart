@@ -17,30 +17,30 @@ Future<dynamic> switchLanguage(BuildContext context, WidgetRef ref) {
           return AlertDialog(
             title: Text(context.l10n.language),
             content: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: L10n.languages.entries
-                    .map(
-                      (e) => RadioListTile(
-                        shape: selected == e.key
-                            ? RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                side: const BorderSide(
-                                  color: Colors.green,
-                                ),
-                              )
-                            : null,
-                        title: Text(e.value),
-                        value: e.key,
-                        groupValue: selected,
-                        onChanged: (value) {
-                          setState(() {
-                            selected = e.key;
-                          });
-                        },
-                      ),
-                    )
-                    .toList(),
+              child: RadioGroup(
+                groupValue: selected,
+                onChanged: (value) {
+                  setState(() {
+                    if (value != null) selected = value;
+                  });
+                },
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: L10n.languages.entries
+                      .map(
+                        (e) => RadioListTile(
+                          shape: selected == e.key
+                              ? RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  side: const BorderSide(color: Colors.green),
+                                )
+                              : null,
+                          title: Text(e.value),
+                          value: e.key,
+                        ),
+                      )
+                      .toList(),
+                ),
               ),
             ),
             actions: [

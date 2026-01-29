@@ -1,0 +1,55 @@
+name: Flutter Release APK
+
+on:
+    workflow_dispatch:
+        inputs:
+            version:
+                description: "Release version (e.g. v1.2.0)"
+                required: true
+
+jobs:
+    release:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Set up Java
+              uses: actions/setup-java@v4
+              with:
+                  distribution: "temurin"
+                  java-version: "17"
+
+            - name: Set up Flutter
+              uses: subosito/flutter-action@v2
+              with:
+                  flutter-version: "stable"
+                  cache: true
+
+            - name: Install dependencies
+              run: flutter pub get
+
+            - name: Build release APK
+              run: flutter build apk --release
+
+            - name: Create git tag if it doesn't exist
+              id: tag
+              run: |
+                  VERSION=${{ github.event.inputs.version }}
+                  if git rev-parse "$VERSION" >/dev/null 2>&1; then
+                    echo "Tag $VERSION already exists"
+                  else
+                    git tag "$VERSION"
+                    git push origin "$VERSION"
+                  fi
+                  echo "tag=$VERSION" >> $GITHUB_OUTPUT
+
+            - name: Create GitHub Release and upload APK
+              uses: softprops/action-gh-release@v2
+              with:
+                  tag_name: ${{ steps.tag.outputs.tag }}
+                  name: ${{ steps.tag.outputs.tag }}
+                  files: build/app/outputs/flutter-apk/app-release.apk
+                  generate_release_notes: true

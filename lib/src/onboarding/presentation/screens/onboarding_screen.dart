@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -15,39 +13,39 @@ class OnBoardingScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SizedBox(
-          width: double.infinity,
-          child: Column(
-            children: [
-              const Spacer(),
-              Image.asset(AppImages.illustration, height: 150, width: 150),
-              const SizedBox(height: 18.0),
-              Text(context.l10n.statusSaverDescription),
-              const Spacer(),
-              Text(
-                context.l10n.permissionPrompt,
-                style: const TextStyle(fontSize: 8.0),
+        padding: const .all(24.0),
+        child: Column(
+          crossAxisAlignment: .stretch,
+          children: [
+            const Spacer(),
+            Image.asset(AppImages.illustration, height: 150, width: 150),
+            const SizedBox(height: 18.0),
+            Text(context.l10n.statusSaverDescription, textAlign: .center),
+            const Spacer(),
+            Text(
+              context.l10n.permissionPrompt,
+              style: const TextStyle(fontSize: 12.0),
+              textAlign: .center,
+            ),
+            const SizedBox(height: 8.0),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+                foregroundColor: Colors.white,
+                fixedSize: Size.fromWidth(MediaQuery.sizeOf(context).width),
               ),
-              const SizedBox(height: 8.0),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                  foregroundColor: Colors.white,
-                  fixedSize: Size.fromWidth(MediaQuery.sizeOf(context).width),
-                ),
-                onPressed: () async {
-                  await ref
-                      .read(onBoardingProvider.notifier)
-                      .requestPermission();
-
-                  context.go(AppRoutes.homeScreen);
-                },
-                child: Text(context.l10n.grantPermission),
-              ),
-              const SizedBox(height: 16.0),
-            ],
-          ),
+              onPressed: () => ref
+                  .read(onBoardingProvider.notifier)
+                  .requestPermission()
+                  .then((value) {
+                    if (context.mounted) {
+                      context.go(AppRoutes.homeScreen);
+                    }
+                  }),
+              child: Text(context.l10n.grantPermission),
+            ),
+            const SizedBox(height: 16.0),
+          ],
         ),
       ),
     );
