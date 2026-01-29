@@ -27,10 +27,10 @@ class SettingsNotifier extends StateNotifier<SettingsState> {
 
     final Directory? statusDir =
         whatsappDir == StatusDirectory.whatsapp.toString()
-            ? StatusDirectory.whatsapp.directory
-            : whatsappDir == StatusDirectory.whatsappBusiness.toString()
-                ? StatusDirectory.whatsappBusiness.directory
-                : null;
+        ? StatusDirectory.whatsapp.directory
+        : whatsappDir == StatusDirectory.whatsappBusiness.toString()
+        ? StatusDirectory.whatsappBusiness.directory
+        : null;
 
     final themeMode = ThemeMode.values[themeModeIndex];
     state = state.copyWith(
@@ -45,9 +45,10 @@ class SettingsNotifier extends StateNotifier<SettingsState> {
     final Directory statusDir = dir == StatusDirectory.whatsapp
         ? StatusDirectory.whatsapp.directory
         : StatusDirectory.whatsappBusiness.directory;
-    final isWhatsapp = statusDir == StatusDirectory.whatsapp.directory;
+    final isWhatsapp =
+        statusDir.path == StatusDirectory.whatsapp.directory.path;
     final isWhatsappBusiness =
-        statusDir == StatusDirectory.whatsappBusiness.directory;
+        statusDir.path == StatusDirectory.whatsappBusiness.directory.path;
     state = state.copyWith(
       statusDirectory: statusDir,
       isWhatsapp: isWhatsapp,
