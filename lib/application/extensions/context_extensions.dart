@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:whatsapp_status_saver/generated/l10n.dart';
+import 'package:whatsapp_status_saver/translations/app_localizations.dart';
 
 extension ContextExtension on BuildContext {
-  S get l10n => S.of(this);
+  AppLocalizations get l10n => .of(this)!;
 
   void showSnackBarMessage(
     String message, {
@@ -30,12 +30,9 @@ extension ContextExtension on BuildContext {
         },
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
-        child: Text(
-          message,
-          style: TextStyle(color: foregroundColor),
-        ),
+        child: Text(message, style: TextStyle(color: foregroundColor)),
       ),
-      behavior: SnackBarBehavior.floating,
+      behavior: .floating,
       duration: duration,
     );
 
