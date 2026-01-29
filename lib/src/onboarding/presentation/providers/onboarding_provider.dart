@@ -1,6 +1,6 @@
 import 'dart:io';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:whatsapp_status_saver/core/enums/status_directory.dart';
 import 'package:whatsapp_status_saver/src/onboarding/presentation/states/onboarding_state.dart';
 

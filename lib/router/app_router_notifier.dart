@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:whatsapp_status_saver/router/app_routes.dart';
 import 'package:whatsapp_status_saver/src/onboarding/presentation/providers/onboarding_provider.dart';
 import 'package:whatsapp_status_saver/src/onboarding/presentation/states/onboarding_state.dart';

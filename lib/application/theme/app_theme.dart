@@ -14,7 +14,7 @@ class AppTheme {
       backgroundColor: Colors.green,
       foregroundColor: Colors.white,
     ),
-    tabBarTheme: TabBarTheme(
+    tabBarTheme: TabBarThemeData(
       labelColor: Colors.white,
       unselectedLabelColor: Colors.grey[400],
       indicatorColor: Colors.white,
@@ -28,7 +28,7 @@ class AppTheme {
     ),
     fontFamily: GoogleFonts.poppins().fontFamily,
     useMaterial3: true,
-    tabBarTheme: const TabBarTheme(
+    tabBarTheme: const TabBarThemeData(
       indicatorSize: TabBarIndicatorSize.tab,
     ),
   );

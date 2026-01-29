@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:whatsapp_status_saver/core/enums/status_directory.dart';
 import 'package:whatsapp_status_saver/src/settings/stats/settings_state.dart';
